@@ -1,0 +1,36 @@
+{% load cld %}
+<header class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="#home" class="navbar__logo" aria-label="{{ site.site_name }} home">
+      {% if site.logo %}
+        <img src="{{ site.logo|cld:320 }}" alt="{{ site.logo_alt }}" height="52">
+      {% else %}
+        <span class="navbar__logo-text">{{ site.site_name|default:"NTTS Mobility" }}</span>
+      {% endif %}
+    </a>
+
+    <nav class="navbar__menu" id="navMenu" aria-label="Main">
+      <ul class="navbar__links">
+        {% for item in nav_items %}
+          <li>
+            <a href="{{ item.link }}" class="navbar__link{% if forloop.first %} is-active{% endif %}"
+               {% if item.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ item.label }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% if site.nav_cta_text %}
+        <a href="{{ site.nav_cta_link|default:'#book' }}" class="btn btn--primary navbar__cta navbar__cta--mobile"
+           {% if site.nav_cta_opens_booking %}data-open-booking{% endif %}>{{ site.nav_cta_text }}</a>
+      {% endif %}
+    </nav>
+
+    {% if site.nav_cta_text %}
+      <a href="{{ site.nav_cta_link|default:'#book' }}" class="btn btn--primary navbar__cta"
+         {% if site.nav_cta_opens_booking %}data-open-booking{% endif %}>{{ site.nav_cta_text }}</a>
+    {% endif %}
+
+    <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

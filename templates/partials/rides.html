@@ -1,0 +1,54 @@
+{% load cld %}
+{% if rides and ride_options %}
+<section class="rides" id="fleet" aria-labelledby="rides-title">
+  <div class="rides__inner">
+    <div class="rides__head">
+      <div class="rides__intro">
+        <span class="tag">{{ rides.badge_text }}</span>
+        <h2 class="section-title" id="rides-title">{{ rides.title }}</h2>
+        <p class="section-text">{{ rides.description }}</p>
+      </div>
+      {% if rides.side_badge_text %}
+        <span class="rides__eco">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          {{ rides.side_badge_text }}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="rides__grid">
+      {% for ride in ride_options %}
+        <article class="ride{% if ride.is_featured %} ride--featured{% endif %}">
+          <div class="ride__media">
+            {% if ride.badge_text %}<span class="ride__badge">{{ ride.badge_text }}</span>{% endif %}
+            {% if ride.image %}
+              <img src="{{ ride.image|cld:600 }}" alt="{{ ride.image_alt|default:ride.name }}" loading="lazy" decoding="async">
+            {% else %}
+              <span class="ride__placeholder">{% include "partials/_car_icon.html" with icon="sedan" %}</span>
+            {% endif %}
+          </div>
+
+          <div class="ride__body">
+            <div class="ride__title-row">
+              <h3 class="ride__name">{{ ride.name }}</h3>
+              <p class="ride__price"><span>{{ ride.price_display }}</span> {{ ride.price_suffix }}</p>
+            </div>
+            <p class="ride__desc">{{ ride.description }}</p>
+            {% if ride.feature_list %}
+              <ul class="ride__tags">
+                {% for feature in ride.feature_list %}<li>{{ feature }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <button type="button" class="ride__btn{% if ride.is_featured %} ride__btn--primary{% endif %}"
+                  data-open-booking{% if ride.booking_car_id %} data-vehicle="{{ ride.booking_car_id }}"{% endif %}>
+            {{ ride.button_text }}
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

@@ -1,0 +1,43 @@
+{% if pricing and pricing_plans %}
+<section class="pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="pricing__inner">
+    <div class="pricing__head">
+      <span class="tag">{{ pricing.badge_text }}</span>
+      <h2 class="section-title" id="pricing-title">{{ pricing.title }}</h2>
+      <p class="section-text">{{ pricing.description }}</p>
+    </div>
+
+    <div class="pricing__grid">
+      {% for plan in pricing_plans %}
+        <article class="plan plan--{{ plan.color }}{% if plan.is_featured %} plan--featured{% endif %}">
+          {% if plan.badge_text %}<span class="plan__badge">{{ plan.badge_text }}</span>{% endif %}
+
+          <div class="plan__top">
+            <h3 class="plan__name">{{ plan.title }}</h3>
+            <span class="plan__icon">
+              {% if plan.icon == "executive" %}{% include "partials/_car_icon.html" with icon="city" %}
+              {% elif plan.icon == "ev" %}{% include "partials/_car_icon.html" with icon="sedan" %}
+              {% elif plan.icon == "suv" %}{% include "partials/_car_icon.html" with icon="van" %}
+              {% else %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14v-5l-2-5H7l-2 5v5Z"/><path d="M5 17v2M19 17v2M5 12h14M8 14.5h.01M16 14.5h.01"/></svg>{% endif %}
+            </span>
+          </div>
+
+          <p class="plan__price">
+            <strong>{{ plan.price_display }}</strong>
+            <span>{{ plan.price_suffix }}</span>
+          </p>
+
+          <ul class="plan__features">
+            {% for feature in plan.feature_list %}
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+
+          <button type="button" class="plan__btn{% if plan.is_featured %} plan__btn--primary{% endif %}"
+                  data-open-booking data-vehicle="{{ plan.car_id }}">{{ plan.button_text }}</button>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load cld %}
+
+{% block head %}
+  {% if hero.background_image %}<link rel="preload" as="image" href="{{ hero.background_image|cld:1920 }}">{% endif %}
+{% endblock %}
+
+{% block content %}
+  {% include "partials/navbar.html" %}
+  <main>
+    {% include "partials/hero.html" %}
+    {% include "partials/fleet_slider.html" %}
+    {% include "partials/stats.html" %}
+    {% include "partials/rides.html" %}
+    {% include "partials/steps.html" %}
+    {% include "partials/safety.html" %}
+    {% include "partials/pricing.html" %}
+    {% include "partials/testimonials.html" %}
+    {% include "partials/app_download.html" %}
+  </main>
+  {% include "partials/footer.html" %}
+  {% include "partials/booking_modal.html" %}
+  {% include "partials/floating_contact.html" %}
+{% endblock %}

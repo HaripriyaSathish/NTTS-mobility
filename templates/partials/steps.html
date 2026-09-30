@@ -1,0 +1,53 @@
+{% if steps_section and steps %}
+<section class="how" id="how-it-works" aria-labelledby="how-title">
+  <span class="how__glow" aria-hidden="true"></span>
+  <div class="how__inner">
+
+    <div class="how__head">
+      <span class="tag">{{ steps_section.badge_text }}</span>
+      <h2 class="section-title" id="how-title">{{ steps_section.title }}</h2>
+      <p class="section-text">{{ steps_section.description }}</p>
+    </div>
+
+    <ol class="how__steps">
+      {% for step in steps %}
+        <li class="step step--{{ step.color }}">
+          <div class="step__top">
+            <span class="step__num">{{ steps_section.step_word }} {{ forloop.counter|stringformat:"02d" }}</span>
+            <span class="step__icon" aria-hidden="true">
+              {% if step.icon == "location" %}<svg viewBox="0 0 24 24"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              {% elif step.icon == "sliders" %}<svg viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></svg>
+              {% elif step.icon == "shield" %}<svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+              {% elif step.icon == "car" %}<svg viewBox="0 0 24 24"><path d="M19 17h2v-4l-2-5H5L3 13v4h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6M3 13h18"/></svg>
+              {% elif step.icon == "phone" %}<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+              {% elif step.icon == "clock" %}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              {% elif step.icon == "star" %}<svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+              {% else %}<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>{% endif %}
+            </span>
+          </div>
+          <h3 class="step__title">{{ step.title }}</h3>
+          <p class="step__desc">{{ step.description }}</p>
+          {% if step.highlight_text %}
+            <p class="step__note"><i class="step__dot"></i>{{ step.highlight_text }}</p>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+
+    {% if steps_section.show_banner and steps_section.banner_title %}
+      <div class="how__banner">
+        <div class="how__banner-main">
+          <span class="how__banner-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m13 6-4 7h4l-2 5"/></svg>
+          </span>
+          <div>
+            <h3 class="how__banner-title">{{ steps_section.banner_title }}</h3>
+            {% if steps_section.banner_text %}<p class="how__banner-text">{{ steps_section.banner_text }}</p>{% endif %}
+          </div>
+        </div>
+        {% if steps_section.banner_badge %}<span class="how__banner-badge">{{ steps_section.banner_badge }}</span>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}

@@ -1,0 +1,91 @@
+{% load cld %}
+{% if fleet and fleet_slides %}
+<section class="fleet" id="fleet-deck" aria-label="{{ fleet.title }}">
+  <div class="container">
+    <div class="fleet__deck" data-slider
+         data-autoplay="{% if fleet.autoplay %}{{ fleet.autoplay_seconds }}{% else %}0{% endif %}">
+
+      {# ---------- Header: title + tabs ---------- #}
+      <div class="fleet__head">
+        <div class="fleet__heading">
+          <span class="fleet__pulse" aria-hidden="true"></span>
+          <div>
+            <p class="fleet__eyebrow">{{ fleet.eyebrow }}</p>
+            <h2 class="fleet__title">{{ fleet.title }}</h2>
+          </div>
+        </div>
+
+        <div class="fleet__tabs" role="tablist" aria-label="Choose a vehicle">
+          {% for slide in fleet_slides %}
+            <button type="button" class="fleet__tab{% if forloop.first %} is-active{% endif %}" role="tab"
+                    id="fleet-tab-{{ forloop.counter0 }}" aria-controls="fleet-slide-{{ forloop.counter0 }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    data-go="{{ forloop.counter0 }}">
+              {% include "partials/_car_icon.html" with icon=slide.tab_icon %}
+              {{ slide.tab_label }}
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      {# ---------- Slides ---------- #}
+      <div class="fleet__stage">
+        {% for slide in fleet_slides %}
+          <article class="fleet__slide{% if forloop.first %} is-active{% endif %}" role="tabpanel"
+                   id="fleet-slide-{{ forloop.counter0 }}" aria-labelledby="fleet-tab-{{ forloop.counter0 }}"
+                   {% if not forloop.first %}aria-hidden="true"{% endif %}>
+            <div class="fleet__copy">
+              {% if slide.badge_text %}
+                <span class="fleet__badge"><i class="dot"></i>{{ slide.badge_text }}</span>
+              {% endif %}
+              <h3 class="fleet__name">{{ slide.title }}</h3>
+              <p class="fleet__desc">{{ slide.description }}</p>
+
+              {% if slide.specs.all %}
+                <dl class="fleet__specs">
+                  {% for spec in slide.specs.all %}
+                    <div class="fleet__spec">
+                      <dt>{{ spec.label }}</dt>
+                      <dd>{{ spec.value }}</dd>
+                    </div>
+                  {% endfor %}
+                </dl>
+              {% endif %}
+            </div>
+
+            <div class="fleet__visual" aria-hidden="{% if slide.photo %}false{% else %}true{% endif %}">
+              <span class="fleet__glow"></span>
+              {% if slide.photo %}
+                <img src="{{ slide.photo|cld:900 }}" alt="{{ slide.image_alt|default:slide.title }}"
+                     class="fleet__car" loading="lazy" decoding="async">
+              {% else %}
+                <span class="fleet__car fleet__car--icon">{% include "partials/_car_icon.html" with icon=slide.tab_icon %}</span>
+              {% endif %}
+              <span class="fleet__road" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      {# ---------- Footer: arrows, note, dots ---------- #}
+      <div class="fleet__foot">
+        <div class="fleet__nav">
+          <button type="button" class="fleet__arrow" data-prev aria-label="Previous vehicle">
+            <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="fleet__arrow" data-next aria-label="Next vehicle">
+            <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          {% if fleet.footer_text %}<p class="fleet__note">{{ fleet.footer_text }}</p>{% endif %}
+        </div>
+        <div class="fleet__dots">
+          {% for slide in fleet_slides %}
+            <button type="button" class="fleet__dot{% if forloop.first %} is-active{% endif %}"
+                    data-go="{{ forloop.counter0 }}" aria-label="Show {{ slide.tab_label }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

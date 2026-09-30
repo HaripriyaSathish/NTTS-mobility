@@ -1,0 +1,57 @@
+{% load cld %}
+{% if app_download %}
+<section class="app-cta" id="download" aria-labelledby="app-title">
+  <div class="app-cta__card">
+    <span class="app-cta__glow" aria-hidden="true"></span>
+
+    <div class="app-cta__content">
+      <span class="app-cta__badge"><i class="dot"></i>{{ app_download.badge_text }}</span>
+      <h2 class="app-cta__title" id="app-title">
+        {{ app_download.title }}
+        <span>{{ app_download.title_highlight }}</span>
+      </h2>
+      <p class="app-cta__text">
+        {{ app_download.text_before_code }}{% if app_download.promo_code %} <code class="app-cta__code">{{ app_download.promo_code }}</code>{% endif %}{{ app_download.text_after_code }}
+      </p>
+
+      {% if app_download.show_app_store or app_download.show_google_play %}
+        <div class="app-cta__stores">
+          {% if app_download.show_app_store %}
+            <a class="store-btn" href="{{ app_download.app_store_link|default:'#' }}"
+               {% if app_download.app_store_link %}target="_blank" rel="noopener"{% endif %}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg>
+              <span><small>{{ app_download.app_store_small_text }}</small>{{ app_download.app_store_text }}</span>
+            </a>
+          {% endif %}
+          {% if app_download.show_google_play %}
+            <a class="store-btn" href="{{ app_download.google_play_link|default:'#' }}"
+               {% if app_download.google_play_link %}target="_blank" rel="noopener"{% endif %}>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11a7 7 0 0 1 14 0v5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z"/><path d="M8 6 6.5 3.5M16 6l1.5-2.5M9.5 12h.01M14.5 12h.01M3 12v3M21 12v3"/></svg>
+              <span><small>{{ app_download.google_play_small_text }}</small>{{ app_download.google_play_text }}</span>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if app_download.show_qr %}
+      <div class="app-cta__qr">
+        <div class="app-cta__qr-box">
+          {% if app_download.qr_image %}
+            <img src="{{ app_download.qr_image|cld:360 }}" alt="QR code to download the NTTS Mobility app" loading="lazy">
+          {% else %}
+            {# Placeholder until a real QR code is uploaded in admin #}
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="app-cta__qr-art">
+              <g fill="none" stroke="#181c24" stroke-width="7"><rect x="6" y="6" width="26" height="26" rx="2"/><rect x="68" y="6" width="26" height="26" rx="2"/><rect x="6" y="68" width="26" height="26" rx="2"/></g>
+              <g fill="#181c24" stroke="none"><rect x="15" y="15" width="8" height="8"/><rect x="77" y="15" width="8" height="8"/><rect x="15" y="77" width="8" height="8"/><rect x="40" y="10" width="8" height="8"/><rect x="50" y="18" width="8" height="8"/><rect x="18" y="42" width="8" height="8"/><rect x="30" y="50" width="8" height="8"/><rect x="66" y="48" width="8" height="8"/><rect x="80" y="58" width="8" height="8"/><rect x="58" y="72" width="8" height="8"/><rect x="72" y="82" width="8" height="8"/><rect x="86" y="80" width="8" height="8"/></g>
+              <rect x="44" y="40" width="16" height="16" fill="#10844f"/>
+            </svg>
+          {% endif %}
+        </div>
+        <p class="app-cta__qr-title">{{ app_download.qr_title }}</p>
+        <p class="app-cta__qr-sub">{{ app_download.qr_subtitle }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
