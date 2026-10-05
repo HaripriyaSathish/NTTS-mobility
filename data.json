@@ -24,31 +24,31 @@
     "port": 587,
     "use_tls": true,
     "use_ssl": false,
-    "username": "priyarajendren2303@gmail.com",
-    "password": "qrzzqeefjqmfhukb",
-    "from_email": "NTTS Mobility <priyarajendren2303@gmail.com>",
-    "receiver_email": "priyarajendren2303@gmail.com",
+    "username": "info@newtrackindia.com",
+    "password": "Dheeva2303",
+    "from_email": "NTTS Mobility <info@newtrackindia.com>",
+    "receiver_email": "info@newtrackindia.com",
     "is_active": true,
-    "updated_at": "2026-09-30T07:31:19.256Z"
+    "updated_at": "2026-09-30T11:50:35.808Z"
   }
 },
 {
   "model": "core.sitesettings",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T07:49:01.730Z",
-    "site_name": "NTTS Mobility",
-    "logo": "image/upload/v1790754542/ntts/branding/lnaquufhizfyqldhhb7a.png",
-    "logo_alt": "NTTS Mobility",
-    "favicon": "image/upload/v1790754543/ntts/branding/u7gu7gy8fazfqtwjbtwu.png",
+    "updated_at": "2026-10-02T08:59:42.380Z",
+    "site_name": "New Track",
+    "logo": "image/upload/v1790926132/ntts/branding/lphrg5kk7xonobnax4vn.png",
+    "logo_alt": "New Track",
+    "favicon": "image/upload/v1790926133/ntts/branding/jqpeuwmhmei9x6sm6nzg.png",
     "nav_cta_text": "Book a Ride",
     "nav_cta_opens_booking": true,
     "nav_cta_link": "#book",
-    "meta_title": "NTTS Mobility | Your Ride, Your Way – Anytime, Anywhere",
+    "meta_title": "New Track | Your Destination – Our Vision",
     "meta_description": "Fast, safe, and sustainable EV rides with NTTS Mobility. Real-time chauffeur tracking, premium EV fleets, upfront fares and zero surge pricing.",
     "meta_keywords": "NTTS Mobility, EV cab, electric taxi, book a ride, airport transfer, chauffeur, urban mobility",
     "canonical_url": "",
-    "og_title": "NTTS Mobility | Your Ride, Your Way",
+    "og_title": "New Track | Your Destination – Our Vision",
     "og_description": "Fast, safe, and sustainable EV rides with zero surge surprises.",
     "og_image": null,
     "robots": "index, follow"
@@ -106,7 +106,7 @@
   "model": "core.navitem",
   "pk": 5,
   "fields": {
-    "order": 5,
+    "order": 6,
     "is_active": true,
     "site": 1,
     "label": "Pricing",
@@ -115,13 +115,25 @@
   }
 },
 {
+  "model": "core.navitem",
+  "pk": 6,
+  "fields": {
+    "order": 5,
+    "is_active": true,
+    "site": 1,
+    "label": "About Us",
+    "link": "#about",
+    "open_in_new_tab": false
+  }
+},
+{
   "model": "core.herosection",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T07:47:49.543Z",
+    "updated_at": "2026-10-02T10:11:34.731Z",
     "badge_text": "NEXT-GEN URBAN TRANSIT",
-    "title": "Your Ride, Your Way —",
-    "title_highlight": "Anytime, Anywhere",
+    "title": "Your Destination —",
+    "title_highlight": "Our Vision",
     "description": "Fast, safe, and sustainable rides at your fingertips. Experience the future of urban mobility with real-time network tracking, verified chauffeurs, premium EV fleets, and zero surge surprises.",
     "background_image": "image/upload/v1790754478/ntts/hero/vy42xxw1wj5eaquyrvmb.png",
     "background_alt": "Electric car driving on a forest road",
@@ -137,9 +149,9 @@
     "driver_trips": "(1,420 trips)",
     "driver_phone": "",
     "card_title": "Book Instantly",
-    "eta_text": "Avg ETA 2.4 min",
-    "pickup_label": "Pickup Point",
-    "pickup_placeholder": "Cyber City Hub, Gate 4",
+    "eta_text": "Avg ETA 30 mins",
+    "pickup_label": "Pickup City",
+    "pickup_placeholder": "Chennai",
     "destination_label": "Destination",
     "destination_placeholder": "International Tech Terminal 2",
     "date_label": "Date",
@@ -153,23 +165,27 @@
   "model": "core.bookingmodal",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T07:46:54.474Z",
+    "updated_at": "2026-10-02T10:12:34.837Z",
     "badge_text": "NTTS SHIELD™ PROTECTED",
-    "title": "Book Your Ride",
+    "title": "Book Instantly",
     "subtitle": "Instant dispatch & guaranteed upfront fares across the city",
-    "pickup_label": "Pickup Point",
-    "pickup_placeholder": "Cyber City Hub, Gate 4",
-    "destination_label": "Destination",
-    "destination_placeholder": "Airport terminal",
-    "ride_now_label": "Ride Now",
-    "schedule_label": "Schedule",
-    "departing_label": "Departing:",
-    "departing_highlight": "Within 3–5 Mins",
-    "departing_note": "(Fastest match)",
+    "airport_tab_label": "Airport Transfer",
+    "local_tab_label": "Local – Hourly Rentals",
+    "outstation_tab_label": "Outstation",
+    "pickup_label": "Pickup at",
+    "pickup_placeholder": "Enter pickup address",
+    "destination_label": "Drop at",
+    "destination_placeholder": "Enter drop address or airport",
     "schedule_date_label": "Pickup Date",
     "schedule_time_label": "Pickup Time",
-    "vehicle_heading": "Select Vehicle Class",
-    "nearby_suffix": "options nearby",
+    "flight_label": "Flight Number",
+    "flight_placeholder": "e.g. 6E 2134",
+    "days_label": "No of Days",
+    "pax_label": "No of Pax",
+    "package_heading": "Select the Package",
+    "vehicle_heading": "Type of Vehicle",
+    "nearby_suffix": "options",
+    "no_cars_text": "No cars are available for this trip yet. Please call us to book.",
     "contact_heading": "Your Details",
     "name_label": "Full Name",
     "name_placeholder": "Enter your name",
@@ -177,7 +193,7 @@
     "phone_placeholder": "Enter your mobile number",
     "email_label": "Email Address",
     "email_placeholder": "Enter your email",
-    "button_prefix": "Request",
+    "button_prefix": "Book",
     "footer_note": "Free cancellation within 3 minutes of booking. Guaranteed zero surge pricing.",
     "success_title": "Request Sent!",
     "success_message": "Our new team member will contact you shortly.",
@@ -193,12 +209,13 @@
     "is_active": true,
     "name": "Compact Sedan",
     "button_name": "Compact Sedan",
-    "details": "4 seats · 3m away",
+    "details": "Dzire Tour, Aura, Amaze · 4+1",
     "base_price": "80.00",
     "currency_symbol": "₹",
     "price_suffix": "base",
     "badge_text": "",
-    "is_default": false
+    "is_default": false,
+    "seats": 4
   }
 },
 {
@@ -207,30 +224,32 @@
   "fields": {
     "order": 2,
     "is_active": true,
-    "name": "Executive Sedan",
-    "button_name": "Executive Sedan",
-    "details": "Luxury AC · 5m away",
+    "name": "Premium Sedan",
+    "button_name": "Premium Sedan",
+    "details": "Maruti Ciaz · 4+1",
     "base_price": "140.00",
     "currency_symbol": "₹",
     "price_suffix": "base",
     "badge_text": "",
-    "is_default": false
+    "is_default": false,
+    "seats": 4
   }
 },
 {
   "model": "core.vehicleclass",
   "pk": 3,
   "fields": {
-    "order": 3,
+    "order": 5,
     "is_active": true,
-    "name": "NTTS Luxe EV",
-    "button_name": "NTTS Luxe",
-    "details": "EV Whisper · 2m away",
+    "name": "Premium Executive",
+    "button_name": "Premium Executive",
+    "details": "Mercedes-Benz E-Class",
     "base_price": "200.00",
     "currency_symbol": "₹",
     "price_suffix": "base",
-    "badge_text": "POPULAR",
-    "is_default": true
+    "badge_text": "",
+    "is_default": false,
+    "seats": 4
   }
 },
 {
@@ -241,12 +260,407 @@
     "is_active": true,
     "name": "Spacious SUV",
     "button_name": "Spacious SUV",
-    "details": "6–7 seats · 6m away",
+    "details": "Innova Hycross · 6+1 / 7+1",
     "base_price": "260.00",
     "currency_symbol": "₹",
     "price_suffix": "base",
     "badge_text": "",
-    "is_default": false
+    "is_default": false,
+    "seats": 7
+  }
+},
+{
+  "model": "core.vehicleclass",
+  "pk": 5,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "name": "Premium SUV",
+    "button_name": "Premium SUV",
+    "details": "Innova Crysta · 6+1 / 7+1",
+    "base_price": "230.00",
+    "currency_symbol": "₹",
+    "price_suffix": "base",
+    "badge_text": "",
+    "is_default": false,
+    "seats": 7
+  }
+},
+{
+  "model": "core.rentalpackage",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "name": "4 Hrs / 40 Km"
+  }
+},
+{
+  "model": "core.rentalpackage",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "name": "8 Hrs / 80 Km"
+  }
+},
+{
+  "model": "core.rentalpackage",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "name": "12 Hrs / 120 Km"
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 1,
+  "fields": {
+    "vehicle": 1,
+    "trip_type": "airport",
+    "package": null,
+    "price": "1200.00",
+    "price_suffix": "fixed",
+    "extra_km_rate": "14.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 2,
+  "fields": {
+    "vehicle": 1,
+    "trip_type": "outstation",
+    "package": null,
+    "price": "3500.00",
+    "price_suffix": "per day (250 Km)",
+    "extra_km_rate": "14.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 3,
+  "fields": {
+    "vehicle": 1,
+    "trip_type": "local",
+    "package": 1,
+    "price": "1100.00",
+    "price_suffix": "",
+    "extra_km_rate": "14.00",
+    "extra_hour_rate": "150.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 4,
+  "fields": {
+    "vehicle": 1,
+    "trip_type": "local",
+    "package": 2,
+    "price": "2000.00",
+    "price_suffix": "",
+    "extra_km_rate": "14.00",
+    "extra_hour_rate": "150.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 5,
+  "fields": {
+    "vehicle": 1,
+    "trip_type": "local",
+    "package": 3,
+    "price": "2800.00",
+    "price_suffix": "",
+    "extra_km_rate": "14.00",
+    "extra_hour_rate": "150.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 6,
+  "fields": {
+    "vehicle": 2,
+    "trip_type": "airport",
+    "package": null,
+    "price": "1500.00",
+    "price_suffix": "fixed",
+    "extra_km_rate": "18.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 7,
+  "fields": {
+    "vehicle": 2,
+    "trip_type": "outstation",
+    "package": null,
+    "price": "4500.00",
+    "price_suffix": "per day (250 Km)",
+    "extra_km_rate": "18.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 8,
+  "fields": {
+    "vehicle": 2,
+    "trip_type": "local",
+    "package": 1,
+    "price": "1400.00",
+    "price_suffix": "",
+    "extra_km_rate": "18.00",
+    "extra_hour_rate": "200.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 9,
+  "fields": {
+    "vehicle": 2,
+    "trip_type": "local",
+    "package": 2,
+    "price": "2600.00",
+    "price_suffix": "",
+    "extra_km_rate": "18.00",
+    "extra_hour_rate": "200.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 10,
+  "fields": {
+    "vehicle": 2,
+    "trip_type": "local",
+    "package": 3,
+    "price": "3600.00",
+    "price_suffix": "",
+    "extra_km_rate": "18.00",
+    "extra_hour_rate": "200.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 11,
+  "fields": {
+    "vehicle": 5,
+    "trip_type": "airport",
+    "package": null,
+    "price": "2000.00",
+    "price_suffix": "fixed",
+    "extra_km_rate": "22.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 12,
+  "fields": {
+    "vehicle": 5,
+    "trip_type": "outstation",
+    "package": null,
+    "price": "5500.00",
+    "price_suffix": "per day (250 Km)",
+    "extra_km_rate": "22.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 13,
+  "fields": {
+    "vehicle": 5,
+    "trip_type": "local",
+    "package": 1,
+    "price": "1800.00",
+    "price_suffix": "",
+    "extra_km_rate": "22.00",
+    "extra_hour_rate": "250.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 14,
+  "fields": {
+    "vehicle": 5,
+    "trip_type": "local",
+    "package": 2,
+    "price": "3200.00",
+    "price_suffix": "",
+    "extra_km_rate": "22.00",
+    "extra_hour_rate": "250.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 15,
+  "fields": {
+    "vehicle": 5,
+    "trip_type": "local",
+    "package": 3,
+    "price": "4500.00",
+    "price_suffix": "",
+    "extra_km_rate": "22.00",
+    "extra_hour_rate": "250.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 16,
+  "fields": {
+    "vehicle": 4,
+    "trip_type": "airport",
+    "package": null,
+    "price": "2500.00",
+    "price_suffix": "fixed",
+    "extra_km_rate": "28.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 17,
+  "fields": {
+    "vehicle": 4,
+    "trip_type": "outstation",
+    "package": null,
+    "price": "7000.00",
+    "price_suffix": "per day (250 Km)",
+    "extra_km_rate": "28.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 18,
+  "fields": {
+    "vehicle": 4,
+    "trip_type": "local",
+    "package": 1,
+    "price": "2200.00",
+    "price_suffix": "",
+    "extra_km_rate": "28.00",
+    "extra_hour_rate": "300.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 19,
+  "fields": {
+    "vehicle": 4,
+    "trip_type": "local",
+    "package": 2,
+    "price": "3900.00",
+    "price_suffix": "",
+    "extra_km_rate": "28.00",
+    "extra_hour_rate": "300.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 20,
+  "fields": {
+    "vehicle": 4,
+    "trip_type": "local",
+    "package": 3,
+    "price": "5400.00",
+    "price_suffix": "",
+    "extra_km_rate": "28.00",
+    "extra_hour_rate": "300.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 21,
+  "fields": {
+    "vehicle": 3,
+    "trip_type": "airport",
+    "package": null,
+    "price": "3500.00",
+    "price_suffix": "fixed",
+    "extra_km_rate": "24.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 22,
+  "fields": {
+    "vehicle": 3,
+    "trip_type": "outstation",
+    "package": null,
+    "price": "6000.00",
+    "price_suffix": "per day (250 Km)",
+    "extra_km_rate": "24.00",
+    "extra_hour_rate": null,
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 23,
+  "fields": {
+    "vehicle": 3,
+    "trip_type": "local",
+    "package": 1,
+    "price": "4000.00",
+    "price_suffix": "",
+    "extra_km_rate": "24.00",
+    "extra_hour_rate": "600.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 24,
+  "fields": {
+    "vehicle": 3,
+    "trip_type": "local",
+    "package": 2,
+    "price": "7500.00",
+    "price_suffix": "",
+    "extra_km_rate": "24.00",
+    "extra_hour_rate": "600.00",
+    "is_active": true
+  }
+},
+{
+  "model": "core.triprate",
+  "pk": 25,
+  "fields": {
+    "vehicle": 3,
+    "trip_type": "local",
+    "package": 3,
+    "price": "10500.00",
+    "price_suffix": "",
+    "extra_km_rate": "24.00",
+    "extra_hour_rate": "600.00",
+    "is_active": true
   }
 },
 {
@@ -498,11 +912,11 @@
     "currency_symbol": "₹",
     "base_price": "80.00",
     "price_suffix": "base",
-    "description": "Affordable daily commutes with reliable drivers and quiet air-conditioned sedan cabins.",
+    "description": "Swift Dzire Tour, Hyundai Aura or Honda Amaze – comfortable AC sedans for city rides and daily commutes.",
     "image": "image/upload/v1790756196/ntts/rides/xogsbywgkqvtdx43a7st.png",
     "image_alt": "Compact Sedan",
     "badge_text": "",
-    "features": "4 Seats\r\nAC Sedan\r\nLuggage 2x",
+    "features": "Dzire Tour / Aura / Amaze\n4+1 Seating\nFull AC",
     "button_text": "Book Sedan",
     "booking_car": 1,
     "is_featured": false
@@ -512,37 +926,37 @@
   "model": "core.rideoption",
   "pk": 2,
   "fields": {
-    "order": 2,
+    "order": 5,
     "is_active": true,
     "name": "Premium Executive",
     "currency_symbol": "₹",
     "base_price": "200.00",
     "price_suffix": "base",
-    "description": "Luxury executive travel with top-tier amenities, EV sedans, and master-level chauffeurs.",
+    "description": "Mercedes-Benz E-Class with professional chauffeurs for VIP, executive and business travel.",
     "image": "image/upload/v1790756212/ntts/rides/vmjxeccgpukhn0dob09l.png",
     "image_alt": "Premium Executive",
     "badge_text": "TOP TIER",
-    "features": "EV / Audi / Tesla\r\nWi-Fi & Mags\r\nPriority Pickup",
-    "button_text": "Book Premium",
-    "booking_car": 2,
-    "is_featured": true
+    "features": "Mercedes-Benz E-Class\nProfessional Chauffeur\nPriority Pickup",
+    "button_text": "Book Executive",
+    "booking_car": 3,
+    "is_featured": false
   }
 },
 {
   "model": "core.rideoption",
   "pk": 3,
   "fields": {
-    "order": 3,
+    "order": 4,
     "is_active": true,
     "name": "Spacious SUV",
     "currency_symbol": "₹",
-    "base_price": "150.00",
+    "base_price": "260.00",
     "price_suffix": "base",
-    "description": "Expansive 6-seater cabin engineered for group trips, family airport travel, and generous luggage.",
+    "description": "Toyota Innova Hycross – a roomy, modern SUV for groups and families who want extra comfort.",
     "image": "image/upload/v1790756227/ntts/rides/jswoqejed2vb9tx5y7ae.png",
     "image_alt": "Spacious SUV",
     "badge_text": "FAMILY & GROUP",
-    "features": "6 Seats\r\nMassive Boot\r\nDual-Zone AC",
+    "features": "Innova Hycross\n6+1 / 7+1 Seating\nSpacious Cabin",
     "button_text": "Book SUV",
     "booking_car": 4,
     "is_featured": false
@@ -553,7 +967,7 @@
   "pk": 4,
   "fields": {
     "order": 4,
-    "is_active": true,
+    "is_active": false,
     "name": "Electric EV Plus",
     "currency_symbol": "₹",
     "base_price": "110.00",
@@ -564,7 +978,47 @@
     "badge_text": "ECO SMART",
     "features": "4 Passengers\r\nZero Emission\r\nSilent Cabin",
     "button_text": "Book EV Plus",
-    "booking_car": 3,
+    "booking_car": null,
+    "is_featured": false
+  }
+},
+{
+  "model": "core.rideoption",
+  "pk": 5,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "name": "Premium Sedan",
+    "currency_symbol": "₹",
+    "base_price": "140.00",
+    "price_suffix": "base",
+    "description": "Maruti Ciaz with extra legroom and boot space, ideal for business trips and airport transfers.",
+    "image": "image/upload/v1790940394/ntts/rides/i3wqnwh9khsrsw6bjn88.jpg",
+    "image_alt": "Premium Sedan",
+    "badge_text": "",
+    "features": "Maruti Ciaz\r\n4+1 Seating\r\nSpacious Boot",
+    "button_text": "Book Premium Sedan",
+    "booking_car": 2,
+    "is_featured": false
+  }
+},
+{
+  "model": "core.rideoption",
+  "pk": 6,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "name": "Premium SUV",
+    "currency_symbol": "₹",
+    "base_price": "230.00",
+    "price_suffix": "base",
+    "description": "Toyota Innova Crysta for family trips, group travel and outstation journeys, available with or without a roof carrier.",
+    "image": "image/upload/v1790940408/ntts/rides/ilji0gc76q1ysh1hu6az.png",
+    "image_alt": "Premium SUV",
+    "badge_text": "",
+    "features": "Innova Crysta\r\n6+1 / 7+1 Seating\r\nWith / Without Carrier",
+    "button_text": "Book Premium SUV",
+    "booking_car": 5,
     "is_featured": false
   }
 },
@@ -626,8 +1080,8 @@
   "model": "core.safetysection",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T08:24:28.979Z",
-    "badge_text": "ISO 27001 CERTIFIED SAFETY",
+    "updated_at": "2026-10-02T08:59:53.338Z",
+    "badge_text": "",
     "title": "Your Safety is Our Priority",
     "description": "From algorithmic background vetting to emergency rapid-response teams on standby, our security infrastructure protects every single kilometer.",
     "show_highlight": true,
@@ -700,7 +1154,7 @@
   "pk": 6,
   "fields": {
     "order": 6,
-    "is_active": true,
+    "is_active": false,
     "icon": "shield",
     "color": "blue",
     "title": "Accident Cover",
@@ -727,7 +1181,7 @@
     "icon": "sedan",
     "car": 1,
     "price_suffix": "/ base fare",
-    "features": "₹14 per additional KM\n4 Passengers Max\nFull Air-Conditioned\nBoot Space for 2 Bags",
+    "features": "₹14 per additional KM\nSwift Dzire Tour / Aura / Amaze\n4+1 Seating, Full AC\nBoot Space for 2 Bags",
     "button_text": "Select Sedan",
     "badge_text": "",
     "is_featured": false,
@@ -740,12 +1194,12 @@
   "fields": {
     "order": 2,
     "is_active": true,
-    "title": "EXECUTIVE SEDAN",
+    "title": "PREMIUM SEDAN",
     "icon": "executive",
     "car": 2,
     "price_suffix": "/ base fare",
-    "features": "₹18 per additional KM\n4 Executive Leather Seats\nBottled Water & Wi-Fi\nTop Chauffeur (4.9★)",
-    "button_text": "Select Executive",
+    "features": "₹18 per additional KM\nMaruti Ciaz\n4+1 Seating\nExtra Legroom & Boot Space",
+    "button_text": "Select Premium Sedan",
     "badge_text": "",
     "is_featured": false,
     "color": "navy"
@@ -755,16 +1209,16 @@
   "model": "core.pricingplan",
   "pk": 3,
   "fields": {
-    "order": 3,
+    "order": 5,
     "is_active": true,
-    "title": "NTTS LUXE EV",
+    "title": "PREMIUM EXECUTIVE",
     "icon": "ev",
     "car": 3,
     "price_suffix": "/ base fare",
-    "features": "₹24 per additional KM\n4 Luxury Ergonomic Seats\nZero-Emission Electric Whisper Drive\nPriority Pickup & Concierge",
-    "button_text": "Select Luxe",
-    "badge_text": "MOST POPULAR",
-    "is_featured": true,
+    "features": "₹24 per additional KM\nMercedes-Benz E-Class\nProfessional Chauffeur\nPriority Pickup & Concierge",
+    "button_text": "Select Executive",
+    "badge_text": "TOP TIER",
+    "is_featured": false,
     "color": "green"
   }
 },
@@ -774,12 +1228,29 @@
   "fields": {
     "order": 4,
     "is_active": true,
-    "title": "SPACIOUS SUV / XL",
+    "title": "SPACIOUS SUV",
     "icon": "suv",
     "car": 4,
     "price_suffix": "/ base fare",
-    "features": "₹28 per additional KM\n6–7 Passengers Max\nMassive Boot for 5+ Bags\nDual-Zone Climate Control",
+    "features": "₹28 per additional KM\nToyota Innova Hycross\n6+1 / 7+1 Seating\nSpacious Cabin",
     "button_text": "Select SUV",
+    "badge_text": "",
+    "is_featured": false,
+    "color": "dark"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 5,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "title": "PREMIUM SUV",
+    "icon": "suv",
+    "car": 5,
+    "price_suffix": "/ base fare",
+    "features": "₹22 per additional KM\nToyota Innova Crysta\n6+1 / 7+1 Seating\nWith / Without Carrier",
+    "button_text": "Select Premium SUV",
     "badge_text": "",
     "is_featured": false,
     "color": "navy"
@@ -789,7 +1260,7 @@
   "model": "core.testimonialssection",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T08:27:31.608Z",
+    "updated_at": "2026-10-02T11:14:55.302Z",
     "badge_text": "VERIFIED RIDERS",
     "title": "What Our Riders Say",
     "description": "Thousands of daily commuters rely on NTTS Mobility for punctual meetings, late-night flights, and stress-free city hops."
@@ -797,95 +1268,237 @@
 },
 {
   "model": "core.testimonial",
-  "pk": 1,
+  "pk": 4,
   "fields": {
     "order": 1,
     "is_active": true,
     "rating": 5,
-    "quote": "The punctuality and EV silence make all the difference. NTTS Mobility is now the official transit app for our entire engineering group.",
-    "name": "Priya Sharma",
-    "photo": "image/upload/v1790757056/ntts/testimonials/xhcf6nfrbo98zvjoidup.avif",
-    "role": "Daily Tech Commuter",
-    "detail": "340+ rides",
+    "quote": "We had an excellent experience with our driver Mr Mohan from Chennai to Kanchipuram. He was extremely professional, friendly, and accommodating throughout the journey. His driving was smooth, safe, and comfortable, making the entire trip very relaxing. He was punctual, courteous, and always willing to help with anything we needed. Thanks to him, our journey was enjoyable from start to finish. We highly recommend his service to anyone looking for a reliable and pleasant travel experience. Thank you for making our trip so memorable!",
+    "name": "Thulasi Margali",
+    "photo": null,
+    "role": "",
+    "detail": "",
     "is_verified": true
   }
 },
 {
   "model": "core.testimonial",
-  "pk": 2,
+  "pk": 5,
   "fields": {
     "order": 2,
     "is_active": true,
     "rating": 5,
-    "quote": "For investor meetings and airport transfers, NTTS Luxe is unmatched. Impeccable electric sedans, silence during phone conferences, and never a cancellation.",
-    "name": "Marcus Vance",
-    "photo": "image/upload/v1790757088/ntts/testimonials/vzd5l2ebvugdmq1p42zg.avif",
-    "role": "Managing Director",
-    "detail": "Executive Rider",
+    "quote": "I highly recommend Mr.Jagaseesan for his excellent travel mobility services. He is professional, punctual, reliable, and always ensures a safe and comfortable journey. His friendly approach and commitment to customer satisfaction make every trip hassle-free. I appreciate his dedication and confidently recommend his services to anyone looking for dependable travel assistance.",
+    "name": "Sri Vaarahi Jothida Nilayam",
+    "photo": null,
+    "role": "",
+    "detail": "",
     "is_verified": true
   }
 },
 {
   "model": "core.testimonial",
-  "pk": 3,
+  "pk": 6,
   "fields": {
     "order": 3,
     "is_active": true,
     "rating": 5,
-    "quote": "As an on-call physician, I need zero delays at 2 AM. The driver background checks and emergency SOS give immense peace of mind.",
-    "name": "Dr. Ananya Roy",
-    "photo": "image/upload/v1790757117/ntts/testimonials/ndzjsxt3trtyqrdd0iu7.avif",
-    "role": "Night Physician",
-    "detail": "190+ trips",
+    "quote": "Ntts mobility has provided with best service, the cab the driver were near and clean, polite and helpful looking forward for their success and giving them business the payment was smooth and best part is respect given by them is too good",
+    "name": "Pritam Solanki",
+    "photo": null,
+    "role": "",
+    "detail": "",
     "is_verified": true
   }
 },
 {
-  "model": "core.appdownloadsection",
+  "model": "core.testimonial",
+  "pk": 7,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "rating": 5,
+    "quote": "Excellent vehicles and driver. I was travelling solo and Mr Prabhu assigned to me took really good care for my safety and drove safely as well.",
+    "name": "Priya Rodrigues",
+    "photo": null,
+    "role": "",
+    "detail": "",
+    "is_verified": true
+  }
+},
+{
+  "model": "core.faqsection",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T08:36:55.584Z",
+    "updated_at": "2026-10-02T10:54:46.933Z",
     "is_active": true,
-    "badge_text": "AVAILABLE ON IOS & ANDROID",
-    "title": "Ready to Move?",
-    "title_highlight": "Download NTTS Mobility Today",
-    "text_before_code": "Get ₹150 off your first 3 rides with promo code",
-    "promo_code": "NTTSGO",
-    "text_after_code": ". Instant onboarding in 60 seconds.",
-    "show_app_store": true,
-    "app_store_small_text": "DOWNLOAD ON THE",
-    "app_store_text": "Apple App Store",
-    "app_store_link": "",
-    "show_google_play": true,
-    "google_play_small_text": "GET IT ON",
-    "google_play_text": "Google Play",
-    "google_play_link": "",
-    "show_qr": true,
-    "qr_image": "image/upload/v1790757417/ntts/app/lxndb8g8n4077khsbafr.png",
-    "qr_title": "Scan to Download",
-    "qr_subtitle": "Instant Camera Link"
+    "badge_text": "FAQ",
+    "title": "Frequently Asked Questions",
+    "description": "Everything you need to know about booking, fares and safety with New Track.",
+    "show_help_box": true,
+    "help_title": "Still have questions?",
+    "help_text": "Our help desk team is happy to help you plan your ride.",
+    "help_button_text": "Call Help Desk"
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "question": "How do I book a ride?",
+    "answer": "Tap “Book a Ride”, enter your pickup city and destination, choose a car and add your name, mobile number and email. Our team will call you shortly to confirm the booking."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "question": "How soon will my car arrive?",
+    "answer": "For instant bookings, your car usually arrives within 30–40 minutes. If you need it at a fixed time, use the Schedule option while booking."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "question": "Can I book a ride in advance?",
+    "answer": "Yes. Choose “Schedule” in the booking form and pick your pickup date and time."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "question": "How is the fare calculated?",
+    "answer": "Each car type has a base fare plus a per-kilometre rate, shown in the Pricing section. The fare is shared with you upfront before you confirm."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 5,
+  "fields": {
+    "order": 5,
+    "is_active": true,
+    "question": "Is there any surge pricing?",
+    "answer": "No. We never apply surge pricing, so you pay the same fair rate at any time of the day."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 6,
+  "fields": {
+    "order": 6,
+    "is_active": true,
+    "question": "Can I cancel my booking?",
+    "answer": "Yes. Cancellation is free within 3 minutes of booking. After that, please call our help desk and we will assist you."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 7,
+  "fields": {
+    "order": 7,
+    "is_active": true,
+    "question": "Are your drivers verified?",
+    "answer": "Yes. Every driver goes through background and driving record checks before their first trip."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 8,
+  "fields": {
+    "order": 8,
+    "is_active": true,
+    "question": "Do you offer airport transfers and outstation trips?",
+    "answer": "Yes. Along with daily city rides, we offer airport pickups and drops and outstation trips. Book online or call our help desk to plan your trip."
+  }
+},
+{
+  "model": "core.aboutsection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-10-02T11:13:56.665Z",
+    "is_active": true,
+    "badge_text": "ABOUT US",
+    "title": "Our Founder & About NTTS",
+    "description": "Founded by Mr. Jagadeesan in 2004 as New Track Travels Services, the company has grown from a humble beginning into a powerhouse in corporate mobility.\nNow registered as NTTS Mobility Private Limited, it is a trusted name in corporate car rentals, fleet management, and business travel built on reliability, transparency and professionalism in every mile.",
+    "image": null,
+    "image_alt": "NTTS Mobility corporate fleet",
+    "services_heading": "Our Fleet Services",
+    "services": "Corporate Car Hire & Chauffeur Services\nEvent & Large-Group Transportation\nVIP & Executive Mobility\nEmployee Transportation Solutions\nLuxury Cars for Business Travel\nBus Rentals for Corporates & Events",
+    "mission_title": "Mission",
+    "mission_text": "Our mission is to provide reliable and efficient corporate mobility solutions that empower businesses to thrive through seamless transportation experiences.",
+    "vision_title": "Vision",
+    "vision_text": "We envision a future where mobility is effortless, and every journey reflects our commitment to excellence and customer satisfaction in corporate transport services.",
+    "why_title": "Why NTTS",
+    "why_text": "NTTS stands out through our dedicated professionalism, commitment to punctuality, and advanced fleet management, ensuring optimum service quality and peace of mind for our clients.",
+    "values_heading": "Our Value Add"
+  }
+},
+{
+  "model": "core.aboutvalue",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "section": 1,
+    "icon": "award",
+    "title": "Professionalism",
+    "text": "At NTTS Mobility, professionalism drives every interaction, reflecting our commitment to excellence and service quality."
+  }
+},
+{
+  "model": "core.aboutvalue",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "section": 1,
+    "icon": "clock",
+    "title": "Punctuality",
+    "text": "We ensure punctuality in every operation, guaranteeing timely service and lasting trust."
+  }
+},
+{
+  "model": "core.aboutvalue",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "section": 1,
+    "icon": "target",
+    "title": "Precision",
+    "text": "We combine precision, technology, and planning to deliver seamless, tailored mobility solutions for every corporate need."
   }
 },
 {
   "model": "core.footersettings",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-09-30T09:07:09.086Z",
+    "updated_at": "2026-10-02T07:30:30.406Z",
     "about_text": "Redefining mobility for the modern city. Experience seamless, safe, and sustainable transportation at the tap of a button.",
-    "company_name": "Ntts Mobility Solutions Pvt Ltd",
-    "address": "First Floor, Door No.4, East Spur Tank Road,\nEgmore, Chennai, Chennai, Tamil Nadu, 600008",
+    "company_name": "NTTS Car Rentals",
+    "address": "5 East Spurtank Road ,\r\nChetpet ,\r\nChennai 600031",
     "map_link": "",
     "email": "info@newtrackindia.com",
     "helpdesk_label": "Help Desk",
     "helpdesk_phone": "9543024365",
     "landline_label": "Land Line",
     "landline_phone": "044-42146995",
-    "copyright_text": "© 2024 NTTS Mobility Technologies. All rights reserved.",
+    "copyright_text": "© {year} NTTS CAR RENTALS. All rights reserved.",
     "credit_text": "Designed & Developed by Vetri IT Systems",
     "credit_link": "https://vetriitsystems.com/",
     "show_floating_buttons": true,
     "whatsapp_number": "9543024365",
-    "whatsapp_message": "Hi NTTS Mobility, I would like to book a ride.",
+    "whatsapp_message": "Hi New Track, I would like to book a ride.",
     "show_email_button": true,
     "show_call_button": true
   }
@@ -952,121 +1565,145 @@
 },
 {
   "model": "core.footerlink",
-  "pk": 1,
+  "pk": 11,
   "fields": {
     "order": 1,
+    "is_active": true,
+    "column": 1,
+    "label": "Home",
+    "link": "#home",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 12,
+  "fields": {
+    "order": 5,
     "is_active": true,
     "column": 1,
     "label": "About Us",
-    "link": "#",
+    "link": "#about",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 2,
+  "pk": 13,
   "fields": {
     "order": 2,
     "is_active": true,
     "column": 1,
-    "label": "Careers",
-    "link": "#",
+    "label": "Fleet & Rides",
+    "link": "#fleet",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 3,
+  "pk": 14,
   "fields": {
     "order": 3,
     "is_active": true,
     "column": 1,
-    "label": "Press",
-    "link": "#",
+    "label": "How It Works",
+    "link": "#how-it-works",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 4,
+  "pk": 15,
   "fields": {
     "order": 4,
     "is_active": true,
     "column": 1,
-    "label": "Blog",
-    "link": "#",
+    "label": "Safety",
+    "link": "#safety",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 5,
+  "pk": 16,
+  "fields": {
+    "order": 6,
+    "is_active": true,
+    "column": 1,
+    "label": "Pricing",
+    "link": "#pricing",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 17,
   "fields": {
     "order": 1,
     "is_active": true,
     "column": 2,
-    "label": "Help Center",
-    "link": "#",
+    "label": "FAQs",
+    "link": "#faq",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 6,
+  "pk": 18,
   "fields": {
     "order": 2,
     "is_active": true,
     "column": 2,
-    "label": "Safety Protocols",
-    "link": "#",
+    "label": "Book a Ride",
+    "link": "#book",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 7,
+  "pk": 19,
   "fields": {
     "order": 3,
     "is_active": true,
     "column": 2,
-    "label": "Policy",
-    "link": "#",
+    "label": "Rider Reviews",
+    "link": "#testimonials",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 8,
+  "pk": 20,
   "fields": {
     "order": 4,
     "is_active": true,
     "column": 2,
-    "label": "Contact Concierge",
-    "link": "#",
+    "label": "Contact Us",
+    "link": "#contact",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 9,
+  "pk": 21,
   "fields": {
     "order": 1,
     "is_active": true,
     "column": 3,
     "label": "Privacy Policy",
-    "link": "#",
+    "link": "#privacy-policy",
     "open_in_new_tab": false
   }
 },
 {
   "model": "core.footerlink",
-  "pk": 10,
+  "pk": 22,
   "fields": {
     "order": 2,
     "is_active": true,
     "column": 3,
     "label": "Terms of Transit",
-    "link": "#",
+    "link": "#terms-of-transit",
     "open_in_new_tab": false
   }
 },
@@ -1074,6 +1711,7 @@
   "model": "core.bookingrequest",
   "pk": 3,
   "fields": {
+    "trip_type": "",
     "pickup": "no 5/216, Maruthu Pandiyar St, S.kolathur",
     "destination": "Tambaram , Chennai",
     "ride_type": "now",
@@ -1081,9 +1719,14 @@
     "scheduled_time": null,
     "date_option": "Today (Instant)",
     "ride_window": "Depart Now",
+    "flight_number": "",
+    "package_name": "",
+    "num_days": null,
+    "num_pax": null,
     "vehicle": 3,
     "vehicle_name": "NTTS Luxe EV",
     "quoted_price": "₹200 base",
+    "extra_charges": "",
     "name": "Haripriya R",
     "phone": "9000990009",
     "email": "priyarajendren2303@gmail.com",
@@ -1092,6 +1735,32 @@
     "ip_address": "127.0.0.1",
     "email_sent": true,
     "created_at": "2026-09-30T08:07:15.869Z"
+  }
+},
+{
+  "model": "core.legalpage",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "intro": "This policy explains what information New Track (NTTS Car Rentals) collects when you use our website and book a ride, and how we use and protect it.",
+    "content": "# Information we collect\nYour name, mobile number and email address when you book a ride.\nRide details such as pickup city, destination, date, time and the car type you choose.\nBasic technical details such as your IP address, used only to keep the website secure.\n# How we use your information\nTo confirm your booking and contact you about your ride.\nTo share the pickup details needed by the driver assigned to your trip.\nTo send booking confirmations and reply to your questions.\nTo improve our service and keep our riders and drivers safe.\n# Sharing your information\nWe never sell or rent your personal information to anyone.\nYour details are shared only with the driver handling your trip, or when required by law.\n# Keeping your data safe\nYour information is stored securely and only authorised staff can access it.\nWe keep booking records only as long as needed for service, accounts and legal requirements.\n# Your choices\nYou can ask us to correct or delete your details at any time by contacting our help desk.\n# Contact us\nFor any privacy questions, email info@newtrackindia.com or call our help desk on 9543024365.",
+    "updated_on": "2026-10-02"
+  }
+},
+{
+  "model": "core.legalpage",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "title": "Terms of Transit",
+    "slug": "terms-of-transit",
+    "intro": "By booking a ride with New Track (NTTS Car Rentals), you agree to the following terms.",
+    "content": "# Bookings\nA booking is confirmed only after our team contacts you on the mobile number you shared.\nPlease enter the correct pickup, destination and contact details so we can reach you on time.\n# Arrival time\nFor instant rides, the car usually arrives within 30–40 minutes.\nArrival time may change due to traffic, weather or road conditions.\n# Fares and payment\nFares are based on the base fare and per-kilometre rate of the car you choose, shared upfront before your trip.\nWe do not apply surge pricing.\nToll, parking and state permit charges on your route, if any, are paid by the rider.\n# Cancellations\nCancellation is free within 3 minutes of booking.\nFor cancellations after that, please call our help desk.\n# During your ride\nPlease wear your seat belt at all times.\nSmoking, alcohol and illegal items are not allowed in the car.\nAny damage to the car caused by the rider may be charged.\nThe driver may end the trip if the rider's behaviour puts anyone's safety at risk.\n# Luggage and belongings\nCarry luggage that fits the boot space of the car you book.\nPlease check your belongings before leaving the car. We will help you find lost items, but we are not responsible for them.\n# Safety\nAll our drivers are verified before their first trip.\nIf you face any problem during your ride, call our help desk immediately.\n# Changes to these terms\nWe may update these terms from time to time. The latest version is always shown here.",
+    "updated_on": "2026-10-02"
   }
 }
 ]

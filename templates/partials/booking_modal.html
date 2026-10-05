@@ -103,6 +103,11 @@
               </label>
             {% endfor %}
           </div>
+          {% if booking.local_terms %}
+            <ul class="packages-terms">
+              {% for line in booking.local_terms.splitlines %}{% if line.strip %}<li>{{ line.strip }}</li>{% endif %}{% endfor %}
+            </ul>
+          {% endif %}
         </div>
       {% endif %}
 

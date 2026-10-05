@@ -228,7 +228,7 @@ class BookingModalAdmin(SingletonAdmin):
                                   ("schedule_date_label", "schedule_time_label"),
                                   ("flight_label", "flight_placeholder"),
                                   ("days_label", "pax_label"),
-                                  "package_heading")}),
+                                  "package_heading", "local_terms")}),
         ("Car list", {
             "description": "Prices are edited in “3. Booking Popup – Prices” (or inside each car). "
                            "Local packages are edited in “3. Booking Popup – Local Packages”.",

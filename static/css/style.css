@@ -376,6 +376,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 .packages input:checked + span { border-color: var(--green); background: var(--green-soft); color: var(--green-dark); }
 .packages input:focus-visible + span { outline: 2px solid var(--green); outline-offset: 2px; }
+.packages-terms { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
 .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: -12px; }
 .section-head h3 { font-size: 15px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }

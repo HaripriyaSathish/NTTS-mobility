@@ -12,7 +12,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from core.about_content import ABOUT, ABOUT_VALUES
-from core.booking_content import BOOKING_TEXT, RENTAL_PACKAGES, SEATS, rate_rows
+from core.booking_content import BOOKING_TEXT, LOCAL_TERMS, RENTAL_PACKAGES, SEATS, rate_rows
 from core.pricing_content import PRICING_PLANS
 from core.vehicles_content import RIDE_OPTIONS, VEHICLES
 from core.legal_content import LEGAL_LINKS, LEGAL_PAGES, SUPPORT_LINKS
@@ -85,6 +85,7 @@ BOOKING = {
     "badge_text": "NTTS SHIELD™ PROTECTED",
     "subtitle": "Instant dispatch & guaranteed upfront fares across the city",
     **BOOKING_TEXT,  # trip tabs wording (core/booking_content.py)
+    "local_terms": LOCAL_TERMS,
     "contact_heading": "Your Details",
     "name_label": "Full Name",
     "name_placeholder": "Enter your name",

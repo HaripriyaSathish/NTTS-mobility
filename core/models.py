@@ -212,6 +212,9 @@ class BookingModal(SingletonModel):
     pax_label = models.CharField("Passengers – title", max_length=30, default="No of Pax", help_text="Outstation tab")
     package_heading = models.CharField("Package list heading", max_length=60, default="Select the Package",
                                        help_text="Local – Hourly Rentals tab")
+    local_terms = models.TextField("Local – terms & conditions", blank=True,
+                                   help_text="Shown under the packages on the Local – Hourly Rentals tab. "
+                                             "One point per line. Leave empty to hide it.")
 
     vehicle_heading = models.CharField("Car list heading", max_length=60)
     nearby_suffix = models.CharField("Text after car count", max_length=40,
