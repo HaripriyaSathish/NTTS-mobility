@@ -16,7 +16,11 @@
       {% endif %}
     </div>
 
-    <div class="rides__grid">
+    {# More than 4 cars: a carousel that glides continuously right → left, with arrows #}
+    {% with ride_count=ride_options|length %}
+    <div class="rides__grid{% if ride_count > 4 %} rides__grid--slider{% endif %}"
+         {% if ride_count > 4 %}data-slider-track data-slider-loop data-slider-marquee="40" data-slider-direction="left" tabindex="0"
+         aria-label="Our vehicles, use the arrows to see more"{% endif %}>
       {% for ride in ride_options %}
         <article class="ride{% if ride.is_featured %} ride--featured{% endif %}">
           <div class="ride__media">
@@ -49,6 +53,17 @@
         </article>
       {% endfor %}
     </div>
+    {% if ride_count > 4 %}
+      <div class="slider-nav">
+        <button type="button" class="slider-arrow" data-slider-prev aria-label="Previous vehicles">
+          <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="slider-arrow" data-slider-next aria-label="Next vehicles">
+          <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    {% endif %}
+    {% endwith %}
   </div>
 </section>
 {% endif %}

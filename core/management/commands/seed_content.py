@@ -11,24 +11,31 @@ from decimal import Decimal
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
+from core.about_content import ABOUT, ABOUT_VALUES
+from core.booking_content import BOOKING_TEXT, RENTAL_PACKAGES, SEATS, rate_rows
+from core.pricing_content import PRICING_PLANS
+from core.vehicles_content import RIDE_OPTIONS, VEHICLES
+from core.legal_content import LEGAL_LINKS, LEGAL_PAGES, SUPPORT_LINKS
+from core.reviews_content import TESTIMONIALS, TESTIMONIALS_SECTION_DESCRIPTION
+
 from core.models import (
-    AppDownloadSection, FooterColumn, FooterLink, FooterSettings, SocialLink,
-    BookingModal, FleetSection, FleetSlide, FleetSpec, HeroSection, NavItem, PricingPlan, PricingSection, RideOption, RidesSection, SafetyFeature, SafetySection, SiteSettings, StatItem, Step, StepsSection, Testimonial, TestimonialsSection, VehicleClass,
+    AboutSection, AboutValue, FAQItem, FAQSection, FooterColumn, LegalPage, FooterLink, FooterSettings, SocialLink,
+    BookingModal, RentalPackage, TripRate, FleetSection, FleetSlide, FleetSpec, HeroSection, NavItem, PricingPlan, PricingSection, RideOption, RidesSection, SafetyFeature, SafetySection, SiteSettings, StatItem, Step, StepsSection, Testimonial, TestimonialsSection, VehicleClass,
 )
 
 SITE = {
-    "site_name": "NTTS Mobility",
-    "logo_alt": "NTTS Mobility",
+    "site_name": "New Track",
+    "logo_alt": "New Track",
     "nav_cta_text": "Book a Ride",
     "nav_cta_opens_booking": True,
     "nav_cta_link": "#book",
-    "meta_title": "NTTS Mobility | Your Ride, Your Way – Anytime, Anywhere",
+    "meta_title": "New Track | Your Destination – Our Vision",
     "meta_description": (
         "Fast, safe, and sustainable EV rides with NTTS Mobility. Real-time chauffeur tracking, "
         "premium EV fleets, upfront fares and zero surge pricing."
     ),
     "meta_keywords": "NTTS Mobility, EV cab, electric taxi, book a ride, airport transfer, chauffeur, urban mobility",
-    "og_title": "NTTS Mobility | Your Ride, Your Way",
+    "og_title": "New Track | Your Destination – Our Vision",
     "og_description": "Fast, safe, and sustainable EV rides with zero surge surprises.",
     "robots": "index, follow",
 }
@@ -38,13 +45,14 @@ NAV_ITEMS = [
     ("Fleet & Rides", "#fleet"),
     ("How It Works", "#how-it-works"),
     ("Safety", "#safety"),
+    ("About Us", "#about"),
     ("Pricing", "#pricing"),
 ]
 
 HERO = {
     "badge_text": "NEXT-GEN URBAN TRANSIT",
-    "title": "Your Ride, Your Way —",
-    "title_highlight": "Anytime, Anywhere",
+    "title": "Your Destination —",
+    "title_highlight": "Our Vision",
     "description": (
         "Fast, safe, and sustainable rides at your fingertips. Experience the future of urban "
         "mobility with real-time network tracking, verified chauffeurs, premium EV fleets, and "
@@ -61,8 +69,8 @@ HERO = {
     "driver_rating": "4.98",
     "driver_trips": "(1,420 trips)",
     "card_title": "Book Instantly",
-    "eta_text": "Avg ETA 2.4 min",
-    "pickup_label": "Pickup Point",
+    "eta_text": "Avg ETA 30 mins",
+    "pickup_label": "Pickup City",
     "pickup_placeholder": "Cyber City Hub, Gate 4",
     "destination_label": "Destination",
     "destination_placeholder": "International Tech Terminal 2",
@@ -75,21 +83,8 @@ HERO = {
 
 BOOKING = {
     "badge_text": "NTTS SHIELD™ PROTECTED",
-    "title": "Book Your Ride",
     "subtitle": "Instant dispatch & guaranteed upfront fares across the city",
-    "pickup_label": "Pickup Point",
-    "pickup_placeholder": "Cyber City Hub, Gate 4",
-    "destination_label": "Destination",
-    "destination_placeholder": "Airport terminal",
-    "ride_now_label": "Ride Now",
-    "schedule_label": "Schedule",
-    "departing_label": "Departing:",
-    "departing_highlight": "Within 3–5 Mins",
-    "departing_note": "(Fastest match)",
-    "schedule_date_label": "Pickup Date",
-    "schedule_time_label": "Pickup Time",
-    "vehicle_heading": "Select Vehicle Class",
-    "nearby_suffix": "options nearby",
+    **BOOKING_TEXT,  # trip tabs wording (core/booking_content.py)
     "contact_heading": "Your Details",
     "name_label": "Full Name",
     "name_placeholder": "Enter your name",
@@ -97,24 +92,13 @@ BOOKING = {
     "phone_placeholder": "Enter your mobile number",
     "email_label": "Email Address",
     "email_placeholder": "Enter your email",
-    "button_prefix": "Request",
+    "button_prefix": "Book",
     "footer_note": "Free cancellation within 3 minutes of booking. Guaranteed zero surge pricing.",
     "success_title": "Request Sent!",
     "success_message": "Our new team member will contact you shortly.",
     "success_button_text": "Done",
     "success_footer_note": "Invitation expires in 7 days",
 }
-
-VEHICLES = [
-    {"name": "Compact Sedan", "button_name": "Compact Sedan", "details": "4 seats · 3m away",
-     "base_price": Decimal("80"), "badge_text": "", "is_default": False, "order": 1},
-    {"name": "Executive Sedan", "button_name": "Executive Sedan", "details": "Luxury AC · 5m away",
-     "base_price": Decimal("140"), "badge_text": "", "is_default": False, "order": 2},
-    {"name": "NTTS Luxe EV", "button_name": "NTTS Luxe", "details": "EV Whisper · 2m away",
-     "base_price": Decimal("200"), "badge_text": "POPULAR", "is_default": True, "order": 3},
-    {"name": "Spacious SUV", "button_name": "Spacious SUV", "details": "6–7 seats · 6m away",
-     "base_price": Decimal("260"), "badge_text": "", "is_default": False, "order": 4},
-]
 
 FLEET = {
     "eyebrow": "NTTS LIVE MOBILITY DECK",
@@ -174,26 +158,6 @@ RIDES = {
     "side_badge_text": "100% Carbon-Neutral Fleet Options",
 }
 
-# "booking_car" = the car picked in the booking popup when the card's button is clicked
-RIDE_OPTIONS = [
-    {"name": "Compact Sedan", "base_price": Decimal("80"), "badge_text": "",
-     "description": "Affordable daily commutes with reliable drivers and quiet air-conditioned sedan cabins.",
-     "features": "4 Seats\nAC Sedan\nLuggage 2x", "button_text": "Book Sedan",
-     "booking_car": "Compact Sedan", "is_featured": False, "order": 1},
-    {"name": "Premium Executive", "base_price": Decimal("200"), "badge_text": "TOP TIER",
-     "description": "Luxury executive travel with top-tier amenities, EV sedans, and master-level chauffeurs.",
-     "features": "EV / Audi / Tesla\nWi-Fi & Mags\nPriority Pickup", "button_text": "Book Premium",
-     "booking_car": "Executive Sedan", "is_featured": True, "order": 2},
-    {"name": "Spacious SUV", "base_price": Decimal("150"), "badge_text": "FAMILY & GROUP",
-     "description": "Expansive 6-seater cabin engineered for group trips, family airport travel, and generous luggage.",
-     "features": "6 Seats\nMassive Boot\nDual-Zone AC", "button_text": "Book SUV",
-     "booking_car": "Spacious SUV", "is_featured": False, "order": 3},
-    {"name": "Electric EV Plus", "base_price": Decimal("110"), "badge_text": "ECO SMART",
-     "description": "100% green zero-emission electric sedans and crossovers with whisper-quiet ride telemetry.",
-     "features": "4 Passengers\nZero Emission\nSilent Cabin", "button_text": "Book EV Plus",
-     "booking_car": "NTTS Luxe EV", "is_featured": False, "order": 4},
-]
-
 STEPS_SECTION = {
     "badge_text": "THE PROCESS",
     "title": "Ride in 3 Simple Steps",
@@ -218,7 +182,7 @@ STEPS = [
 ]
 
 SAFETY = {
-    "badge_text": "ISO 27001 CERTIFIED SAFETY",
+    "badge_text": "",
     "title": "Your Safety is Our Priority",
     "description": (
         "From algorithmic background vetting to emergency rapid-response teams on standby, "
@@ -250,62 +214,47 @@ PRICING = {
     "description": "No hidden fuel fees. Upfront fares guaranteed before you confirm.",
 }
 
-# "car" = name of the car in the booking popup; the price comes from that car
-PRICING_PLANS = [
-    {"title": "COMPACT SEDAN", "color": "dark", "icon": "sedan", "car": "Compact Sedan", "badge_text": "", "is_featured": False,
-     "features": "₹14 per additional KM\n4 Passengers Max\nFull Air-Conditioned\nBoot Space for 2 Bags",
-     "button_text": "Select Sedan", "order": 1},
-    {"title": "EXECUTIVE SEDAN", "color": "navy", "icon": "executive", "car": "Executive Sedan", "badge_text": "", "is_featured": False,
-     "features": "₹18 per additional KM\n4 Executive Leather Seats\nBottled Water & Wi-Fi\nTop Chauffeur (4.9★)",
-     "button_text": "Select Executive", "order": 2},
-    {"title": "NTTS LUXE EV", "color": "green", "icon": "ev", "car": "NTTS Luxe EV", "badge_text": "MOST POPULAR", "is_featured": True,
-     "features": "₹24 per additional KM\n4 Luxury Ergonomic Seats\nZero-Emission Electric Whisper Drive\n"
-                 "Priority Pickup & Concierge",
-     "button_text": "Select Luxe", "order": 3},
-    {"title": "SPACIOUS SUV / XL", "color": "navy", "icon": "suv", "car": "Spacious SUV", "badge_text": "", "is_featured": False,
-     "features": "₹28 per additional KM\n6–7 Passengers Max\nMassive Boot for 5+ Bags\nDual-Zone Climate Control",
-     "button_text": "Select SUV", "order": 4},
-]
-
 TESTIMONIALS_SECTION = {
     "badge_text": "VERIFIED RIDERS",
     "title": "What Our Riders Say",
-    "description": (
-        "Thousands of daily commuters rely on NTTS Mobility for punctual meetings, "
-        "late-night flights, and stress-free city hops."
-    ),
+    "description": TESTIMONIALS_SECTION_DESCRIPTION,
 }
 
-TESTIMONIALS = [
-    {"rating": 5, "name": "Priya Sharma", "role": "Daily Tech Commuter", "detail": "340+ rides", "order": 1,
-     "quote": "The punctuality and EV silence make all the difference. NTTS Mobility is now the official "
-              "transit app for our entire engineering group."},
-    {"rating": 5, "name": "Marcus Vance", "role": "Managing Director", "detail": "Executive Rider", "order": 2,
-     "quote": "For investor meetings and airport transfers, NTTS Luxe is unmatched. Impeccable electric sedans, "
-              "silence during phone conferences, and never a cancellation."},
-    {"rating": 5, "name": "Dr. Ananya Roy", "role": "Night Physician", "detail": "190+ trips", "order": 3,
-     "quote": "As an on-call physician, I need zero delays at 2 AM. The driver background checks and "
-              "emergency SOS give immense peace of mind."},
-]
 
-APP_DOWNLOAD = {
+FAQ_SECTION = {
     "is_active": True,
-    "badge_text": "AVAILABLE ON IOS & ANDROID",
-    "title": "Ready to Move?",
-    "title_highlight": "Download NTTS Mobility Today",
-    "text_before_code": "Get ₹150 off your first 3 rides with promo code",
-    "promo_code": "NTTSGO",
-    "text_after_code": ". Instant onboarding in 60 seconds.",
-    "show_app_store": True,
-    "app_store_small_text": "DOWNLOAD ON THE",
-    "app_store_text": "Apple App Store",
-    "show_google_play": True,
-    "google_play_small_text": "GET IT ON",
-    "google_play_text": "Google Play",
-    "show_qr": True,
-    "qr_title": "Scan to Download",
-    "qr_subtitle": "Instant Camera Link",
+    "badge_text": "FAQ",
+    "title": "Frequently Asked Questions",
+    "description": "Everything you need to know about booking, fares and safety with New Track.",
+    "show_help_box": True,
+    "help_title": "Still have questions?",
+    "help_text": "Our help desk team is happy to help you plan your ride.",
+    "help_button_text": "Call Help Desk",
 }
+
+FAQ_ITEMS = [
+    ("How do I book a ride?",
+     "Tap “Book a Ride”, enter your pickup city and destination, choose a car and add your name, "
+     "mobile number and email. Our team will call you shortly to confirm the booking."),
+    ("How soon will my car arrive?",
+     "For instant bookings, your car usually arrives within 30–40 minutes. "
+     "If you need it at a fixed time, use the Schedule option while booking."),
+    ("Can I book a ride in advance?",
+     "Yes. Choose “Schedule” in the booking form and pick your pickup date and time."),
+    ("How is the fare calculated?",
+     "Each car type has a base fare plus a per-kilometre rate, shown in the Pricing section. "
+     "The fare is shared with you upfront before you confirm."),
+    ("Is there any surge pricing?",
+     "No. We never apply surge pricing, so you pay the same fair rate at any time of the day."),
+    ("Can I cancel my booking?",
+     "Yes. Cancellation is free within 3 minutes of booking. "
+     "After that, please call our help desk and we will assist you."),
+    ("Are your drivers verified?",
+     "Yes. Every driver goes through background and driving record checks before their first trip."),
+    ("Do you offer airport transfers and outstation trips?",
+     "Yes. Along with daily city rides, we offer airport pickups and drops and outstation trips. "
+     "Book online or call our help desk to plan your trip."),
+]
 
 FOOTER = {
     "about_text": (
@@ -319,7 +268,7 @@ FOOTER = {
     "helpdesk_phone": "9543024365",
     "landline_label": "Land Line",
     "landline_phone": "044-42146995",
-    "copyright_text": "© 2024 NTTS Mobility Technologies. All rights reserved.",
+    "copyright_text": "© {year} NTTS CAR RENTALS. All rights reserved.",
     "credit_text": "Designed & Developed by Vetri IT Systems",
     "credit_link": "https://vetriitsystems.com/",
     "whatsapp_number": "9543024365",
@@ -329,9 +278,11 @@ FOOTER = {
 SOCIAL_LINKS = [("website", "#"), ("share", "#"), ("heart", "#")]
 
 FOOTER_COLUMNS = [
-    ("COMPANY", ["About Us", "Careers", "Press", "Blog"]),
-    ("SUPPORT", ["Help Center", "Safety Protocols", "Policy", "Contact Concierge"]),
-    ("LEGAL", ["Privacy Policy", "Terms of Transit"]),
+    # Company = the same sections as the navbar menu
+    ("COMPANY", [(label, link) for label, link in NAV_ITEMS]),
+    # Support and Legal only link to things on this page (Legal links open the policy popups)
+    ("SUPPORT", SUPPORT_LINKS),
+    ("LEGAL", LEGAL_LINKS),
 ]
 
 
@@ -353,7 +304,8 @@ class Command(BaseCommand):
             obj.save()
             self.stdout.write(self.style.WARNING(f"  reset {model._meta.verbose_name}"))
         else:
-            filled = [key for key, value in values.items() if getattr(obj, key) in ("", None)]
+            filled = [key for key, value in values.items()
+                      if getattr(obj, key) in ("", None) and value not in ("", None)]
             for key in filled:
                 setattr(obj, key, values[key])
             if filled:
@@ -368,6 +320,12 @@ class Command(BaseCommand):
         self.stdout.write("Seeding content...")
         site = self.singleton(SiteSettings, SITE, reset)
         self.singleton(HeroSection, HERO, reset)
+        about = self.singleton(AboutSection, ABOUT, reset)
+        if reset or not about.values.exists():
+            about.values.all().delete()
+            for data in ABOUT_VALUES:
+                AboutValue.objects.create(section=about, **data)
+            self.stdout.write(self.style.SUCCESS(f"  {len(ABOUT_VALUES)} About Us value cards"))
         self.singleton(BookingModal, BOOKING, reset)
 
         if reset or not site.nav_items.exists():
@@ -377,6 +335,8 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"  {len(NAV_ITEMS)} navbar links"))
 
         for data in VEHICLES:
+            data = {k: v for k, v in data.items() if k != "old_names"}
+            data["seats"] = SEATS.get(data["name"], 4)
             existing = VehicleClass.objects.filter(name=data["name"]).first()
             if existing is None:
                 VehicleClass.objects.create(**data)
@@ -385,6 +345,22 @@ class Command(BaseCommand):
                 for key, value in data.items():
                     setattr(existing, key, value)
                 existing.save()
+
+        packages = {}
+        for order, name in enumerate(RENTAL_PACKAGES, start=1):
+            packages[name], _ = RentalPackage.objects.get_or_create(name=name, defaults={"order": order})
+        added = 0
+        for car in VehicleClass.objects.all():
+            for row in rate_rows(car.name):
+                package = packages.get(row.pop("package"))
+                rate, created = TripRate.objects.get_or_create(
+                    vehicle=car, trip_type=row.pop("trip_type"), package=package, defaults=row)
+                if created:
+                    added += 1
+                elif reset:
+                    TripRate.objects.filter(pk=rate.pk).update(**row)
+        if added:
+            self.stdout.write(self.style.SUCCESS(f"  {added} booking popup prices"))
 
         self.singleton(FleetSection, FLEET, reset)
         if reset or not StatItem.objects.exists():
@@ -395,6 +371,7 @@ class Command(BaseCommand):
 
         self.singleton(RidesSection, RIDES, reset)
         for data in RIDE_OPTIONS:
+            data = {k: v for k, v in data.items() if k != "old_names"}
             data = dict(data, currency_symbol="₹", price_suffix="base", image_alt=data["name"])
             data["booking_car"] = VehicleClass.objects.filter(name=data["booking_car"]).first()
             existing = RideOption.objects.filter(name=data["name"]).first()
@@ -446,6 +423,7 @@ class Command(BaseCommand):
 
         self.singleton(PricingSection, PRICING, reset)
         for data in PRICING_PLANS:
+            data = {k: v for k, v in data.items() if k != "old_titles"}
             data = dict(data, price_suffix="/ base fare")
             data["car"] = VehicleClass.objects.filter(name=data["car"]).first()
             if data["car"] is None:
@@ -467,7 +445,12 @@ class Command(BaseCommand):
                 Testimonial.objects.create(**data)
             self.stdout.write(self.style.SUCCESS(f"  {len(TESTIMONIALS)} testimonials"))
 
-        self.singleton(AppDownloadSection, APP_DOWNLOAD, reset)
+        self.singleton(FAQSection, FAQ_SECTION, reset)
+        if reset or not FAQItem.objects.exists():
+            FAQItem.objects.all().delete()
+            for i, (question, answer) in enumerate(FAQ_ITEMS, start=1):
+                FAQItem.objects.create(question=question, answer=answer, order=i)
+            self.stdout.write(self.style.SUCCESS(f"  {len(FAQ_ITEMS)} FAQ questions"))
 
         footer = self.singleton(FooterSettings, FOOTER, reset)
         if reset or not footer.social_links.exists():
@@ -479,8 +462,19 @@ class Command(BaseCommand):
             FooterColumn.objects.all().delete()
             for i, (title, labels) in enumerate(FOOTER_COLUMNS, start=1):
                 column = FooterColumn.objects.create(title=title, order=i)
-                for j, label in enumerate(labels, start=1):
-                    FooterLink.objects.create(column=column, label=label, link="#", order=j)
+                for j, item in enumerate(labels, start=1):
+                    label, link = item if isinstance(item, tuple) else (item, "#")
+                    FooterLink.objects.create(column=column, label=label, link=link, order=j)
             self.stdout.write(self.style.SUCCESS(f"  {len(FOOTER_COLUMNS)} footer link columns"))
 
-        self.stdout.write(self.style.SUCCESS("Done. Upload images in admin: logo, hero background, car options, fleet slides, ride cards, testimonial photos, app QR code."))
+        for data in LEGAL_PAGES:
+            existing = LegalPage.objects.filter(slug=data["slug"]).first()
+            if existing is None:
+                LegalPage.objects.create(**data)
+                self.stdout.write(self.style.SUCCESS(f"  created policy popup {data['title']}"))
+            elif reset:
+                for key, value in data.items():
+                    setattr(existing, key, value)
+                existing.save()
+
+        self.stdout.write(self.style.SUCCESS("Done. Upload images in admin: logo, hero background, car options, fleet slides, ride cards, testimonial photos."))

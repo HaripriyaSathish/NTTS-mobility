@@ -1,0 +1,1097 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$xTi2vvZGqYsI1YoXAPzPol$3xEPWJWvuBOrU7vQMB5tHusP0o68444iDsmIDyZSIsE=",
+    "last_login": "2026-09-30T09:29:59.500Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "priyarajendren2303@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-09-30T07:26:45.542Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.smtpsettings",
+  "pk": 1,
+  "fields": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "use_tls": true,
+    "use_ssl": false,
+    "username": "priyarajendren2303@gmail.com",
+    "password": "qrzzqeefjqmfhukb",
+    "from_email": "NTTS Mobility <priyarajendren2303@gmail.com>",
+    "receiver_email": "priyarajendren2303@gmail.com",
+    "is_active": true,
+    "updated_at": "2026-09-30T07:31:19.256Z"
+  }
+},
+{
+  "model": "core.sitesettings",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T07:49:01.730Z",
+    "site_name": "NTTS Mobility",
+    "logo": "image/upload/v1790754542/ntts/branding/lnaquufhizfyqldhhb7a.png",
+    "logo_alt": "NTTS Mobility",
+    "favicon": "image/upload/v1790754543/ntts/branding/u7gu7gy8fazfqtwjbtwu.png",
+    "nav_cta_text": "Book a Ride",
+    "nav_cta_opens_booking": true,
+    "nav_cta_link": "#book",
+    "meta_title": "NTTS Mobility | Your Ride, Your Way – Anytime, Anywhere",
+    "meta_description": "Fast, safe, and sustainable EV rides with NTTS Mobility. Real-time chauffeur tracking, premium EV fleets, upfront fares and zero surge pricing.",
+    "meta_keywords": "NTTS Mobility, EV cab, electric taxi, book a ride, airport transfer, chauffeur, urban mobility",
+    "canonical_url": "",
+    "og_title": "NTTS Mobility | Your Ride, Your Way",
+    "og_description": "Fast, safe, and sustainable EV rides with zero surge surprises.",
+    "og_image": null,
+    "robots": "index, follow"
+  }
+},
+{
+  "model": "core.navitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "site": 1,
+    "label": "Home",
+    "link": "#home",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.navitem",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "site": 1,
+    "label": "Fleet & Rides",
+    "link": "#fleet",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.navitem",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "site": 1,
+    "label": "How It Works",
+    "link": "#how-it-works",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.navitem",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "site": 1,
+    "label": "Safety",
+    "link": "#safety",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.navitem",
+  "pk": 5,
+  "fields": {
+    "order": 5,
+    "is_active": true,
+    "site": 1,
+    "label": "Pricing",
+    "link": "#pricing",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.herosection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T07:47:49.543Z",
+    "badge_text": "NEXT-GEN URBAN TRANSIT",
+    "title": "Your Ride, Your Way —",
+    "title_highlight": "Anytime, Anywhere",
+    "description": "Fast, safe, and sustainable rides at your fingertips. Experience the future of urban mobility with real-time network tracking, verified chauffeurs, premium EV fleets, and zero surge surprises.",
+    "background_image": "image/upload/v1790754478/ntts/hero/vy42xxw1wj5eaquyrvmb.png",
+    "background_alt": "Electric car driving on a forest road",
+    "tracking_label": "Tracking Chauffeur",
+    "vehicle_name": "NTTS Luxe EV",
+    "vehicle_details": "Ioniq 5 / Tesla • Emerald",
+    "fleet_label": "NTTS Fleet",
+    "distance_text": "0.8 km away",
+    "driver_name": "Rajesh S.",
+    "driver_initials": "RS",
+    "driver_photo": null,
+    "driver_rating": "4.98",
+    "driver_trips": "(1,420 trips)",
+    "driver_phone": "",
+    "card_title": "Book Instantly",
+    "eta_text": "Avg ETA 2.4 min",
+    "pickup_label": "Pickup Point",
+    "pickup_placeholder": "Cyber City Hub, Gate 4",
+    "destination_label": "Destination",
+    "destination_placeholder": "International Tech Terminal 2",
+    "date_label": "Date",
+    "date_options": "Today (Instant)",
+    "ride_window_label": "Ride Window",
+    "ride_window_options": "Depart Now",
+    "button_text": "Book a Ride"
+  }
+},
+{
+  "model": "core.bookingmodal",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T07:46:54.474Z",
+    "badge_text": "NTTS SHIELD™ PROTECTED",
+    "title": "Book Your Ride",
+    "subtitle": "Instant dispatch & guaranteed upfront fares across the city",
+    "pickup_label": "Pickup Point",
+    "pickup_placeholder": "Cyber City Hub, Gate 4",
+    "destination_label": "Destination",
+    "destination_placeholder": "Airport terminal",
+    "ride_now_label": "Ride Now",
+    "schedule_label": "Schedule",
+    "departing_label": "Departing:",
+    "departing_highlight": "Within 3–5 Mins",
+    "departing_note": "(Fastest match)",
+    "schedule_date_label": "Pickup Date",
+    "schedule_time_label": "Pickup Time",
+    "vehicle_heading": "Select Vehicle Class",
+    "nearby_suffix": "options nearby",
+    "contact_heading": "Your Details",
+    "name_label": "Full Name",
+    "name_placeholder": "Enter your name",
+    "phone_label": "Mobile Number",
+    "phone_placeholder": "Enter your mobile number",
+    "email_label": "Email Address",
+    "email_placeholder": "Enter your email",
+    "button_prefix": "Request",
+    "footer_note": "Free cancellation within 3 minutes of booking. Guaranteed zero surge pricing.",
+    "success_title": "Request Sent!",
+    "success_message": "Our new team member will contact you shortly.",
+    "success_button_text": "Done",
+    "success_footer_note": "Invitation expires in 7 days"
+  }
+},
+{
+  "model": "core.vehicleclass",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "name": "Compact Sedan",
+    "button_name": "Compact Sedan",
+    "details": "4 seats · 3m away",
+    "base_price": "80.00",
+    "currency_symbol": "₹",
+    "price_suffix": "base",
+    "badge_text": "",
+    "is_default": false
+  }
+},
+{
+  "model": "core.vehicleclass",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "name": "Executive Sedan",
+    "button_name": "Executive Sedan",
+    "details": "Luxury AC · 5m away",
+    "base_price": "140.00",
+    "currency_symbol": "₹",
+    "price_suffix": "base",
+    "badge_text": "",
+    "is_default": false
+  }
+},
+{
+  "model": "core.vehicleclass",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "name": "NTTS Luxe EV",
+    "button_name": "NTTS Luxe",
+    "details": "EV Whisper · 2m away",
+    "base_price": "200.00",
+    "currency_symbol": "₹",
+    "price_suffix": "base",
+    "badge_text": "POPULAR",
+    "is_default": true
+  }
+},
+{
+  "model": "core.vehicleclass",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "name": "Spacious SUV",
+    "button_name": "Spacious SUV",
+    "details": "6–7 seats · 6m away",
+    "base_price": "260.00",
+    "currency_symbol": "₹",
+    "price_suffix": "base",
+    "badge_text": "",
+    "is_default": false
+  }
+},
+{
+  "model": "core.fleetsection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:07:10.380Z",
+    "eyebrow": "NTTS LIVE MOBILITY DECK",
+    "title": "Dynamic Fleet in Motion",
+    "footer_text": "Auto-synced telematics • Zero idle latency",
+    "autoplay": true,
+    "autoplay_seconds": 6
+  }
+},
+{
+  "model": "core.fleetslide",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "tab_label": "Luxe Sedan",
+    "tab_icon": "sedan",
+    "badge_text": "ZERO-EMISSION LUXURY",
+    "title": "NTTS Luxe Electric Sedan",
+    "description": "Whisper-quiet electric cabin with ambient lighting, ergonomic leather seating, onboard Wi-Fi, and a smooth zero-emission ride across the city.",
+    "ride_card": 4,
+    "image": null,
+    "image_alt": "NTTS Luxe Electric Sedan"
+  }
+},
+{
+  "model": "core.fleetslide",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "tab_label": "Smart City",
+    "tab_icon": "city",
+    "badge_text": "EVERYDAY CITY RIDES",
+    "title": "NTTS Smart City Sedan",
+    "description": "Affordable air-conditioned sedans for quick city hops, office commutes, and daily errands, with verified drivers and upfront fares.",
+    "ride_card": 1,
+    "image": null,
+    "image_alt": "NTTS Smart City Sedan"
+  }
+},
+{
+  "model": "core.fleetslide",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "tab_label": "Exec SUV",
+    "tab_icon": "suv",
+    "badge_text": "FIRST-CLASS CHAUFFEUR",
+    "title": "NTTS Executive Grand SUV",
+    "description": "Expansive 6-passenger cabin with active noise cancellation, private Wi-Fi mesh, executive fold-out desks, and generous luggage hold.",
+    "ride_card": 3,
+    "image": null,
+    "image_alt": "NTTS Executive Grand SUV"
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 1,
+  "fields": {
+    "slide": 3,
+    "label": "Cabin Space",
+    "value": "6 Seats",
+    "order": 1
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 2,
+  "fields": {
+    "slide": 3,
+    "label": "Luggage",
+    "value": "5 Suitcases",
+    "order": 2
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 3,
+  "fields": {
+    "slide": 3,
+    "label": "Privacy Tint",
+    "value": "Grade A",
+    "order": 3
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 4,
+  "fields": {
+    "slide": 3,
+    "label": "Rating",
+    "value": "★ 4.99",
+    "order": 4
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 5,
+  "fields": {
+    "slide": 1,
+    "label": "Cabin Space",
+    "value": "4 Seats",
+    "order": 1
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 6,
+  "fields": {
+    "slide": 1,
+    "label": "Luggage",
+    "value": "2 Suitcases",
+    "order": 2
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 7,
+  "fields": {
+    "slide": 1,
+    "label": "Drive",
+    "value": "100% Electric",
+    "order": 3
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 8,
+  "fields": {
+    "slide": 1,
+    "label": "Rating",
+    "value": "★ 4.98",
+    "order": 4
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 9,
+  "fields": {
+    "slide": 2,
+    "label": "Cabin Space",
+    "value": "4 Seats",
+    "order": 1
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 10,
+  "fields": {
+    "slide": 2,
+    "label": "Luggage",
+    "value": "2 Bags",
+    "order": 2
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 11,
+  "fields": {
+    "slide": 2,
+    "label": "Comfort",
+    "value": "Full AC",
+    "order": 3
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 12,
+  "fields": {
+    "slide": 2,
+    "label": "Rating",
+    "value": "★ 4.90",
+    "order": 4
+  }
+},
+{
+  "model": "core.statitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "number": "10M+",
+    "show_star": false,
+    "label": "Rides Completed Safely",
+    "color": "green"
+  }
+},
+{
+  "model": "core.statitem",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "number": "4.9",
+    "show_star": true,
+    "label": "Avg Customer Satisfaction",
+    "color": "dark"
+  }
+},
+{
+  "model": "core.statitem",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "number": "50+",
+    "show_star": false,
+    "label": "Metros & Cities Worldwide",
+    "color": "navy"
+  }
+},
+{
+  "model": "core.statitem",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "number": "24/7",
+    "show_star": false,
+    "label": "Human Concierge & Safety",
+    "color": "green"
+  }
+},
+{
+  "model": "core.ridessection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:15:41.470Z",
+    "badge_text": "FLEET & RIDES",
+    "title": "Choose Your Ride",
+    "description": "Tailored transportation solutions calibrated for speed, comfort, or solo sprints.",
+    "side_badge_text": "100% Carbon-Neutral Fleet Options"
+  }
+},
+{
+  "model": "core.rideoption",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "name": "Compact Sedan",
+    "currency_symbol": "₹",
+    "base_price": "80.00",
+    "price_suffix": "base",
+    "description": "Affordable daily commutes with reliable drivers and quiet air-conditioned sedan cabins.",
+    "image": "image/upload/v1790756196/ntts/rides/xogsbywgkqvtdx43a7st.png",
+    "image_alt": "Compact Sedan",
+    "badge_text": "",
+    "features": "4 Seats\r\nAC Sedan\r\nLuggage 2x",
+    "button_text": "Book Sedan",
+    "booking_car": 1,
+    "is_featured": false
+  }
+},
+{
+  "model": "core.rideoption",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "name": "Premium Executive",
+    "currency_symbol": "₹",
+    "base_price": "200.00",
+    "price_suffix": "base",
+    "description": "Luxury executive travel with top-tier amenities, EV sedans, and master-level chauffeurs.",
+    "image": "image/upload/v1790756212/ntts/rides/vmjxeccgpukhn0dob09l.png",
+    "image_alt": "Premium Executive",
+    "badge_text": "TOP TIER",
+    "features": "EV / Audi / Tesla\r\nWi-Fi & Mags\r\nPriority Pickup",
+    "button_text": "Book Premium",
+    "booking_car": 2,
+    "is_featured": true
+  }
+},
+{
+  "model": "core.rideoption",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "name": "Spacious SUV",
+    "currency_symbol": "₹",
+    "base_price": "150.00",
+    "price_suffix": "base",
+    "description": "Expansive 6-seater cabin engineered for group trips, family airport travel, and generous luggage.",
+    "image": "image/upload/v1790756227/ntts/rides/jswoqejed2vb9tx5y7ae.png",
+    "image_alt": "Spacious SUV",
+    "badge_text": "FAMILY & GROUP",
+    "features": "6 Seats\r\nMassive Boot\r\nDual-Zone AC",
+    "button_text": "Book SUV",
+    "booking_car": 4,
+    "is_featured": false
+  }
+},
+{
+  "model": "core.rideoption",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "name": "Electric EV Plus",
+    "currency_symbol": "₹",
+    "base_price": "110.00",
+    "price_suffix": "base",
+    "description": "100% green zero-emission electric sedans and crossovers with whisper-quiet ride telemetry.",
+    "image": "image/upload/v1790756239/ntts/rides/uynhzikql4vh3zwmqf1w.png",
+    "image_alt": "Electric EV Plus",
+    "badge_text": "ECO SMART",
+    "features": "4 Passengers\r\nZero Emission\r\nSilent Cabin",
+    "button_text": "Book EV Plus",
+    "booking_car": 3,
+    "is_featured": false
+  }
+},
+{
+  "model": "core.stepssection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:24:28.963Z",
+    "badge_text": "THE PROCESS",
+    "title": "Ride in 3 Simple Steps",
+    "description": "From tapping your screen to stepping out at your destination—zero friction, all precision.",
+    "step_word": "STEP",
+    "show_banner": true,
+    "banner_title": "Sub-Second Driver Allocation",
+    "banner_text": "Our edge routing engine matches you with the ideal nearby partner in less than 400ms.",
+    "banner_badge": "99.98% DISPATCH UPTIME"
+  }
+},
+{
+  "model": "core.step",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "icon": "location",
+    "color": "green",
+    "title": "Enter Your Destination",
+    "description": "Type in your pickup point or allow the geo-sensor to lock onto your precise spot automatically.",
+    "highlight_text": "Instant GPS coordinate detection"
+  }
+},
+{
+  "model": "core.step",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "icon": "sliders",
+    "color": "blue",
+    "title": "Choose Your Ride",
+    "description": "Compare transparent upfront fares, precise vehicle models, and driver distance before locking in.",
+    "highlight_text": "Locked fixed price — no surprises"
+  }
+},
+{
+  "model": "core.step",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "icon": "shield",
+    "color": "green",
+    "title": "Sit Back & Relax",
+    "description": "Track your driver's real-time trajectory, share ride details with loved ones, and pay cashlessly.",
+    "highlight_text": "Encrypted telemetry & live track"
+  }
+},
+{
+  "model": "core.safetysection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:24:28.979Z",
+    "badge_text": "ISO 27001 CERTIFIED SAFETY",
+    "title": "Your Safety is Our Priority",
+    "description": "From algorithmic background vetting to emergency rapid-response teams on standby, our security infrastructure protects every single kilometer.",
+    "show_highlight": true,
+    "highlight_title": "NTTS Shield™ Active",
+    "highlight_text": "Every trip automatically benefits from round-the-clock incident monitoring and insurance cover."
+  }
+},
+{
+  "model": "core.safetyfeature",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "icon": "id_card",
+    "color": "green",
+    "title": "Verified Drivers",
+    "description": "Multi-point background and driving record screening before first dispatch."
+  }
+},
+{
+  "model": "core.safetyfeature",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "icon": "satellite",
+    "color": "blue",
+    "title": "Live GPS Tracking",
+    "description": "Share live telemetry links with contacts so they see your precise spot in real-time."
+  }
+},
+{
+  "model": "core.safetyfeature",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "icon": "sos",
+    "color": "red",
+    "title": "SOS Emergency Button",
+    "description": "Direct 1-tap pipeline to law enforcement and 24/7 internal emergency dispatch."
+  }
+},
+{
+  "model": "core.safetyfeature",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "icon": "phone_lock",
+    "color": "green",
+    "title": "Masked Numbers",
+    "description": "In-app VoIP and masked virtual phone routing keep your private number private."
+  }
+},
+{
+  "model": "core.safetyfeature",
+  "pk": 5,
+  "fields": {
+    "order": 5,
+    "is_active": true,
+    "icon": "handshake",
+    "color": "green",
+    "title": "2-Way Accountability",
+    "description": "Mutual rating ensures both riders and drivers uphold highest decorum standards."
+  }
+},
+{
+  "model": "core.safetyfeature",
+  "pk": 6,
+  "fields": {
+    "order": 6,
+    "is_active": true,
+    "icon": "shield",
+    "color": "blue",
+    "title": "Accident Cover",
+    "description": "Included comprehensive accidental and medical insurance for every booked ride."
+  }
+},
+{
+  "model": "core.pricingsection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:26:03.522Z",
+    "badge_text": "TRANSPARENT TARIFF",
+    "title": "Simple, Transparent Pricing",
+    "description": "No hidden fuel fees. Upfront fares guaranteed before you confirm."
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "title": "COMPACT SEDAN",
+    "icon": "sedan",
+    "car": 1,
+    "price_suffix": "/ base fare",
+    "features": "₹14 per additional KM\n4 Passengers Max\nFull Air-Conditioned\nBoot Space for 2 Bags",
+    "button_text": "Select Sedan",
+    "badge_text": "",
+    "is_featured": false,
+    "color": "dark"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "title": "EXECUTIVE SEDAN",
+    "icon": "executive",
+    "car": 2,
+    "price_suffix": "/ base fare",
+    "features": "₹18 per additional KM\n4 Executive Leather Seats\nBottled Water & Wi-Fi\nTop Chauffeur (4.9★)",
+    "button_text": "Select Executive",
+    "badge_text": "",
+    "is_featured": false,
+    "color": "navy"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "title": "NTTS LUXE EV",
+    "icon": "ev",
+    "car": 3,
+    "price_suffix": "/ base fare",
+    "features": "₹24 per additional KM\n4 Luxury Ergonomic Seats\nZero-Emission Electric Whisper Drive\nPriority Pickup & Concierge",
+    "button_text": "Select Luxe",
+    "badge_text": "MOST POPULAR",
+    "is_featured": true,
+    "color": "green"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "title": "SPACIOUS SUV / XL",
+    "icon": "suv",
+    "car": 4,
+    "price_suffix": "/ base fare",
+    "features": "₹28 per additional KM\n6–7 Passengers Max\nMassive Boot for 5+ Bags\nDual-Zone Climate Control",
+    "button_text": "Select SUV",
+    "badge_text": "",
+    "is_featured": false,
+    "color": "navy"
+  }
+},
+{
+  "model": "core.testimonialssection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:27:31.608Z",
+    "badge_text": "VERIFIED RIDERS",
+    "title": "What Our Riders Say",
+    "description": "Thousands of daily commuters rely on NTTS Mobility for punctual meetings, late-night flights, and stress-free city hops."
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "rating": 5,
+    "quote": "The punctuality and EV silence make all the difference. NTTS Mobility is now the official transit app for our entire engineering group.",
+    "name": "Priya Sharma",
+    "photo": "image/upload/v1790757056/ntts/testimonials/xhcf6nfrbo98zvjoidup.avif",
+    "role": "Daily Tech Commuter",
+    "detail": "340+ rides",
+    "is_verified": true
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "rating": 5,
+    "quote": "For investor meetings and airport transfers, NTTS Luxe is unmatched. Impeccable electric sedans, silence during phone conferences, and never a cancellation.",
+    "name": "Marcus Vance",
+    "photo": "image/upload/v1790757088/ntts/testimonials/vzd5l2ebvugdmq1p42zg.avif",
+    "role": "Managing Director",
+    "detail": "Executive Rider",
+    "is_verified": true
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "rating": 5,
+    "quote": "As an on-call physician, I need zero delays at 2 AM. The driver background checks and emergency SOS give immense peace of mind.",
+    "name": "Dr. Ananya Roy",
+    "photo": "image/upload/v1790757117/ntts/testimonials/ndzjsxt3trtyqrdd0iu7.avif",
+    "role": "Night Physician",
+    "detail": "190+ trips",
+    "is_verified": true
+  }
+},
+{
+  "model": "core.appdownloadsection",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T08:36:55.584Z",
+    "is_active": true,
+    "badge_text": "AVAILABLE ON IOS & ANDROID",
+    "title": "Ready to Move?",
+    "title_highlight": "Download NTTS Mobility Today",
+    "text_before_code": "Get ₹150 off your first 3 rides with promo code",
+    "promo_code": "NTTSGO",
+    "text_after_code": ". Instant onboarding in 60 seconds.",
+    "show_app_store": true,
+    "app_store_small_text": "DOWNLOAD ON THE",
+    "app_store_text": "Apple App Store",
+    "app_store_link": "",
+    "show_google_play": true,
+    "google_play_small_text": "GET IT ON",
+    "google_play_text": "Google Play",
+    "google_play_link": "",
+    "show_qr": true,
+    "qr_image": "image/upload/v1790757417/ntts/app/lxndb8g8n4077khsbafr.png",
+    "qr_title": "Scan to Download",
+    "qr_subtitle": "Instant Camera Link"
+  }
+},
+{
+  "model": "core.footersettings",
+  "pk": 1,
+  "fields": {
+    "updated_at": "2026-09-30T09:07:09.086Z",
+    "about_text": "Redefining mobility for the modern city. Experience seamless, safe, and sustainable transportation at the tap of a button.",
+    "company_name": "Ntts Mobility Solutions Pvt Ltd",
+    "address": "First Floor, Door No.4, East Spur Tank Road,\nEgmore, Chennai, Chennai, Tamil Nadu, 600008",
+    "map_link": "",
+    "email": "info@newtrackindia.com",
+    "helpdesk_label": "Help Desk",
+    "helpdesk_phone": "9543024365",
+    "landline_label": "Land Line",
+    "landline_phone": "044-42146995",
+    "copyright_text": "© 2024 NTTS Mobility Technologies. All rights reserved.",
+    "credit_text": "Designed & Developed by Vetri IT Systems",
+    "credit_link": "https://vetriitsystems.com/",
+    "show_floating_buttons": true,
+    "whatsapp_number": "9543024365",
+    "whatsapp_message": "Hi NTTS Mobility, I would like to book a ride.",
+    "show_email_button": true,
+    "show_call_button": true
+  }
+},
+{
+  "model": "core.sociallink",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "footer": 1,
+    "platform": "website",
+    "link": "#"
+  }
+},
+{
+  "model": "core.sociallink",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "footer": 1,
+    "platform": "share",
+    "link": "#"
+  }
+},
+{
+  "model": "core.sociallink",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "footer": 1,
+    "platform": "heart",
+    "link": "#"
+  }
+},
+{
+  "model": "core.footercolumn",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "title": "COMPANY"
+  }
+},
+{
+  "model": "core.footercolumn",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "title": "SUPPORT"
+  }
+},
+{
+  "model": "core.footercolumn",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "title": "LEGAL"
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "column": 1,
+    "label": "About Us",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 2,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "column": 1,
+    "label": "Careers",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 3,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "column": 1,
+    "label": "Press",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 4,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "column": 1,
+    "label": "Blog",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 5,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "column": 2,
+    "label": "Help Center",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 6,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "column": 2,
+    "label": "Safety Protocols",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 7,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "column": 2,
+    "label": "Policy",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 8,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "column": 2,
+    "label": "Contact Concierge",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 9,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "column": 3,
+    "label": "Privacy Policy",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.footerlink",
+  "pk": 10,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "column": 3,
+    "label": "Terms of Transit",
+    "link": "#",
+    "open_in_new_tab": false
+  }
+},
+{
+  "model": "core.bookingrequest",
+  "pk": 3,
+  "fields": {
+    "pickup": "no 5/216, Maruthu Pandiyar St, S.kolathur",
+    "destination": "Tambaram , Chennai",
+    "ride_type": "now",
+    "scheduled_date": null,
+    "scheduled_time": null,
+    "date_option": "Today (Instant)",
+    "ride_window": "Depart Now",
+    "vehicle": 3,
+    "vehicle_name": "NTTS Luxe EV",
+    "quoted_price": "₹200 base",
+    "name": "Haripriya R",
+    "phone": "9000990009",
+    "email": "priyarajendren2303@gmail.com",
+    "status": "new",
+    "admin_notes": "",
+    "ip_address": "127.0.0.1",
+    "email_sent": true,
+    "created_at": "2026-09-30T08:07:15.869Z"
+  }
+}
+]

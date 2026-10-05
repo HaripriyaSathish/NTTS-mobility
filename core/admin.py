@@ -6,20 +6,25 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from .models import (
-    AppDownloadSection,
+    AboutSection,
+    AboutValue,
     FooterColumn,
     FooterLink,
     FooterSettings,
     SocialLink,
     BookingModal,
     BookingRequest,
+    FAQItem,
+    FAQSection,
     FleetSection,
     FleetSlide,
     FleetSpec,
     HeroSection,
+    LegalPage,
     NavItem,
     PricingPlan,
     PricingSection,
+    RentalPackage,
     RideOption,
     RidesSection,
     SafetyFeature,
@@ -31,6 +36,7 @@ from .models import (
     StepsSection,
     Testimonial,
     TestimonialsSection,
+    TripRate,
     VehicleClass,
 )
 
@@ -216,14 +222,17 @@ class HeroSectionAdmin(SingletonAdmin):
 class BookingModalAdmin(SingletonAdmin):
     fieldsets = (
         ("Top of popup", {"fields": ("badge_text", "title", "subtitle")}),
-        ("Pickup & drop boxes", {"fields": (("pickup_label", "pickup_placeholder"),
-                                           ("destination_label", "destination_placeholder"))}),
-        ("Ride now / Schedule", {"fields": (("ride_now_label", "schedule_label"),
-                                            ("departing_label", "departing_highlight", "departing_note"),
-                                            ("schedule_date_label", "schedule_time_label"))}),
+        ("Trip tabs", {"fields": (("airport_tab_label", "local_tab_label", "outstation_tab_label"),)}),
+        ("Trip boxes", {"fields": (("pickup_label", "pickup_placeholder"),
+                                  ("destination_label", "destination_placeholder"),
+                                  ("schedule_date_label", "schedule_time_label"),
+                                  ("flight_label", "flight_placeholder"),
+                                  ("days_label", "pax_label"),
+                                  "package_heading")}),
         ("Car list", {
-            "description": "The cars themselves are edited in “3. Booking Popup – Car Options”.",
-            "fields": ("vehicle_heading", "nearby_suffix"),
+            "description": "Prices are edited in “3. Booking Popup – Prices” (or inside each car). "
+                           "Local packages are edited in “3. Booking Popup – Local Packages”.",
+            "fields": ("vehicle_heading", "nearby_suffix", "no_cars_text"),
         }),
         ("Customer details", {"fields": ("contact_heading",
                                          ("name_label", "name_placeholder"),
@@ -235,17 +244,30 @@ class BookingModalAdmin(SingletonAdmin):
     )
 
 
+class TripRateInline(admin.TabularInline):
+    model = TripRate
+    extra = 0
+    fields = ("trip_type", "package", "price", "price_suffix", "extra_km_rate", "extra_hour_rate", "is_active")
+    verbose_name = "Price"
+    verbose_name_plural = "Prices in the booking popup (Airport / Local packages / Outstation)"
+
+
 @admin.register(VehicleClass)
 class VehicleClassAdmin(admin.ModelAdmin):
-    list_display = ("thumb", "name", "details", "price", "badge_text", "is_default", "order", "is_active")
+    inlines = [TripRateInline]
+    list_display = ("thumb", "name", "details", "seats", "price", "badge_text", "is_default", "order", "is_active")
     list_display_links = ("thumb", "name")
     list_editable = ("order", "is_active")
     actions = [show_on_site, hide_from_site]
     readonly_fields = ("photo_info",)
     fieldsets = (
-        ("Car", {"fields": ("name", "details", "badge_text")}),
+        ("Car", {"fields": ("name", "details", "seats", "badge_text")}),
         ("Photo", {"fields": ("photo_info",)}),
-        ("Price", {"fields": (("currency_symbol", "base_price", "price_suffix"),)}),
+        ("Starting price", {
+            "description": "Shown on the Fleet & Rides and Pricing cards. "
+                           "The booking popup uses the prices in the table below.",
+            "fields": (("currency_symbol", "base_price", "price_suffix"),),
+        }),
         ("Booking button", {"fields": ("button_name", "is_default")}),
         ("Display", {"fields": ("order", "is_active")}),
     )
@@ -271,6 +293,33 @@ class VehicleClassAdmin(admin.ModelAdmin):
     @admin.display(description="Price")
     def price(self, obj):
         return f"{obj.price_display} {obj.price_suffix}"
+
+
+@admin.register(TripRate)
+class TripRateAdmin(admin.ModelAdmin):
+    list_display = ("vehicle", "trip_type", "package", "price", "price_suffix", "extra_km_rate", "extra_hour_rate",
+                    "is_active")
+    list_display_links = ("vehicle",)
+    list_editable = ("price", "price_suffix", "extra_km_rate", "extra_hour_rate", "is_active")
+    list_filter = ("trip_type", "vehicle", "package")
+    list_select_related = ("vehicle", "package")
+    actions = [show_on_site, hide_from_site]
+    fieldsets = (
+        (None, {"fields": ("vehicle", "trip_type", "package")}),
+        ("Price", {"fields": (("price", "price_suffix"), ("extra_km_rate", "extra_hour_rate"))}),
+        ("Display", {"fields": ("is_active",)}),
+    )
+
+
+@admin.register(RentalPackage)
+class RentalPackageAdmin(admin.ModelAdmin):
+    list_display = ("name", "cars_priced", "order", "is_active")
+    list_editable = ("order", "is_active")
+    actions = [show_on_site, hide_from_site]
+
+    @admin.display(description="Cars with a price")
+    def cars_priced(self, obj):
+        return obj.rates.count()
 
 
 # ---------------------------------------------------------------------------
@@ -420,6 +469,35 @@ class StepAdmin(admin.ModelAdmin):
 
 
 # ---------------------------------------------------------------------------
+# 13. About Us
+# ---------------------------------------------------------------------------
+class AboutValueInline(admin.TabularInline):
+    model = AboutValue
+    extra = 0
+    fields = ("icon", "title", "text", "order", "is_active")
+    formfield_overrides = {models.CharField: {"widget": forms.TextInput(attrs={"size": 40})}}
+
+
+@admin.register(AboutSection)
+class AboutSectionAdmin(SingletonAdmin):
+    inlines = [AboutValueInline]
+    readonly_fields = ("image_preview",)
+    fieldsets = (
+        (None, {"fields": ("is_active", "badge_text", "title", "description")}),
+        ("Services list", {"fields": ("services_heading", "services")}),
+        ("Photo (optional)", {"fields": ("image", "image_preview", "image_alt")}),
+        ("Mission, Vision & Why cards", {"fields": (("mission_title", "mission_text"),
+                                                    ("vision_title", "vision_text"),
+                                                    ("why_title", "why_text"))}),
+        ("Values row", {"fields": ("values_heading",)}),
+    )
+
+    @admin.display(description="Current photo")
+    def image_preview(self, obj):
+        return image_preview(obj.image, 100)
+
+
+# ---------------------------------------------------------------------------
 # 8. Safety
 # ---------------------------------------------------------------------------
 @admin.register(SafetySection)
@@ -532,27 +610,29 @@ class TestimonialAdmin(admin.ModelAdmin):
 
 
 # ---------------------------------------------------------------------------
-# 11. App download banner
+# 11. FAQ
 # ---------------------------------------------------------------------------
-@admin.register(AppDownloadSection)
-class AppDownloadSectionAdmin(SingletonAdmin):
-    readonly_fields = ("qr_preview",)
+@admin.register(FAQSection)
+class FAQSectionAdmin(SingletonAdmin):
     fieldsets = (
-        ("Heading", {"fields": ("is_active", "badge_text", "title", "title_highlight")}),
-        ("Offer line", {
-            "description": "Shown as: text before + [promo code box] + text after.",
-            "fields": ("text_before_code", "promo_code", "text_after_code"),
+        ("Left side", {
+            "description": "The questions themselves are edited in “11. FAQ – Questions”.",
+            "fields": ("is_active", "badge_text", "title", "description"),
         }),
-        ("Apple App Store button", {"fields": ("show_app_store", ("app_store_small_text", "app_store_text"),
-                                               "app_store_link")}),
-        ("Google Play button", {"fields": ("show_google_play", ("google_play_small_text", "google_play_text"),
-                                           "google_play_link")}),
-        ("QR code box (right side)", {"fields": ("show_qr", "qr_image", "qr_preview", "qr_title", "qr_subtitle")}),
+        ("“Still have questions?” box", {
+            "fields": ("show_help_box", "help_title", "help_text", "help_button_text"),
+        }),
     )
 
-    @admin.display(description="Current QR code")
-    def qr_preview(self, obj):
-        return image_preview(obj.qr_image, 120)
+
+@admin.register(FAQItem)
+class FAQItemAdmin(admin.ModelAdmin):
+    formfield_overrides = {models.TextField: {"widget": forms.Textarea(attrs={"rows": 5, "cols": 80})}}
+    list_display = ("question", "order", "is_active")
+    list_editable = ("order", "is_active")
+    search_fields = ("question", "answer")
+    actions = [show_on_site, hide_from_site]
+    fields = ("question", "answer", "order", "is_active")
 
 
 # ---------------------------------------------------------------------------
@@ -611,28 +691,56 @@ class FooterColumnAdmin(admin.ModelAdmin):
 # ---------------------------------------------------------------------------
 @admin.register(BookingRequest)
 class BookingRequestAdmin(admin.ModelAdmin):
-    list_display = ("created_at", "name", "phone", "pickup", "destination", "vehicle_name",
+    list_display = ("ref", "created_at", "name", "phone", "trip_type", "pickup", "vehicle_name",
                     "when", "status", "email_sent")
-    list_filter = ("status", "ride_type", "vehicle_name", "created_at")
+    list_display_links = ("ref", "created_at")
+    list_filter = ("status", "trip_type", "vehicle_name", "created_at")
     list_editable = ("status",)
-    search_fields = ("name", "phone", "email", "pickup", "destination")
-    readonly_fields = ("pickup", "destination", "ride_type", "scheduled_date", "scheduled_time",
-                       "date_option", "ride_window", "vehicle", "vehicle_name", "quoted_price",
+    search_fields = ("name", "phone", "email", "pickup", "destination", "flight_number")
+    readonly_fields = ("ref", "trip_type", "pickup", "destination", "scheduled_date", "scheduled_time",
+                       "flight_number", "package_name", "num_days", "num_pax",
+                       "date_option", "ride_window", "vehicle", "vehicle_name", "quoted_price", "extra_charges",
                        "name", "phone", "email", "ip_address", "email_sent", "created_at")
     fieldsets = (
-        ("Customer", {"fields": ("name", "phone", "email")}),
-        ("Trip", {"fields": ("pickup", "destination", "ride_type", "scheduled_date", "scheduled_time",
-                             "date_option", "ride_window", "vehicle_name", "quoted_price")}),
+        ("Customer", {"fields": ("ref", "name", "phone", "email")}),
+        ("Trip", {"fields": ("trip_type", "pickup", "destination", ("scheduled_date", "scheduled_time"),
+                             "flight_number", "package_name", ("num_days", "num_pax"))}),
+        ("Car & fare", {"fields": ("vehicle_name", "quoted_price", "extra_charges")}),
         ("Follow-up", {"fields": ("status", "admin_notes")}),
-        ("Other details", {"fields": ("created_at", "email_sent", "vehicle", "ip_address"), "classes": ("collapse",)}),
+        ("Other details", {"fields": ("created_at", "email_sent", "vehicle", "date_option", "ride_window",
+                                      "ip_address"), "classes": ("collapse",)}),
     )
 
-    @admin.display(description="When")
+    @admin.display(description="Ref", ordering="pk")
+    def ref(self, obj):
+        return obj.reference
+
+    @admin.display(description="Pickup date & time")
     def when(self, obj):
-        if obj.ride_type == BookingRequest.SCHEDULE and obj.scheduled_date:
+        if obj.scheduled_date:
             text = f"{obj.scheduled_date:%d %b}"
             return f"{text}, {obj.scheduled_time:%I:%M %p}" if obj.scheduled_time else text
         return obj.ride_window or obj.date_option or "Now"
 
     def has_add_permission(self, request):
         return False
+
+
+# ---------------------------------------------------------------------------
+# 14. Policy popups
+# ---------------------------------------------------------------------------
+@admin.register(LegalPage)
+class LegalPageAdmin(admin.ModelAdmin):
+    formfield_overrides = {models.TextField: {"widget": forms.Textarea(attrs={"rows": 18, "cols": 90})}}
+    list_display = ("title", "footer_link", "updated_on", "order", "is_active")
+    list_editable = ("order", "is_active")
+    prepopulated_fields = {"slug": ("title",)}
+    fieldsets = (
+        (None, {"fields": ("title", "slug", "updated_on")}),
+        ("Popup text", {"fields": ("intro", "content")}),
+        ("Display", {"fields": ("order", "is_active")}),
+    )
+
+    @admin.display(description="Footer link “Goes to”")
+    def footer_link(self, obj):
+        return f"#{obj.slug}"

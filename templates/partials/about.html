@@ -1,0 +1,80 @@
+{% load cld %}
+{% if about %}
+<section class="about" id="about" aria-labelledby="about-title">
+  <div class="about__inner">
+
+    {# ---------- Founder story + services (left) | Mission, Vision, Why (right) ---------- #}
+    <div class="about__top">
+      <div class="about__intro">
+        {% if about.badge_text %}<span class="tag">{{ about.badge_text }}</span>{% endif %}
+        <h2 class="section-title" id="about-title">{{ about.title }}</h2>
+        {% for paragraph in about.paragraphs %}
+          <p class="section-text">{{ paragraph }}</p>
+        {% endfor %}
+
+        {% if about.services_heading and about.service_list %}
+          <h3 class="about__sub">{{ about.services_heading }}</h3>
+          <ul class="about__services">
+            {% for service in about.service_list %}
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+                {{ service }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="about__side">
+        {% if about.image %}
+          <img class="about__photo" src="{{ about.image|cld:900 }}" alt="{{ about.image_alt }}" loading="lazy">
+        {% endif %}
+
+        {% if about.cards %}
+          <ul class="about__cards">
+            {% for key, heading, text in about.cards %}
+              <li class="about__card about__card--{{ key }}">
+                <span class="about__icon" aria-hidden="true">
+                  {% if key == "mission" %}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                  {% elif key == "vision" %}<svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                  {% else %}<svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>{% endif %}
+                </span>
+                <div>
+                  <h3 class="about__card-title">{{ heading }}</h3>
+                  {% if text %}<p class="about__card-text">{{ text }}</p>{% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    {# ---------- Our Value Add ---------- #}
+    {% with values=about.active_values %}
+      {% if values %}
+        <div class="about__values-wrap">
+          {% if about.values_heading %}<h3 class="about__values-heading"><span>{{ about.values_heading }}</span></h3>{% endif %}
+          <ul class="about__values">
+            {% for value in values %}
+                <li class="about__value">
+                  <span class="about__value-num" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+                  <span class="about__value-icon" aria-hidden="true">
+                    {% if value.icon == "clock" %}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    {% elif value.icon == "target" %}<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    {% elif value.icon == "shield" %}<svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                    {% elif value.icon == "star" %}<svg viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+                    {% elif value.icon == "handshake" %}<svg viewBox="0 0 24 24"><path d="M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4"/></svg>
+                    {% else %}<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg>{% endif %}
+                  </span>
+                  <h4 class="about__value-title">{{ value.title }}</h4>
+                  <p class="about__value-text">{{ value.text }}</p>
+                </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+</section>
+{% endif %}

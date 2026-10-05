@@ -3,7 +3,7 @@
   <div class="safety__inner">
 
     <div class="safety__intro">
-      <span class="tag">{{ safety.badge_text }}</span>
+      {% if safety.badge_text %}<span class="tag">{{ safety.badge_text }}</span>{% endif %}
       <h2 class="section-title" id="safety-title">{{ safety.title }}</h2>
       <p class="section-text">{{ safety.description }}</p>
 

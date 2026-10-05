@@ -1,0 +1,21 @@
+{% autoescape off %}Hi {{ booking.name }},
+
+Thank you for booking with {{ site_name }}. We have received your {{ booking.trip_label }} request.
+Our team will call you on {{ booking.phone }} shortly to confirm your ride.
+
+Booking ref: {{ booking.reference }}
+
+YOUR TRIP
+{% for label, value in booking.trip_rows %}{{ label }}: {{ value }}
+{% endfor %}
+CAR & FARE
+{% for label, value in booking.fare_rows %}{{ label }}: {{ value }}
+{% endfor %}
+The fare shown is an estimate. Tolls, parking, state permits and any extra Km or hours are charged separately.
+The final fare will be confirmed when we call you.
+{% if footer %}
+Need to change something? Call us on {{ footer.helpdesk_phone }} or email {{ footer.email }} and mention {{ booking.reference }}.
+{% endif %}
+Thank you,
+Team {{ site_name }}
+{% endautoescape %}

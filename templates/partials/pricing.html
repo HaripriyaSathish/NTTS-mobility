@@ -7,7 +7,11 @@
       <p class="section-text">{{ pricing.description }}</p>
     </div>
 
-    <div class="pricing__grid">
+    {# More than 4 plans: a slider that moves only when the arrows are clicked #}
+    {% with plan_count=pricing_plans|length %}
+    <div class="pricing__grid{% if plan_count > 4 %} pricing__grid--slider{% endif %}"
+         {% if plan_count > 4 %}data-slider-track data-slider-loop tabindex="0"
+         aria-label="Pricing plans, use the arrows to see more"{% endif %}>
       {% for plan in pricing_plans %}
         <article class="plan plan--{{ plan.color }}{% if plan.is_featured %} plan--featured{% endif %}">
           {% if plan.badge_text %}<span class="plan__badge">{{ plan.badge_text }}</span>{% endif %}
@@ -38,6 +42,17 @@
         </article>
       {% endfor %}
     </div>
+    {% if plan_count > 4 %}
+      <div class="slider-nav">
+        <button type="button" class="slider-arrow" data-slider-prev aria-label="Previous plans">
+          <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="slider-arrow" data-slider-next aria-label="Next plans">
+          <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    {% endif %}
+    {% endwith %}
   </div>
 </section>
 {% endif %}

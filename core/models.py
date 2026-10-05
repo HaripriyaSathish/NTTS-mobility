@@ -1,4 +1,5 @@
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
@@ -193,22 +194,30 @@ class BookingModal(SingletonModel):
     title = models.CharField("Heading", max_length=80)
     subtitle = models.CharField("Line under heading", max_length=200)
 
+    airport_tab_label = models.CharField("Tab 1 – Airport", max_length=40, default="Airport Transfer")
+    local_tab_label = models.CharField("Tab 2 – Local", max_length=40, default="Local – Hourly Rentals")
+    outstation_tab_label = models.CharField("Tab 3 – Outstation", max_length=40, default="Outstation")
+
     pickup_label = models.CharField("Pickup – title", max_length=40)
     pickup_placeholder = models.CharField("Pickup – example text", max_length=120)
-    destination_label = models.CharField("Drop – title", max_length=40)
+    destination_label = models.CharField("Drop – title", max_length=40, help_text="Shown on the Airport tab")
     destination_placeholder = models.CharField("Drop – example text", max_length=120)
 
-    ride_now_label = models.CharField("“Ride now” button", max_length=30)
-    schedule_label = models.CharField("“Schedule” button", max_length=30)
-    departing_label = models.CharField("Departure – title", max_length=30, help_text="e.g. Departing:")
-    departing_highlight = models.CharField("Departure – bold text", max_length=40, help_text="e.g. Within 3–5 Mins")
-    departing_note = models.CharField("Departure – note", max_length=60, help_text="e.g. (Fastest match)")
-    schedule_date_label = models.CharField("Schedule – date title", max_length=30, default="Pickup Date")
-    schedule_time_label = models.CharField("Schedule – time title", max_length=30, default="Pickup Time")
+    schedule_date_label = models.CharField("Date – title", max_length=30, default="Pickup Date")
+    schedule_time_label = models.CharField("Time – title", max_length=30, default="Pickup Time")
+    flight_label = models.CharField("Flight number – title", max_length=30, default="Flight Number",
+                                    help_text="Airport tab")
+    flight_placeholder = models.CharField("Flight number – example text", max_length=60, default="e.g. 6E 2134")
+    days_label = models.CharField("Days – title", max_length=30, default="No of Days", help_text="Outstation tab")
+    pax_label = models.CharField("Passengers – title", max_length=30, default="No of Pax", help_text="Outstation tab")
+    package_heading = models.CharField("Package list heading", max_length=60, default="Select the Package",
+                                       help_text="Local – Hourly Rentals tab")
 
     vehicle_heading = models.CharField("Car list heading", max_length=60)
     nearby_suffix = models.CharField("Text after car count", max_length=40,
-                                     help_text='The number is added for you: "options nearby" shows as "4 options nearby"')
+                                     help_text='The number is added for you: "options" shows as "4 options"')
+    no_cars_text = models.CharField("Text when no car has a price", max_length=150,
+                                    default="No cars are available for this trip yet. Please call us to book.")
 
     contact_heading = models.CharField("Customer details – heading", max_length=60, default="Your Details")
     name_label = models.CharField("Name – title", max_length=30, default="Full Name")
@@ -249,6 +258,9 @@ class VehicleClass(OrderedModel):
                                   help_text='e.g. POPULAR. Leave empty for no tag.')
     is_default = models.BooleanField("Picked by default", default=False,
                                      help_text="Only one car can be picked by default")
+    seats = models.PositiveSmallIntegerField("Passenger seats", default=4,
+                                             help_text="On the Outstation tab, cars with fewer seats than "
+                                                       "“No of Pax” can't be picked")
 
     class Meta(OrderedModel.Meta):
         verbose_name = "Car option"
@@ -277,6 +289,91 @@ class VehicleClass(OrderedModel):
         super().save(*args, **kwargs)
         if self.is_default:
             VehicleClass.objects.exclude(pk=self.pk).filter(is_default=True).update(is_default=False)
+
+
+# The 3 tabs in the booking popup
+AIRPORT = "airport"
+LOCAL = "local"
+OUTSTATION = "outstation"
+TRIP_TYPES = [(AIRPORT, "Airport Transfer"), (LOCAL, "Local – Hourly Rental"), (OUTSTATION, "Outstation")]
+
+
+def money(value, symbol="₹"):
+    """₹1,200 or ₹14.50 (no trailing .00)."""
+    if value is None:
+        return ""
+    text = f"{value:,.0f}" if value == value.to_integral() else f"{value:,.2f}"
+    return f"{symbol}{text}"
+
+
+class RentalPackage(OrderedModel):
+    name = models.CharField("Package", max_length=40, help_text="e.g. 4 Hrs / 40 Km")
+
+    class Meta(OrderedModel.Meta):
+        verbose_name = "Local package"
+        verbose_name_plural = "3. Booking Popup – Local Packages"
+
+    def __str__(self):
+        return self.name
+
+
+class TripRate(models.Model):
+    vehicle = models.ForeignKey(VehicleClass, on_delete=models.CASCADE, related_name="trip_rates",
+                                verbose_name="Car")
+    trip_type = models.CharField("Trip", max_length=12, choices=TRIP_TYPES)
+    package = models.ForeignKey(RentalPackage, on_delete=models.CASCADE, null=True, blank=True,
+                                related_name="rates", verbose_name="Package",
+                                help_text="Only for Local – Hourly Rental")
+    price = models.DecimalField("Price", max_digits=9, decimal_places=2, help_text="Numbers only, e.g. 1200")
+    price_suffix = models.CharField("Text after price", max_length=30, blank=True,
+                                    help_text="e.g. fixed, per day (250 Km). Can be empty.")
+    extra_km_rate = models.DecimalField("Extra per Km", max_digits=7, decimal_places=2, null=True, blank=True)
+    extra_hour_rate = models.DecimalField("Extra per hour", max_digits=7, decimal_places=2, null=True, blank=True)
+    is_active = models.BooleanField("Show on website", default=True)
+
+    class Meta:
+        ordering = ["vehicle__order", "vehicle_id", "trip_type", "package__order", "id"]
+        verbose_name = "Price"
+        verbose_name_plural = "3. Booking Popup – Prices"
+
+    def __str__(self):
+        return f"{self.vehicle} · {self.trip_label}"
+
+    def clean(self):
+        if self.trip_type == LOCAL and not self.package_id:
+            raise ValidationError({"package": "Please choose a package for Local – Hourly Rental."})
+        if self.trip_type != LOCAL and self.package_id:
+            raise ValidationError({"package": "Packages are only for Local – Hourly Rental. Please leave it empty."})
+        if self.vehicle_id and self.trip_type:
+            same = TripRate.objects.filter(vehicle_id=self.vehicle_id, trip_type=self.trip_type,
+                                           package_id=self.package_id).exclude(pk=self.pk)
+            if same.exists():
+                raise ValidationError("This car already has a price for this trip"
+                                      + (" and package." if self.package_id else "."))
+
+    @property
+    def trip_label(self):
+        label = self.get_trip_type_display()
+        return f"{label} – {self.package}" if self.package_id else label
+
+    @property
+    def price_display(self):
+        return money(self.price, self.vehicle.currency_symbol)
+
+    @property
+    def quote(self):
+        return f"{self.price_display} {self.price_suffix}".strip()
+
+    @property
+    def extras(self):
+        """e.g. "₹14/Km · ₹150/hour" (empty when there are no extra rates)."""
+        symbol = self.vehicle.currency_symbol
+        parts = []
+        if self.extra_km_rate:
+            parts.append(f"{money(self.extra_km_rate, symbol)}/Km")
+        if self.extra_hour_rate:
+            parts.append(f"{money(self.extra_hour_rate, symbol)}/hour")
+        return " · ".join(parts)
 
 
 # ---------------------------------------------------------------------------
@@ -483,7 +580,8 @@ class Step(OrderedModel):
 # 8. Safety
 # ---------------------------------------------------------------------------
 class SafetySection(SingletonModel):
-    badge_text = models.CharField("Small tag above heading", max_length=60, help_text="e.g. ISO 27001 CERTIFIED SAFETY")
+    badge_text = models.CharField("Small tag above heading", max_length=60, blank=True,
+                                  help_text="e.g. ISO 27001 CERTIFIED SAFETY. Leave empty to hide it.")
     title = models.CharField("Heading", max_length=80)
     description = models.TextField("Short paragraph")
     show_highlight = models.BooleanField("Show highlight box", default=True)
@@ -608,7 +706,8 @@ class Testimonial(OrderedModel):
     name = models.CharField("Customer name", max_length=60)
     photo = CloudinaryField("Customer photo", blank=True, null=True, folder="ntts/testimonials",
                             help_text="Square photo works best. If empty, the initials are shown.")
-    role = models.CharField("Who they are", max_length=60, help_text="e.g. Daily Tech Commuter")
+    role = models.CharField("Who they are", max_length=60, blank=True,
+                            help_text="e.g. Daily Tech Commuter. Leave empty to hide.")
     detail = models.CharField("Extra detail", max_length=40, blank=True, help_text="e.g. 340+ rides")
     is_verified = models.BooleanField("Show green verified tick", default=True)
 
@@ -621,8 +720,9 @@ class Testimonial(OrderedModel):
 
     @property
     def initials(self):
-        words = [w for w in self.name.replace(".", " ").split() if w[:1].isalpha()]
-        return "".join(w[0] for w in words[-2:]).upper()
+        """First letter of the name, shown when there is no photo."""
+        letters = [ch for ch in self.name if ch.isalpha()]
+        return letters[0].upper() if letters else "?"
 
     @property
     def stars(self):
@@ -630,41 +730,121 @@ class Testimonial(OrderedModel):
 
 
 # ---------------------------------------------------------------------------
-# 11. App download banner
+# 11. FAQ
 # ---------------------------------------------------------------------------
-class AppDownloadSection(SingletonModel):
+class FAQSection(SingletonModel):
     is_active = models.BooleanField("Show this section on website", default=True)
-    badge_text = models.CharField("Small tag above heading", max_length=60, help_text="e.g. AVAILABLE ON IOS & ANDROID")
-    title = models.CharField("Heading – first line", max_length=80)
-    title_highlight = models.CharField("Heading – coloured line", max_length=80)
+    badge_text = models.CharField("Small tag above heading", max_length=40, blank=True, help_text="e.g. FAQ")
+    title = models.CharField("Heading", max_length=100)
+    description = models.TextField("Short paragraph", blank=True)
 
-    text_before_code = models.CharField("Text before promo code", max_length=150)
-    promo_code = models.CharField("Promo code", max_length=30, blank=True,
-                                  help_text="Shown in a small box. Leave empty for no code.")
-    text_after_code = models.CharField("Text after promo code", max_length=150, blank=True)
-
-    show_app_store = models.BooleanField("Show Apple App Store button", default=True)
-    app_store_small_text = models.CharField("App Store – small text", max_length=30, default="DOWNLOAD ON THE")
-    app_store_text = models.CharField("App Store – big text", max_length=30, default="Apple App Store")
-    app_store_link = models.URLField("App Store link", blank=True, help_text="Your app page on the Apple App Store")
-
-    show_google_play = models.BooleanField("Show Google Play button", default=True)
-    google_play_small_text = models.CharField("Google Play – small text", max_length=30, default="GET IT ON")
-    google_play_text = models.CharField("Google Play – big text", max_length=30, default="Google Play")
-    google_play_link = models.URLField("Google Play link", blank=True, help_text="Your app page on Google Play")
-
-    show_qr = models.BooleanField("Show QR code box", default=True)
-    qr_image = CloudinaryField("QR code image", blank=True, null=True, folder="ntts/app",
-                               help_text="Upload your QR code (square PNG).")
-    qr_title = models.CharField("QR box – heading", max_length=40, default="Scan to Download")
-    qr_subtitle = models.CharField("QR box – small text", max_length=40, default="Instant Camera Link")
+    # Help box under the paragraph (left side)
+    show_help_box = models.BooleanField("Show “still have questions” box", default=True)
+    help_title = models.CharField("Help box – heading", max_length=60, blank=True)
+    help_text = models.CharField("Help box – text", max_length=200, blank=True)
+    help_button_text = models.CharField("Help box – call button text", max_length=40, blank=True,
+                                        help_text="Calls the Help Desk number from “12. Footer – Main”. Leave empty to hide.")
 
     class Meta:
-        verbose_name = "11. App Download Banner"
-        verbose_name_plural = "11. App Download Banner"
+        verbose_name = "11. FAQ – Heading"
+        verbose_name_plural = "11. FAQ – Heading"
 
     def __str__(self):
-        return "App Download Banner"
+        return "FAQ – Heading"
+
+
+class FAQItem(OrderedModel):
+    question = models.CharField("Question", max_length=200)
+    answer = models.TextField("Answer", help_text="Write each paragraph on its own line")
+
+    class Meta(OrderedModel.Meta):
+        verbose_name = "Question"
+        verbose_name_plural = "11. FAQ – Questions"
+
+    def __str__(self):
+        return self.question
+
+    @property
+    def answer_paragraphs(self):
+        return lines(self.answer)
+
+
+# ---------------------------------------------------------------------------
+# 13. About Us
+# ---------------------------------------------------------------------------
+class AboutSection(SingletonModel):
+    is_active = models.BooleanField("Show this section on website", default=True)
+    badge_text = models.CharField("Small tag above heading", max_length=40, blank=True, help_text="e.g. ABOUT US")
+    title = models.CharField("Heading", max_length=100)
+    description = models.TextField("Paragraphs", help_text="Write each paragraph on its own line")
+    image = CloudinaryField("Photo", blank=True, null=True, folder="ntts/about",
+                            help_text="Optional. Office, team or fleet photo (landscape works best).")
+    image_alt = models.CharField("Photo description", max_length=150, blank=True, help_text="For Google")
+
+    services_heading = models.CharField("Services – heading", max_length=60, blank=True,
+                                        help_text="e.g. Our Fleet Services. Leave empty to hide the list.")
+    services = models.TextField("Services", blank=True, help_text="Write one service per line")
+
+    mission_title = models.CharField("Card 1 – heading", max_length=60, blank=True, help_text="e.g. Mission. Leave empty to hide.")
+    mission_text = models.CharField("Card 1 – text", max_length=300, blank=True)
+    vision_title = models.CharField("Card 2 – heading", max_length=60, blank=True, help_text="e.g. Vision. Leave empty to hide.")
+    vision_text = models.CharField("Card 2 – text", max_length=300, blank=True)
+    why_title = models.CharField("Card 3 – heading", max_length=60, blank=True, help_text="e.g. Why NTTS. Leave empty to hide.")
+    why_text = models.CharField("Card 3 – text", max_length=300, blank=True)
+
+    values_heading = models.CharField("Values row – heading", max_length=60, blank=True,
+                                      help_text="e.g. Our Value Add. The value cards are added at the bottom of this page.")
+
+    class Meta:
+        verbose_name = "13. About Us"
+        verbose_name_plural = "13. About Us"
+
+    def __str__(self):
+        return "About Us"
+
+    @property
+    def paragraphs(self):
+        return lines(self.description)
+
+    @property
+    def active_values(self):
+        return [v for v in self.values.all() if v.is_active]
+
+    @property
+    def service_list(self):
+        return lines(self.services)
+
+    @property
+    def cards(self):
+        """Mission / Vision / Why cards that have a heading, as (key, heading, text)."""
+        return [(key, title, text) for key, title, text in (
+            ("mission", self.mission_title, self.mission_text),
+            ("vision", self.vision_title, self.vision_text),
+            ("why", self.why_title, self.why_text),
+        ) if title]
+
+
+class AboutValue(OrderedModel):
+    ICON_CHOICES = [
+        ("award", "Award / badge"),
+        ("clock", "Clock"),
+        ("target", "Target"),
+        ("shield", "Shield"),
+        ("star", "Star"),
+        ("handshake", "Handshake"),
+    ]
+
+    section = models.ForeignKey(AboutSection, on_delete=models.CASCADE, related_name="values")
+    icon = models.CharField("Icon", max_length=12, choices=ICON_CHOICES, default="award")
+    title = models.CharField("Heading", max_length=60)
+    text = models.CharField("Text", max_length=250)
+
+    class Meta(OrderedModel.Meta):
+        verbose_name = "Value card"
+        verbose_name_plural = "Value cards (e.g. Professionalism, Punctuality, Precision)"
+
+    def __str__(self):
+        return self.title
 
 
 # ---------------------------------------------------------------------------
@@ -808,17 +988,23 @@ class BookingRequest(models.Model):
         ("cancelled", "Cancelled"),
     ]
 
+    trip_type = models.CharField("Trip", max_length=12, choices=TRIP_TYPES, blank=True)
     pickup = models.CharField("Pickup", max_length=255)
-    destination = models.CharField("Drop", max_length=255)
+    destination = models.CharField("Drop", max_length=255, blank=True)
     ride_type = models.CharField("Ride type", max_length=10, choices=RIDE_TYPES, default=RIDE_NOW)
     scheduled_date = models.DateField("Pickup date", null=True, blank=True)
     scheduled_time = models.TimeField("Pickup time", null=True, blank=True)
     date_option = models.CharField("Date chosen", max_length=60, blank=True)
     ride_window = models.CharField("Time chosen", max_length=60, blank=True)
+    flight_number = models.CharField("Flight number", max_length=12, blank=True)
+    package_name = models.CharField("Package", max_length=40, blank=True)
+    num_days = models.PositiveSmallIntegerField("No of days", null=True, blank=True)
+    num_pax = models.PositiveSmallIntegerField("No of pax", null=True, blank=True)
 
     vehicle = models.ForeignKey(VehicleClass, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Car option")
     vehicle_name = models.CharField("Car", max_length=60, blank=True)
-    quoted_price = models.CharField("Price shown", max_length=20, blank=True)
+    quoted_price = models.CharField("Price shown", max_length=60, blank=True)
+    extra_charges = models.CharField("Extra charges shown", max_length=80, blank=True)
 
     name = models.CharField("Name", max_length=100)
     phone = models.CharField("Mobile", max_length=20)
@@ -836,4 +1022,94 @@ class BookingRequest(models.Model):
         verbose_name_plural = "Ride Bookings (from website)"
 
     def __str__(self):
-        return f"{self.name} · {self.pickup} → {self.destination}"
+        route = f"{self.pickup} → {self.destination}" if self.destination else self.pickup
+        return f"{self.name} · {route}"
+
+    @property
+    def reference(self):
+        return f"NT-{self.pk:05d}" if self.pk else ""
+
+    @property
+    def trip_label(self):
+        return self.get_trip_type_display() or "Ride"
+
+    @property
+    def when_text(self):
+        if self.scheduled_date:
+            text = f"{self.scheduled_date:%a, %d %b %Y}"
+            return f"{text}, {self.scheduled_time:%I:%M %p}" if self.scheduled_time else text
+        return self.ride_window or self.date_option or "Now"
+
+    @property
+    def trip_rows(self):
+        """[(label, value), …] of the trip details the customer filled in (used in emails)."""
+        rows = [("Trip", self.trip_label), ("Pickup at", self.pickup)]
+        if self.destination:
+            rows.append(("Drop at", self.destination))
+        if self.scheduled_date:
+            rows.append(("Pickup date", f"{self.scheduled_date:%a, %d %b %Y}"))
+        if self.scheduled_time:
+            rows.append(("Pickup time", f"{self.scheduled_time:%I:%M %p}"))
+        if not self.scheduled_date:
+            rows.append(("When", self.when_text))
+        if self.flight_number:
+            rows.append(("Flight number", self.flight_number))
+        if self.package_name:
+            rows.append(("Package", self.package_name))
+        if self.num_days:
+            rows.append(("No of days", str(self.num_days)))
+        if self.num_pax:
+            rows.append(("No of pax", str(self.num_pax)))
+        return rows
+
+    @property
+    def customer_rows(self):
+        rows = [("Name", self.name), ("Mobile", self.phone)]
+        if self.email:
+            rows.append(("Email", self.email))
+        return rows
+
+    @property
+    def fare_rows(self):
+        rows = [("Car", self.vehicle_name), ("Fare", self.quoted_price)]
+        if self.extra_charges:
+            rows.append(("Extra charges", self.extra_charges))
+        return rows
+
+
+# ---------------------------------------------------------------------------
+# 14. Policy popups (Privacy Policy, Terms) opened from footer links
+# ---------------------------------------------------------------------------
+class LegalPage(OrderedModel):
+    title = models.CharField("Title", max_length=80, help_text="e.g. Privacy Policy")
+    slug = models.SlugField(
+        "Link name", max_length=60, unique=True,
+        help_text="To open this popup from a footer link, set that link's “Goes to” to # + this name, "
+                  "e.g. #privacy-policy",
+    )
+    intro = models.TextField("Opening line", blank=True)
+    content = models.TextField(
+        "Content",
+        help_text="Write one point per line. Start a line with # to make it a heading, e.g. # Cancellations",
+    )
+    updated_on = models.DateField("Last updated", default=timezone.localdate)
+
+    class Meta(OrderedModel.Meta):
+        verbose_name = "Policy popup"
+        verbose_name_plural = "14. Policy Popups (Privacy, Terms)"
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def sections(self):
+        """[(heading, [points]), …] from the content lines."""
+        sections = []
+        for line in lines(self.content):
+            if line.startswith("#"):
+                sections.append((line.lstrip("#").strip(), []))
+            else:
+                if not sections:
+                    sections.append(("", []))
+                sections[-1][1].append(line)
+        return sections

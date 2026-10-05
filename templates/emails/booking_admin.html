@@ -1,16 +1,41 @@
-<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#0f172a">
-  <h2 style="color:#12805a;margin-bottom:4px">New ride booking</h2>
-  <p style="color:#64748b;margin-top:0">{{ booking.created_at|date:"d M Y, h:i A" }}</p>
-  <table cellpadding="8" style="border-collapse:collapse;width:100%;font-size:14px">
-    <tr><td style="color:#64748b;width:140px">Name</td><td><strong>{{ booking.name }}</strong></td></tr>
-    <tr><td style="color:#64748b">Mobile</td><td><a href="tel:{{ booking.phone }}">{{ booking.phone }}</a></td></tr>
-    {% if booking.email %}<tr><td style="color:#64748b">Email</td><td>{{ booking.email }}</td></tr>{% endif %}
-    <tr><td style="color:#64748b">Pickup</td><td>{{ booking.pickup }}</td></tr>
-    <tr><td style="color:#64748b">Destination</td><td>{{ booking.destination }}</td></tr>
-    <tr><td style="color:#64748b">Vehicle</td><td>{{ booking.vehicle_name }} ({{ booking.quoted_price }})</td></tr>
-    <tr><td style="color:#64748b">When</td><td>
-      {% if booking.ride_type == "schedule" %}{{ booking.scheduled_date|date:"d M Y" }}, {{ booking.scheduled_time|time:"h:i A" }}
-      {% else %}Ride now{% if booking.date_option %} · {{ booking.date_option }}{% endif %}{% if booking.ride_window %} · {{ booking.ride_window }}{% endif %}{% endif %}
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>New booking {{ booking.reference }}</title></head>
+<body style="margin:0;padding:0;background:#f4f5f2">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f5f2">
+<tr><td align="center" style="padding:24px 12px">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0">
+
+    <tr><td style="background:#10844f;padding:22px 28px;font-family:Arial,Helvetica,sans-serif;color:#ffffff">
+      <div style="font-size:13px;opacity:.85">{{ site_name }} · Website booking</div>
+      <div style="font-size:22px;font-weight:bold;margin-top:4px">New {{ booking.trip_label }} booking</div>
+      <div style="font-size:14px;margin-top:6px">Ref: <strong>{{ booking.reference }}</strong> · {{ booking.created_at|date:"d M Y, h:i A" }}</div>
+    </td></tr>
+
+    <tr><td style="padding:22px 28px 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#181c24">
+      <strong>{{ booking.name }}</strong> wants a <strong>{{ booking.vehicle_name }}</strong> on
+      <strong>{{ booking.when_text }}</strong>. Please call to confirm.
+    </td></tr>
+
+    {% include "emails/_rows.html" with title="Customer" rows=booking.customer_rows %}
+    {% include "emails/_rows.html" with title="Trip details" rows=booking.trip_rows %}
+    {% include "emails/_rows.html" with title="Car & fare" rows=booking.fare_rows %}
+
+    {% if call_link %}
+    <tr><td style="padding:24px 28px 4px 28px">
+      <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+        <td style="background:#10844f;border-radius:8px"><a href="{{ call_link }}" style="display:inline-block;padding:12px 22px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#ffffff;text-decoration:none">Call customer</a></td>
+        <td width="10"></td>
+        <td style="background:#25d366;border-radius:8px"><a href="{{ whatsapp_link }}" style="display:inline-block;padding:12px 22px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#ffffff;text-decoration:none">WhatsApp</a></td>
+      </tr></table>
+    </td></tr>
+    {% endif %}
+
+    <tr><td style="padding:22px 28px 26px 28px;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#94a3b8">
+      Change the status of this booking in the website admin: Ride Bookings (from website).
     </td></tr>
   </table>
-</div>
+</td></tr>
+</table>
+</body>
+</html>

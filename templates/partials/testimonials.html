@@ -10,7 +10,9 @@
       <p class="reviews__intro">{{ testimonials_section.description }}</p>
     </div>
 
-    <div class="reviews__grid">
+    {# More than 3 reviews: shown as a slider with arrows (3 at a time on desktop) #}
+    {% with review_count=testimonials|length %}
+    <div class="reviews__grid{% if review_count > 3 %} reviews__grid--slider{% endif %}" {% if review_count > 3 %}data-slider-track tabindex="0" aria-label="Customer reviews, use the arrows to see more"{% endif %}>
       {% for review in testimonials %}
         <figure class="review">
           <div>
@@ -33,12 +35,25 @@
                   <svg class="review__verified" viewBox="0 0 24 24" aria-label="Verified rider"><path fill="currentColor" stroke="none" d="M12 1.5 14.6 3.4l3.2-.2 1 3.1 2.7 1.8-.9 3.1.9 3.1-2.7 1.8-1 3.1-3.2-.2L12 22.5l-2.6-1.9-3.2.2-1-3.1-2.7-1.8.9-3.1-.9-3.1 2.7-1.8 1-3.1 3.2.2z"/><path d="m8.5 12.2 2.4 2.4 4.6-4.8" stroke="#fff" stroke-width="2.2"/></svg>
                 {% endif %}
               </p>
-              <p class="review__role">{{ review.role }}{% if review.detail %} &bull; {{ review.detail }}{% endif %}</p>
+              {% if review.role or review.detail %}
+                <p class="review__role">{{ review.role }}{% if review.role and review.detail %} &bull; {% endif %}{{ review.detail }}</p>
+              {% endif %}
             </div>
           </figcaption>
         </figure>
       {% endfor %}
     </div>
+    {% if review_count > 3 %}
+      <div class="reviews__nav slider-nav">
+        <button type="button" class="slider-arrow" data-slider-prev aria-label="Previous reviews">
+          <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="slider-arrow" data-slider-next aria-label="Next reviews">
+          <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    {% endif %}
+    {% endwith %}
   </div>
 </section>
 {% endif %}

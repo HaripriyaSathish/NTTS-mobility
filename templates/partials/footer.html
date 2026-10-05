@@ -8,7 +8,7 @@
       <div class="site-footer__brand">
         <a href="#home" class="site-footer__logo" aria-label="{{ site.site_name }} home">
           {% if site.logo %}
-            <img src="{{ site.logo|cld:300 }}" alt="{{ site.logo_alt }}" height="40" loading="lazy">
+            <img src="{{ site.logo|cld:400 }}" alt="{{ site.logo_alt }}" height="52" loading="lazy">
           {% else %}
             <span class="navbar__logo-text">{{ site.site_name }}</span>
           {% endif %}
@@ -34,14 +34,15 @@
           <h3 class="site-footer__heading">{{ column.title }}</h3>
           <ul>
             {% for link in column.active_links %}
-              <li><a href="{{ link.link }}" {% if link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a></li>
+              <li><a href="{{ link.link }}" {% if link.link == "#book" %}data-open-booking{% endif %}
+                     {% if link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a></li>
             {% endfor %}
           </ul>
         </nav>
       {% endfor %}
 
       {# ---------- Contact (address from admin) ---------- #}
-      <div class="site-footer__col site-footer__contact">
+      <div class="site-footer__col site-footer__contact" id="contact">
         <h3 class="site-footer__heading">Contact</h3>
         <address>
           <p class="site-footer__company">{{ footer.company_name }}</p>

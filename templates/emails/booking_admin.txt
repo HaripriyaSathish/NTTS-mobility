@@ -1,0 +1,14 @@
+{% autoescape off %}New {{ booking.trip_label }} booking – {{ site_name }}
+Ref: {{ booking.reference }} · {{ booking.created_at|date:"d M Y, h:i A" }}
+
+CUSTOMER
+{% for label, value in booking.customer_rows %}{{ label }}: {{ value }}
+{% endfor %}
+TRIP DETAILS
+{% for label, value in booking.trip_rows %}{{ label }}: {{ value }}
+{% endfor %}
+CAR & FARE
+{% for label, value in booking.fare_rows %}{{ label }}: {{ value }}
+{% endfor %}
+Please call the customer to confirm.
+{% endautoescape %}
