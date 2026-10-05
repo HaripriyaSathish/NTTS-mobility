@@ -393,7 +393,10 @@ document.addEventListener("DOMContentLoaded", () => {
     lastFocus = document.activeElement;
     modal.hidden = false;
     document.body.classList.add("no-scroll");
-    (modal.querySelector("input:not([type=hidden]):not(.hp)") || modal.querySelector("button"))?.focus();
+    // Always open at the top (trip tabs first), not where it was last scrolled to
+    modal.querySelectorAll(".booking__body").forEach((body) => { body.scrollTop = 0; });
+    (modal.querySelector("input:not([type=hidden]):not(.hp)") || modal.querySelector("button"))
+      ?.focus({ preventScroll: true });
   };
   const closeModal = (modal) => {
     if (!modal || modal.hidden) return;
@@ -693,7 +696,6 @@ document.addEventListener("DOMContentLoaded", () => {
       form.elements.scheduled_time.value = heroSlot.value;
     }
     openModal(bookingModal);
-    form.elements.name.focus();
   });
   quick?.addEventListener("input", (e) => {
     e.target.closest("label")?.classList.remove("has-error");
