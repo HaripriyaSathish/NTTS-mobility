@@ -1,10 +1,16 @@
+{% load cld %}
 {% if pricing and pricing_plans %}
 <section class="pricing" id="pricing" aria-labelledby="pricing-title">
   <div class="pricing__inner">
     <div class="pricing__head">
       <span class="tag">{{ pricing.badge_text }}</span>
       <h2 class="section-title" id="pricing-title">{{ pricing.title }}</h2>
-      <p class="section-text">{{ pricing.description }}</p>
+      <p class="section-text">{{ pricing.description|bold }}</p>
+      {% if pricing.highlight_list %}
+        <ul class="pricing__points">
+          {% for point in pricing.highlight_list %}<li>{{ point }}</li>{% endfor %}
+        </ul>
+      {% endif %}
     </div>
 
     {# More than 4 plans: a slider that moves only when the arrows are clicked #}
@@ -17,7 +23,10 @@
           {% if plan.badge_text %}<span class="plan__badge">{{ plan.badge_text }}</span>{% endif %}
 
           <div class="plan__top">
-            <h3 class="plan__name">{{ plan.title }}</h3>
+            <div>
+              <h3 class="plan__name">{{ plan.title }}</h3>
+              {% if plan.subtitle %}<p class="plan__subtitle">{{ plan.subtitle }}</p>{% endif %}
+            </div>
             <span class="plan__icon">
               {% if plan.icon == "executive" %}{% include "partials/_car_icon.html" with icon="city" %}
               {% elif plan.icon == "ev" %}{% include "partials/_car_icon.html" with icon="sedan" %}
@@ -30,6 +39,8 @@
             <strong>{{ plan.price_display }}</strong>
             <span>{{ plan.price_suffix }}</span>
           </p>
+
+          {% if plan.description %}<p class="plan__desc">{{ plan.description }}</p>{% endif %}
 
           <ul class="plan__features">
             {% for feature in plan.feature_list %}

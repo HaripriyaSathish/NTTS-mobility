@@ -157,6 +157,8 @@ class HeroSection(SingletonModel):
 
     # Booking box
     card_title = models.CharField("Box heading", max_length=60)
+    tab_labels = models.TextField("Trip tabs", blank=True,
+                                  help_text="Write one tab name per line, e.g. Airport Cab. Leave empty to hide the tabs.")
     eta_text = models.CharField("Arrival time tag", max_length=40, help_text="e.g. Avg ETA 2.4 min")
     pickup_label = models.CharField("Pickup – title", max_length=40)
     pickup_placeholder = models.CharField("Pickup – example text", max_length=120,
@@ -184,6 +186,10 @@ class HeroSection(SingletonModel):
     @property
     def ride_window_option_list(self):
         return lines(self.ride_window_options)
+
+    @property
+    def tab_label_list(self):
+        return lines(self.tab_labels)
 
 
 # ---------------------------------------------------------------------------
@@ -411,7 +417,8 @@ class FleetSlide(OrderedModel):
     tab_icon = models.CharField("Tab icon", max_length=10, choices=ICON_CHOICES, default="sedan")
     badge_text = models.CharField("Small tag", max_length=40, blank=True, help_text="e.g. FIRST-CLASS CHAUFFEUR")
     title = models.CharField("Car name", max_length=80)
-    description = models.TextField("Description")
+    description = models.TextField("Description",
+                                   help_text="To make words bold, put two stars on each side: **AC sedan cabs**")
     ride_card = models.ForeignKey(
         "RideOption", on_delete=models.SET_NULL, null=True, blank=True, related_name="fleet_slides",
         verbose_name="Use photo from Fleet & Rides card",
@@ -476,7 +483,8 @@ class StatItem(OrderedModel):
 class RidesSection(SingletonModel):
     badge_text = models.CharField("Small tag above heading", max_length=40, help_text="e.g. FLEET & RIDES")
     title = models.CharField("Heading", max_length=80)
-    description = models.TextField("Short paragraph")
+    description = models.TextField("Short paragraph",
+                                   help_text="To make words bold, put two stars on each side: **cab booking**")
     side_badge_text = models.CharField("Tag on the right", max_length=60, blank=True,
                                        help_text="e.g. 100% Carbon-Neutral Fleet Options. Leave empty to hide.")
 
@@ -493,6 +501,8 @@ class RideOption(OrderedModel):
     currency_symbol = models.CharField("Currency", max_length=5, default="₹")
     base_price = models.DecimalField("Starting price", max_digits=8, decimal_places=2, help_text="Numbers only, e.g. 80")
     price_suffix = models.CharField("Text after price", max_length=20, default="base")
+    subtitle = models.CharField("Line under car type", max_length=80, blank=True,
+                                help_text="e.g. Affordable City & Daily Travel. Leave empty to hide it.")
     description = models.TextField("Short description")
     image = CloudinaryField("Car photo", blank=True, null=True, folder="ntts/rides")
     image_alt = models.CharField("Photo description", max_length=150, blank=True, help_text="For Google")
@@ -531,14 +541,16 @@ class RideOption(OrderedModel):
 class StepsSection(SingletonModel):
     badge_text = models.CharField("Small tag above heading", max_length=40, help_text="e.g. THE PROCESS")
     title = models.CharField("Heading", max_length=80)
-    description = models.TextField("Short paragraph")
+    description = models.TextField("Short paragraph",
+                                   help_text="To make words bold, put two stars on each side: **cab or taxi online**")
     step_word = models.CharField("Word before step number", max_length=15, default="STEP",
                                  help_text='Numbers are added for you in order: STEP 01, STEP 02…')
 
     # Green banner under the steps
     show_banner = models.BooleanField("Show green banner under the steps", default=True)
     banner_title = models.CharField("Banner heading", max_length=80, blank=True)
-    banner_text = models.CharField("Banner text", max_length=200, blank=True)
+    banner_text = models.CharField("Banner text", max_length=300, blank=True,
+                                   help_text="To make words bold, put two stars on each side: **cab for city travel**")
     banner_badge = models.CharField("Banner tag (right side)", max_length=40, blank=True,
                                     help_text="e.g. 99.98% DISPATCH UPTIME. Leave empty to hide.")
 
@@ -567,9 +579,11 @@ class Step(OrderedModel):
     color = models.CharField("Colour", max_length=10, choices=COLOR_CHOICES, default="green",
                              help_text="Colour of the step tag, icon and dot")
     title = models.CharField("Step heading", max_length=80)
-    description = models.TextField("Description")
-    highlight_text = models.CharField("Highlight line at bottom", max_length=80, blank=True,
-                                      help_text="e.g. Instant GPS coordinate detection. Leave empty to hide.")
+    description = models.TextField("Description",
+                                   help_text="To make words bold, put two stars on each side: **cab fare**")
+    highlight_text = models.CharField("Highlight line at bottom", max_length=200, blank=True,
+                                      help_text="e.g. **Live Ride Tracking –** Stay updated on your driver. "
+                                                "Words between ** show in bold green. Leave empty to hide.")
 
     class Meta(OrderedModel.Meta):
         verbose_name = "Step"
@@ -586,11 +600,15 @@ class SafetySection(SingletonModel):
     badge_text = models.CharField("Small tag above heading", max_length=60, blank=True,
                                   help_text="e.g. ISO 27001 CERTIFIED SAFETY. Leave empty to hide it.")
     title = models.CharField("Heading", max_length=80)
-    description = models.TextField("Short paragraph")
+    description = models.TextField("Short paragraph",
+                                   help_text="To make words bold, put two stars on each side: **online cab booking**")
     show_highlight = models.BooleanField("Show highlight box", default=True)
     highlight_title = models.CharField("Highlight box – heading", max_length=60, blank=True,
                                        help_text="e.g. NTTS Shield™ Active")
-    highlight_text = models.CharField("Highlight box – text", max_length=200, blank=True)
+    highlight_text = models.CharField("Highlight box – text", max_length=400, blank=True,
+                                      help_text="To make words bold, put two stars on each side: **taxi booking**")
+    highlight_tag = models.CharField("Highlight box – green line at bottom", max_length=60, blank=True,
+                                     help_text="e.g. 24/7 Ride Monitoring. Leave empty to hide it.")
 
     class Meta:
         verbose_name = "8. Safety – Heading"
@@ -616,7 +634,11 @@ class SafetyFeature(OrderedModel):
     icon = models.CharField("Icon", max_length=12, choices=ICON_CHOICES, default="shield")
     color = models.CharField("Icon colour", max_length=10, choices=COLOR_CHOICES, default="green")
     title = models.CharField("Heading", max_length=60)
+    subtitle = models.CharField("Line under heading", max_length=80, blank=True,
+                                help_text="e.g. Trusted Drivers for Every Journey. Leave empty to hide it.")
     description = models.TextField("Description")
+    check_text = models.CharField("Green tick line at bottom", max_length=80, blank=True,
+                                  help_text="e.g. Verified Driver Screening (the ✓ is added for you). Leave empty to hide it.")
 
     class Meta(OrderedModel.Meta):
         verbose_name = "Safety feature"
@@ -632,7 +654,10 @@ class SafetyFeature(OrderedModel):
 class PricingSection(SingletonModel):
     badge_text = models.CharField("Small tag above heading", max_length=40, help_text="e.g. TRANSPARENT TARIFF")
     title = models.CharField("Heading", max_length=80)
-    description = models.TextField("Short paragraph")
+    description = models.TextField("Short paragraph",
+                                   help_text="To make words bold, put two stars on each side: **cab booking**")
+    highlights = models.TextField("Green points under the paragraph", blank=True,
+                                  help_text="Write one point per line, e.g. No Hidden Charges. Leave empty to hide them.")
 
     class Meta:
         verbose_name = "9. Pricing – Heading"
@@ -640,6 +665,10 @@ class PricingSection(SingletonModel):
 
     def __str__(self):
         return "Pricing – Heading"
+
+    @property
+    def highlight_list(self):
+        return lines(self.highlights)
 
 
 class PricingPlan(OrderedModel):
@@ -651,6 +680,10 @@ class PricingPlan(OrderedModel):
     ]
 
     title = models.CharField("Plan name", max_length=40, help_text="e.g. COMPACT SEDAN")
+    subtitle = models.CharField("Line under plan name", max_length=60, blank=True,
+                                help_text="e.g. Affordable Sedan Cab. Leave empty to hide it.")
+    description = models.CharField("Short description", max_length=250, blank=True,
+                                   help_text="Shown under the price. Leave empty to hide it.")
     icon = models.CharField("Icon", max_length=10, choices=ICON_CHOICES, default="sedan")
     car = models.ForeignKey(
         VehicleClass, on_delete=models.PROTECT, related_name="pricing_plans", verbose_name="Linked car",
@@ -690,7 +723,8 @@ class PricingPlan(OrderedModel):
 class TestimonialsSection(SingletonModel):
     badge_text = models.CharField("Small tag above heading", max_length=40, help_text="e.g. VERIFIED RIDERS")
     title = models.CharField("Heading", max_length=80)
-    description = models.TextField("Paragraph on the right")
+    description = models.TextField("Paragraph on the right",
+                                   help_text="To make words bold, put two stars on each side: **reliable cab booking**")
 
     class Meta:
         verbose_name = "10. Testimonials – Heading"
@@ -854,7 +888,12 @@ class AboutValue(OrderedModel):
 # 12. Footer
 # ---------------------------------------------------------------------------
 class FooterSettings(SingletonModel):
-    about_text = models.TextField("Text under the logo")
+    tagline = models.CharField("Heading under the logo", max_length=80, blank=True,
+                               help_text="e.g. Safe & Reliable Mobility for the Modern City. Leave empty to hide it.")
+    about_text = models.TextField("Text under the logo",
+                                  help_text="To make words bold, put two stars on each side: **online cab booking**")
+    highlights = models.TextField("Green points under the text", blank=True,
+                                  help_text="Write one point per line, e.g. Safe Rides. Leave empty to hide them.")
 
     company_name = models.CharField("Company name", max_length=100)
     address = models.TextField("Address", help_text="Write it the way it should appear, line by line")
@@ -892,6 +931,10 @@ class FooterSettings(SingletonModel):
 
     def __str__(self):
         return "Footer"
+
+    @property
+    def highlight_list(self):
+        return lines(self.highlights)
 
     @property
     def address_lines(self):

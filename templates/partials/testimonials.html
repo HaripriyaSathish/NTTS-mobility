@@ -7,7 +7,7 @@
         <span class="tag">{{ testimonials_section.badge_text }}</span>
         <h2 class="section-title" id="reviews-title">{{ testimonials_section.title }}</h2>
       </div>
-      <p class="reviews__intro">{{ testimonials_section.description }}</p>
+      <p class="reviews__intro">{{ testimonials_section.description|bold }}</p>
     </div>
 
     {# More than 3 reviews: shown as a slider with arrows (3 at a time on desktop) #}
@@ -24,7 +24,7 @@
 
           <figcaption class="review__author">
             {% if review.photo %}
-              <img class="review__avatar" src="{{ review.photo|cld:120 }}" alt="{{ review.name }}" loading="lazy" width="48" height="48">
+              <img class="review__avatar" src="{{ review.photo|cld:120 }}" alt="{{ review.name }}" loading="lazy" width="40" height="40">
             {% else %}
               <span class="review__avatar review__avatar--initials" aria-hidden="true">{{ review.initials }}</span>
             {% endif %}

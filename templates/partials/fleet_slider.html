@@ -39,7 +39,7 @@
                 <span class="fleet__badge"><i class="dot"></i>{{ slide.badge_text }}</span>
               {% endif %}
               <h3 class="fleet__name">{{ slide.title }}</h3>
-              <p class="fleet__desc">{{ slide.description }}</p>
+              <p class="fleet__desc">{{ slide.description|bold }}</p>
 
               {% if slide.specs.all %}
                 <dl class="fleet__specs">

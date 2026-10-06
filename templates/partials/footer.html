@@ -13,7 +13,13 @@
             <span class="navbar__logo-text">{{ site.site_name }}</span>
           {% endif %}
         </a>
-        <p class="site-footer__about">{{ footer.about_text }}</p>
+        {% if footer.tagline %}<p class="site-footer__tagline">{{ footer.tagline }}</p>{% endif %}
+        <p class="site-footer__about">{{ footer.about_text|bold }}</p>
+        {% if footer.highlight_list %}
+          <ul class="site-footer__points">
+            {% for point in footer.highlight_list %}<li>{{ point }}</li>{% endfor %}
+          </ul>
+        {% endif %}
         {% if social_links %}
           <ul class="site-footer__social">
             {% for s in social_links %}

@@ -580,6 +580,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .fleet__badge .dot { width: 6px; height: 6px; background: #34d399; }
 .fleet__name { margin-top: 18px; font-size: clamp(26px, 2.6vw, 38px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
 .fleet__desc { margin-top: 14px; max-width: 560px; font-size: 16px; line-height: 1.7; color: rgba(255, 255, 255, .82); }
+.fleet__desc strong { font-weight: 700; color: #fff; }
 
 .fleet__specs {
   margin: 26px 0 0; padding-top: 16px; max-width: 560px;
@@ -702,6 +703,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   letter-spacing: -.02em; color: var(--ink);
 }
 .section-text { margin-top: 12px; font-size: 16px; line-height: 1.7; color: #475569; }
+.section-text strong { font-weight: 700; color: var(--ink); }
 
 /* ==========================================================================
    Choose Your Ride
@@ -728,7 +730,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   gap: 24px; align-items: start;
 }
 .ride {
-  display: flex; flex-direction: column; justify-content: space-between; gap: 20px;
+  display: flex; flex-direction: column; gap: 20px;
   padding: 24px; border-radius: 16px; background: #fff;
   border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(24, 28, 36, .04);
   transition: transform .25s, box-shadow .25s, border-color .25s;
@@ -749,14 +751,18 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--green);
 }
 
-.ride__title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+/* Room for 2 lines of name, 2 of subtitle and 5 of description, so every card's parts
+   start at the same height even when one car's text is shorter */
+.ride__body { flex: 1; }
+.ride__title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; min-height: 2.6em; font-size: 20px; }
 .ride__name { font-size: 20px; line-height: 1.3; font-weight: 700; color: var(--ink); }
+.ride__subtitle { margin-top: 6px; min-height: 2.8em; font-size: 14px; line-height: 1.4; font-weight: 600; color: var(--green); }
 .ride__price {
   flex-shrink: 0; max-width: 45%; text-align: right; padding-top: 3px;
   font-family: var(--mono); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--green);
 }
 .ride__price span { font-weight: 600; }
-.ride__desc { margin-top: 12px; font-size: 13.5px; line-height: 1.65; color: #475569; }
+.ride__desc { margin-top: 10px; min-height: 8.25em; font-size: 13.5px; line-height: 1.65; color: #475569; }
 .ride__tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .ride__tags li {
   padding: 5px 10px; border-radius: 6px; background: #fff; border: 1px solid #e2e8f0;
@@ -845,7 +851,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 .how__inner { max-width: 1440px; margin: 0 auto; padding: 0 60px; display: flex; flex-direction: column; gap: 48px; }
 .how__head { text-align: center; }
-.how__head .section-text { max-width: 720px; margin-left: auto; margin-right: auto; }
+.how__head .section-title { font-size: clamp(26px, 2.6vw, 36px); }
+.how__head .section-text { max-width: 720px; margin-left: auto; margin-right: auto; font-size: 15px; }
 
 /* Step cards */
 .how__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
@@ -869,14 +876,16 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 .step:hover .step__icon { transform: rotate(-6deg) scale(1.06); }
 .step__icon svg { width: 22px; height: 22px; }
-.step__title { margin-top: 28px; font-size: 22px; line-height: 1.3; font-weight: 700; color: var(--ink); }
-.step__desc { margin-top: 12px; font-size: 15px; line-height: 1.7; color: #475569; flex: 1; }
+.step__title { margin-top: 22px; font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--ink); }
+.step__desc { margin-top: 10px; font-size: 13.5px; line-height: 1.65; color: #475569; flex: 1; }
 .step__note {
-  margin-top: 24px; display: flex; align-items: center; gap: 12px;
+  margin-top: 24px; display: flex; align-items: flex-start; gap: 12px; line-height: 1.6;
   padding: 14px 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0;
-  font-family: var(--mono); font-size: 13px; color: var(--ink);
+  font-family: var(--mono); font-size: 12px; color: var(--ink);
 }
-.step__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex-shrink: 0; }
+.step__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex-shrink: 0; margin-top: 6px; }
+.step__note strong { font-weight: 700; color: var(--green); }
+.step__desc strong, .how__banner-text strong { font-weight: 700; color: var(--ink); }
 
 /* Banner */
 .how__banner {
@@ -891,8 +900,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   background: #ecfdf5; border: 1px solid #a7f3d0; color: var(--green);
 }
 .how__banner-icon svg { width: 24px; height: 24px; }
-.how__banner-title { font-size: 19px; font-weight: 700; color: var(--ink); }
-.how__banner-text { margin-top: 4px; font-size: 14.5px; color: #475569; }
+.how__banner-title { font-size: 16px; font-weight: 700; color: var(--ink); }
+.how__banner-text { margin-top: 4px; font-size: 13.5px; color: #475569; }
 .how__banner-badge {
   flex-shrink: 0; padding: 10px 16px; border-radius: 10px; background: #fff; border: 1px solid #a7f3d0;
   font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--green);
@@ -927,8 +936,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   max-width: 1232px; margin: 0 auto;
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 778px); gap: 48px; align-items: start;
 }
-.safety__intro .section-title { max-width: 420px; }
-.safety__intro .section-text { font-size: 16.5px; }
+.safety__intro .section-title { max-width: 420px; font-size: clamp(26px, 2.6vw, 36px); }
+.safety__intro .section-text { font-size: 15px; }
 
 .safety__shield {
   margin-top: 32px; padding: 20px 24px; border-radius: 16px; background: #fff;
@@ -936,18 +945,24 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 .safety__shield-title {
   display: flex; align-items: center; gap: 10px;
-  font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--green);
+  font-family: var(--font-head); font-size: 16px; font-weight: 700; color: var(--green);
 }
 .safety__shield-title svg { width: 22px; height: 22px; }
-.safety__shield-text { margin-top: 8px; font-size: 13.5px; line-height: 1.65; color: #475569; }
+.safety__shield-text { margin-top: 8px; font-size: 13px; line-height: 1.65; color: #475569; }
+.safety__shield-text strong { font-weight: 700; color: var(--ink); }
+.safety__shield-tag { margin-top: 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--green); }
 
+/* 3 cards per row on a 6-column grid, so a last row of 1 or 2 cards can sit in the centre */
 .safety__grid {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px;
 }
+/* Each card shares 5 rows (icon, title, line under title, text, tick line) with the cards
+   beside it, so those parts line up across the row even when one wraps to two lines */
 .sfeature {
   --c: #10844f; --c-soft: #ecfdf5; --c-line: #a7f3d0;
-  display: flex; flex-direction: column; gap: 12px;
+  grid-column: span 2; grid-row: span 5;
+  display: grid; grid-template-rows: subgrid; row-gap: 10px; align-content: start;
   padding: 24px; border-radius: 16px; background: #fff; border: 1px solid #e2e8f0;
   box-shadow: 0 1px 2px rgba(24, 28, 36, .04);
   transition: transform .25s, box-shadow .25s, border-color .25s;
@@ -960,8 +975,15 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   background: var(--c-soft); border: 1px solid var(--c-line); color: var(--c);
 }
 .sfeature__icon svg { width: 20px; height: 20px; }
-.sfeature__title { margin-top: 4px; font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--ink); }
-.sfeature__desc { font-size: 13.5px; line-height: 1.65; color: #475569; }
+.sfeature__icon { grid-row: 1; }
+.sfeature__title { grid-row: 2; margin-top: 6px; font-size: 15.5px; line-height: 1.3; font-weight: 700; color: var(--ink); }
+.sfeature__subtitle { grid-row: 3; font-size: 13px; line-height: 1.4; font-weight: 600; color: var(--ink); }
+.sfeature__desc { grid-row: 4; font-size: 12.5px; line-height: 1.65; color: #475569; }
+.sfeature__check { grid-row: 5; align-self: start; margin-top: 4px; display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--green); }
+.sfeature__check svg { width: 14px; height: 14px; stroke-width: 3; }
+/* Last row with 2 cards: start one column in. Last row with 1 card: centre it. */
+.sfeature:nth-child(3n + 1):nth-last-child(2) { grid-column: 2 / span 2; }
+.sfeature:nth-child(3n + 1):last-child { grid-column: 3 / span 2; }
 
 @media (max-width: 1100px) {
   .safety__inner { grid-template-columns: 1fr; gap: 36px; }
@@ -970,10 +992,16 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 @media (max-width: 1024px) { .safety { padding: 64px 24px; } }
 @media (max-width: 760px) {
   .safety { padding: 48px 16px; }
-  .safety__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  /* 2 cards per row; an odd last card sits in the centre */
+  .safety__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
   .sfeature { padding: 18px; }
+  .sfeature:nth-child(3n + 1):nth-last-child(2), .sfeature:nth-child(3n + 1):last-child { grid-column: span 2; }
+  .sfeature:nth-child(2n + 1):last-child { grid-column: 2 / span 2; }
 }
-@media (max-width: 460px) { .safety__grid { grid-template-columns: 1fr; } }
+@media (max-width: 460px) {
+  .safety__grid { grid-template-columns: 1fr; }
+  .safety__grid > .sfeature:nth-child(n):nth-last-child(n) { grid-column: 1 / -1; }
+}
 
 /* ==========================================================================
    Pricing ("Simple, Transparent Pricing")
@@ -983,6 +1011,9 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .pricing { background: #fff; padding: 80px 32px 96px; }
 .pricing__inner { max-width: 1232px; margin: 0 auto; } /* same centred width as Fleet & Rides */
 .pricing__head { text-align: center; }
+.pricing__points { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; }
+.pricing__points li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--green); }
+.pricing__points li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .pricing__grid {
   margin-top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px; align-items: center;
@@ -1008,10 +1039,12 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
   box-shadow: 0 8px 18px -8px rgba(5, 150, 105, .7);
 }
-.plan__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.plan__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .plan__name { font-family: var(--font); font-size: 14px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
 .plan__icon { color: var(--c); display: grid; place-items: center; }
 .plan__icon svg { width: 26px; height: 26px; }
+.plan__subtitle { margin-top: 6px; font-family: var(--font-head); font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--ink); }
+.plan__desc { margin-top: 14px; font-size: 13.5px; line-height: 1.6; color: #475569; }
 .plan__price { margin-top: 22px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
 .plan__price strong { font-family: var(--font-head); font-size: 42px; line-height: 1; font-weight: 700; color: var(--ink); letter-spacing: -.02em; }
 .plan__price span { font-size: 13px; color: #64748b; }
@@ -1116,6 +1149,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .reviews__inner { max-width: 1440px; margin: 0 auto; padding: 0 60px; }
 .reviews__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
 .reviews__intro { max-width: 500px; font-size: 15px; line-height: 1.7; color: #475569; }
+.reviews__intro strong { font-weight: 700; color: var(--ink); }
 
 .reviews__grid {
   /* fills the row with however many reviews there are (2, 3, 4…), no empty gaps */
@@ -1123,27 +1157,27 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   gap: 32px; align-items: stretch;
 }
 .review {
-  margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 28px;
-  padding: 32px; border-radius: 24px; background: #fff; border: 1px solid #e2e8f0;
+  margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+  padding: 22px 24px; border-radius: 18px; background: #fff; border: 1px solid #e2e8f0;
   box-shadow: 0 0 2px rgba(24, 28, 36, .08);
   transition: transform .3s, box-shadow .3s;
 }
 .review:hover { transform: translateY(-5px); box-shadow: 0 22px 44px -28px rgba(24, 28, 36, .35); }
-.review__stars { display: flex; gap: 4px; }
-.review__stars svg { width: 20px; height: 20px; fill: #f59e0b; stroke: none; }
-.review__quote { margin: 20px 0 0; font-size: 16px; line-height: 1.8; color: var(--ink); }
+.review__stars { display: flex; gap: 3px; }
+.review__stars svg { width: 16px; height: 16px; fill: #f59e0b; stroke: none; }
+.review__quote { margin: 12px 0 0; font-size: 14px; line-height: 1.65; color: var(--ink); }
 
-.review__author { display: flex; align-items: center; gap: 14px; padding-top: 24px; border-top: 1px solid #e2e8f0; }
+.review__author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid #e2e8f0; }
 .review__avatar {
-  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; object-fit: cover;
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; object-fit: cover;
   box-shadow: 0 0 0 2px #fff, 0 0 0 3px #a7f3d0;
 }
 .review__avatar--initials {
   display: grid; place-items: center; background: #ecfdf5; color: var(--green);
-  font-family: var(--font-head); font-weight: 700; font-size: 16px;
+  font-family: var(--font-head); font-weight: 700; font-size: 15px;
 }
-.review__name { display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: var(--ink); }
-.review__verified { width: 20px; height: 20px; color: #10844f; flex-shrink: 0; }
+.review__name { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--ink); }
+.review__verified { width: 18px; height: 18px; color: #10844f; flex-shrink: 0; }
 .review__role { margin-top: 2px; font-size: 13.5px; color: #64748b; }
 
 /* Slider (more than 3 reviews): 3 cards in view, arrows move one card at a time */
@@ -1173,8 +1207,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .reviews__inner { padding: 0 16px; }
   .reviews__grid { margin-top: 32px; gap: 18px; }
   .reviews__grid--slider .review { flex-basis: 100%; }
-  .review { padding: 24px; border-radius: 20px; }
-  .review__quote { font-size: 15px; }
+  .review { padding: 20px; border-radius: 16px; }
+  .review__quote { font-size: 14px; }
 }
 
 /* ==========================================================================
@@ -1284,7 +1318,14 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)) minmax(0, 1.4fr);
   gap: 40px; padding: 64px 0 48px;
 }
+.site-footer__logo { display: flex; width: fit-content; }
 .site-footer__about { margin-top: 18px; max-width: 300px; font-size: 13.5px; line-height: 1.7; color: #475569; }
+.site-footer__about strong { font-weight: 700; color: var(--ink); }
+.site-footer__tagline { margin-top: 18px; max-width: 300px; font-family: var(--font-head); font-size: 16px; line-height: 1.35; font-weight: 700; color: var(--ink); }
+.site-footer__tagline + .site-footer__about { margin-top: 8px; }
+.site-footer__points { list-style: none; margin: 14px 0 0; padding: 0; max-width: 300px; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.site-footer__points li { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--green); }
+.site-footer__points li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 .site-footer__social { list-style: none; margin: 22px 0 0; padding: 0; display: flex; gap: 10px; }
 .site-footer__social a {
   width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
@@ -1296,6 +1337,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 
 .site-footer__heading {
   font-family: var(--font); font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+  min-height: 52px; display: flex; align-items: center; /* same height as the logo, so the titles line up with it */
 }
 .site-footer__col ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
 .site-footer__col a { font-size: 13.5px; color: #475569; transition: color .2s; }
@@ -1317,6 +1359,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 @media (max-width: 1100px) {
   .site-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .site-footer__brand { grid-column: 1 / -1; }
+  .site-footer__heading { min-height: 0; } /* logo is on its own row here */
 }
 @media (max-width: 1024px) { .site-footer__inner { padding: 0 24px; } }
 @media (max-width: 640px) {
@@ -1518,3 +1561,13 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .legal__footer { padding: 12px 16px 16px; border-radius: 0; }
   .legal__footer .btn { width: 100%; }
 }
+
+/* ==========================================================================
+   Space between sections – one value for every section, change it here
+   ========================================================================== */
+:root { --section-y: 56px; }
+@media (max-width: 1024px) { :root { --section-y: 44px; } }
+@media (max-width: 700px) { :root { --section-y: 36px; } }
+
+.rides, .how, .safety, .about, .pricing, .reviews, .faq { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+.stats { padding-bottom: var(--section-y); }

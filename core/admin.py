@@ -194,9 +194,10 @@ class HeroSectionAdmin(SingletonAdmin):
             ),
         }),
         ("Booking box", {
-            "description": "The white “Book Instantly” box under the heading.",
+            "description": "The white booking box under the heading.",
             "fields": (
                 ("card_title", "eta_text"),
+                "tab_labels",
                 ("pickup_label", "pickup_placeholder"),
                 ("destination_label", "destination_placeholder"),
                 ("date_label", "date_options"),
@@ -412,7 +413,7 @@ class RideOptionAdmin(admin.ModelAdmin):
     actions = [show_on_site, hide_from_site]
     readonly_fields = ("image_preview",)
     fieldsets = (
-        ("Car", {"fields": ("name", "description", "badge_text")}),
+        ("Car", {"fields": ("name", "subtitle", "description", "badge_text")}),
         ("Price", {"fields": (("currency_symbol", "base_price", "price_suffix"),)}),
         ("Car photo", {
             "description": "This photo is also shown in the booking popup for the linked car (see Button below).",
@@ -504,11 +505,11 @@ class AboutSectionAdmin(SingletonAdmin):
 class SafetySectionAdmin(SingletonAdmin):
     fieldsets = (
         ("Left side", {
-            "description": "The six feature cards on the right are edited in “8. Safety – Feature Cards”.",
+            "description": "The feature cards on the right are edited in “8. Safety – Feature Cards”.",
             "fields": ("badge_text", "title", "description"),
         }),
         ("Highlight box (under the paragraph)", {
-            "fields": ("show_highlight", "highlight_title", "highlight_text"),
+            "fields": ("show_highlight", "highlight_title", "highlight_text", "highlight_tag"),
         }),
     )
 
@@ -520,7 +521,7 @@ class SafetyFeatureAdmin(admin.ModelAdmin):
     list_editable = ("order", "is_active")
     actions = [show_on_site, hide_from_site]
     fieldsets = (
-        ("Card", {"fields": ("title", "description")}),
+        ("Card", {"fields": ("title", "subtitle", "description", "check_text")}),
         ("Look", {"fields": (("icon", "color"),)}),
         ("Display", {"fields": ("order", "is_active")}),
     )
@@ -534,7 +535,7 @@ class PricingSectionAdmin(SingletonAdmin):
     fieldsets = (
         (None, {
             "description": "The price cards themselves are edited in “9. Pricing – Plans”.",
-            "fields": ("badge_text", "title", "description"),
+            "fields": ("badge_text", "title", "description", "highlights"),
         }),
     )
 
@@ -548,8 +549,8 @@ class PricingPlanAdmin(admin.ModelAdmin):
     actions = [show_on_site, hide_from_site]
     readonly_fields = ("price_info",)
     fieldsets = (
-        ("Plan", {"fields": ("title", ("icon", "color"), "badge_text")}),
-        ("Price", {"fields": ("car", "price_info", "price_suffix")}),
+        ("Plan", {"fields": ("title", "subtitle", ("icon", "color"), "badge_text")}),
+        ("Price", {"fields": ("car", "price_info", "price_suffix", "description")}),
         ("Features", {"fields": ("features",)}),
         ("Button", {"fields": ("button_text", "is_featured")}),
         ("Display", {"fields": ("order", "is_active")}),
@@ -651,7 +652,7 @@ class FooterSettingsAdmin(SingletonAdmin):
         ("Under the logo", {
             "description": "The footer uses the same logo as “1. Website Settings & Menu”. "
                            "Link columns (Company, Support, Legal) are edited in “12. Footer – Link Columns”.",
-            "fields": ("about_text",),
+            "fields": ("tagline", "about_text", "highlights"),
         }),
         ("Address & contact", {"fields": ("company_name", "address", "map_link", "email",
                                           ("helpdesk_label", "helpdesk_phone"),

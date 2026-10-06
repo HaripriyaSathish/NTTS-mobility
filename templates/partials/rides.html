@@ -6,7 +6,7 @@
       <div class="rides__intro">
         <span class="tag">{{ rides.badge_text }}</span>
         <h2 class="section-title" id="rides-title">{{ rides.title }}</h2>
-        <p class="section-text">{{ rides.description }}</p>
+        <p class="section-text">{{ rides.description|bold }}</p>
       </div>
       {% if rides.side_badge_text %}
         <span class="rides__eco">
@@ -37,6 +37,8 @@
               <h3 class="ride__name">{{ ride.name }}</h3>
               <p class="ride__price"><span>{{ ride.price_display }}</span> {{ ride.price_suffix }}</p>
             </div>
+            {# Always present (even empty) so every card's text lines up #}
+            <p class="ride__subtitle">{{ ride.subtitle }}</p>
             <p class="ride__desc">{{ ride.description }}</p>
             {% if ride.feature_list %}
               <ul class="ride__tags">

@@ -1,3 +1,4 @@
+{% load cld %}
 {% if steps_section and steps %}
 <section class="how" id="how-it-works" aria-labelledby="how-title">
   <span class="how__glow" aria-hidden="true"></span>
@@ -6,7 +7,7 @@
     <div class="how__head">
       <span class="tag">{{ steps_section.badge_text }}</span>
       <h2 class="section-title" id="how-title">{{ steps_section.title }}</h2>
-      <p class="section-text">{{ steps_section.description }}</p>
+      <p class="section-text">{{ steps_section.description|bold }}</p>
     </div>
 
     <ol class="how__steps">
@@ -26,9 +27,9 @@
             </span>
           </div>
           <h3 class="step__title">{{ step.title }}</h3>
-          <p class="step__desc">{{ step.description }}</p>
+          <p class="step__desc">{{ step.description|bold }}</p>
           {% if step.highlight_text %}
-            <p class="step__note"><i class="step__dot"></i>{{ step.highlight_text }}</p>
+            <p class="step__note"><i class="step__dot"></i><span>{{ step.highlight_text|bold }}</span></p>
           {% endif %}
         </li>
       {% endfor %}
@@ -42,7 +43,7 @@
           </span>
           <div>
             <h3 class="how__banner-title">{{ steps_section.banner_title }}</h3>
-            {% if steps_section.banner_text %}<p class="how__banner-text">{{ steps_section.banner_text }}</p>{% endif %}
+            {% if steps_section.banner_text %}<p class="how__banner-text">{{ steps_section.banner_text|bold }}</p>{% endif %}
           </div>
         </div>
         {% if steps_section.banner_badge %}<span class="how__banner-badge">{{ steps_section.banner_badge }}</span>{% endif %}

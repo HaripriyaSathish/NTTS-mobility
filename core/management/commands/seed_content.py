@@ -17,6 +17,10 @@ from core.pricing_content import PRICING_PLANS
 from core.vehicles_content import RIDE_OPTIONS, VEHICLES
 from core.legal_content import LEGAL_LINKS, LEGAL_PAGES, SUPPORT_LINKS
 from core.reviews_content import TESTIMONIALS, TESTIMONIALS_SECTION_DESCRIPTION
+from core.seo_content import (
+    FAQ_ITEMS_SEO, FLEET_SLIDES_SEO, FOOTER_SEO, HERO_SEO, PRICING_PLANS_SEO, PRICING_SEO, RIDE_CARDS_SEO, RIDES_SEO,
+    SAFETY_FEATURES_SEO, SAFETY_SEO, SITE_SEO, STATS_SEO, STEPS_SECTION_SEO, STEPS_SEO, TESTIMONIALS_SECTION_SEO,
+)
 
 from core.models import (
     AboutSection, AboutValue, FAQItem, FAQSection, FooterColumn, LegalPage, FooterLink, FooterSettings, SocialLink,
@@ -38,6 +42,7 @@ SITE = {
     "og_title": "New Track | Your Destination – Our Vision",
     "og_description": "Fast, safe, and sustainable EV rides with zero surge surprises.",
     "robots": "index, follow",
+    **SITE_SEO,  # client SEO wording (core/seo_content.py)
 }
 
 NAV_ITEMS = [
@@ -79,6 +84,7 @@ HERO = {
     "ride_window_label": "Ride Window",
     "ride_window_options": "Depart Now",
     "button_text": "Book a Ride",
+    **HERO_SEO,  # client SEO wording (core/seo_content.py)
 }
 
 BOOKING = {
@@ -144,6 +150,8 @@ FLEET_SLIDES = [
      "specs": [("Cabin Space", "6 Seats"), ("Luggage", "5 Suitcases"),
                ("Privacy Tint", "Grade A"), ("Rating", "★ 4.99")]},
 ]
+for _slide in FLEET_SLIDES:
+    _slide.update(FLEET_SLIDES_SEO[_slide["tab_label"]])  # client SEO wording (core/seo_content.py)
 
 STATS = [
     {"number": "10M+", "show_star": False, "label": "Rides Completed Safely", "color": "green", "order": 1},
@@ -151,13 +159,18 @@ STATS = [
     {"number": "50+", "show_star": False, "label": "Metros & Cities Worldwide", "color": "navy", "order": 3},
     {"number": "24/7", "show_star": False, "label": "Human Concierge & Safety", "color": "green", "order": 4},
 ]
+for _stat in STATS:
+    _stat["label"] = STATS_SEO[_stat["number"]]  # client SEO wording (core/seo_content.py)
 
 RIDES = {
     "badge_text": "FLEET & RIDES",
     "title": "Choose Your Ride",
     "description": "Tailored transportation solutions calibrated for speed, comfort, or solo sprints.",
     "side_badge_text": "100% Carbon-Neutral Fleet Options",
+    **RIDES_SEO,  # client SEO wording (core/seo_content.py)
 }
+for _card in RIDE_OPTIONS:
+    _card.update(RIDE_CARDS_SEO[_card["name"]])  # client SEO wording (core/seo_content.py)
 
 STEPS_SECTION = {
     "badge_text": "THE PROCESS",
@@ -168,6 +181,7 @@ STEPS_SECTION = {
     "banner_title": "Sub-Second Driver Allocation",
     "banner_text": "Our edge routing engine matches you with the ideal nearby partner in less than 400ms.",
     "banner_badge": "99.98% DISPATCH UPTIME",
+    **STEPS_SECTION_SEO,  # client SEO wording (core/seo_content.py)
 }
 
 STEPS = [
@@ -181,6 +195,8 @@ STEPS = [
      "description": "Track your driver's real-time trajectory, share ride details with loved ones, and pay cashlessly.",
      "highlight_text": "Encrypted telemetry & live track", "order": 3},
 ]
+for _step in STEPS:
+    _step.update(STEPS_SEO[_step["order"]])  # client SEO wording (core/seo_content.py)
 
 SAFETY = {
     "badge_text": "",
@@ -192,6 +208,7 @@ SAFETY = {
     "show_highlight": True,
     "highlight_title": "NTTS Shield™ Active",
     "highlight_text": "Every trip automatically benefits from round-the-clock incident monitoring and insurance cover.",
+    **SAFETY_SEO,  # client SEO wording (core/seo_content.py)
 }
 
 SAFETY_FEATURES = [
@@ -208,17 +225,23 @@ SAFETY_FEATURES = [
     {"icon": "shield", "color": "blue", "title": "Accident Cover",
      "description": "Included comprehensive accidental and medical insurance for every booked ride.", "order": 6},
 ]
+for _feature in SAFETY_FEATURES:
+    _feature.update(SAFETY_FEATURES_SEO[_feature["order"]])  # client SEO wording (core/seo_content.py)
 
 PRICING = {
     "badge_text": "TRANSPARENT TARIFF",
     "title": "Simple, Transparent Pricing",
     "description": "No hidden fuel fees. Upfront fares guaranteed before you confirm.",
+    **PRICING_SEO,  # client SEO wording (core/seo_content.py)
 }
+for _plan in PRICING_PLANS:
+    _plan.update(PRICING_PLANS_SEO[_plan["car"]])  # client SEO wording (core/seo_content.py)
 
 TESTIMONIALS_SECTION = {
     "badge_text": "VERIFIED RIDERS",
     "title": "What Our Riders Say",
     "description": TESTIMONIALS_SECTION_DESCRIPTION,
+    **TESTIMONIALS_SECTION_SEO,  # client SEO wording (core/seo_content.py)
 }
 
 
@@ -256,12 +279,14 @@ FAQ_ITEMS = [
      "Yes. Along with daily city rides, we offer airport pickups and drops and outstation trips. "
      "Book online or call our help desk to plan your trip."),
 ]
+FAQ_ITEMS = FAQ_ITEMS_SEO  # client SEO wording (core/seo_content.py) replaces the questions above
 
 FOOTER = {
     "about_text": (
         "Redefining mobility for the modern city. Experience seamless, safe, and sustainable "
         "transportation at the tap of a button."
     ),
+    **FOOTER_SEO,  # client SEO wording (core/seo_content.py)
     "company_name": "Ntts Mobility Solutions Pvt Ltd",
     "address": "First Floor, Door No.4, East Spur Tank Road,\nEgmore, Chennai, Chennai, Tamil Nadu, 600008",
     "email": "info@newtrackindia.com",
