@@ -12,14 +12,14 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from core.about_content import ABOUT, ABOUT_VALUES
-from core.booking_content import BOOKING_TEXT, LOCAL_TERMS, RENTAL_PACKAGES, SEATS, rate_rows
+from core.booking_content import BOOKING_TEXT, CHENNAI_LOCATIONS, LOCAL_TERMS, RENTAL_PACKAGES, SEATS, rate_rows
 from core.pricing_content import PRICING_PLANS
 from core.vehicles_content import RIDE_OPTIONS, VEHICLES
 from core.legal_content import LEGAL_LINKS, LEGAL_PAGES, SUPPORT_LINKS
 from core.reviews_content import TESTIMONIALS, TESTIMONIALS_SECTION_DESCRIPTION
 from core.seo_content import (
     FAQ_ITEMS_SEO, FLEET_SLIDES_SEO, FOOTER_SEO, HERO_SEO, PRICING_PLANS_SEO, PRICING_SEO, RIDE_CARDS_SEO, RIDES_SEO,
-    SAFETY_FEATURES_SEO, SAFETY_SEO, SITE_SEO, STATS_SEO, STEPS_SECTION_SEO, STEPS_SEO, TESTIMONIALS_SECTION_SEO,
+    SAFETY_FEATURES_SEO, SAFETY_SEO, SITE_SEO, STAT_LINKS, STATS_SEO, STEPS_SECTION_SEO, STEPS_SEO, TESTIMONIALS_SECTION_SEO,
 )
 
 from core.models import (
@@ -92,6 +92,7 @@ BOOKING = {
     "subtitle": "Instant dispatch & guaranteed upfront fares across the city",
     **BOOKING_TEXT,  # trip tabs wording (core/booking_content.py)
     "local_terms": LOCAL_TERMS,
+    "location_suggestions": "\n".join(CHENNAI_LOCATIONS),
     "contact_heading": "Your Details",
     "name_label": "Full Name",
     "name_placeholder": "Enter your name",
@@ -161,6 +162,7 @@ STATS = [
 ]
 for _stat in STATS:
     _stat["label"] = STATS_SEO[_stat["number"]]  # client SEO wording (core/seo_content.py)
+    _stat["link"] = STAT_LINKS.get(_stat["number"], "")
 
 RIDES = {
     "badge_text": "FLEET & RIDES",

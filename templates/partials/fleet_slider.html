@@ -56,7 +56,7 @@
             <div class="fleet__visual" aria-hidden="{% if slide.photo %}false{% else %}true{% endif %}">
               <span class="fleet__glow"></span>
               {% if slide.photo %}
-                <img src="{{ slide.photo|cld:900 }}" alt="{{ slide.image_alt|default:slide.title }}"
+                <img src="{{ slide.photo|cld_car:900 }}" data-fallback="{{ slide.photo|cld:900 }}" alt="{{ slide.image_alt|default:slide.title }}"
                      class="fleet__car" loading="lazy" decoding="async">
               {% else %}
                 <span class="fleet__car fleet__car--icon">{% include "partials/_car_icon.html" with icon=slide.tab_icon %}</span>

@@ -171,6 +171,8 @@ class HeroSection(SingletonModel):
     ride_window_label = models.CharField("Time – title", max_length=30)
     ride_window_options = models.TextField("Time – choices", help_text="Write one choice per line. The first one is picked by default.")
     button_text = models.CharField("Button text", max_length=40)
+    pricing_button_text = models.CharField("Second button text", max_length=40, default="Pricing Details",
+                                           help_text="Scrolls down to the Pricing section.")
 
     class Meta:
         verbose_name = "2. Hero Banner"
@@ -208,6 +210,9 @@ class BookingModal(SingletonModel):
     pickup_placeholder = models.CharField("Pickup – example text", max_length=120)
     destination_label = models.CharField("Drop – title", max_length=40, help_text="Shown on the Airport tab")
     destination_placeholder = models.CharField("Drop – example text", max_length=120)
+    location_suggestions = models.TextField(
+        "Pickup / Drop suggestions", blank=True,
+        help_text="Place names shown as the customer types, one per line, e.g. T. Nagar. Leave empty to turn off.")
 
     schedule_date_label = models.CharField("Date – title", max_length=30, default="Pickup Date")
     schedule_time_label = models.CharField("Time – title", max_length=30, default="Pickup Time")
@@ -254,6 +259,10 @@ class BookingModal(SingletonModel):
     def __str__(self):
         return "Booking Popup"
 
+    @property
+    def location_list(self):
+        return lines(self.location_suggestions)
+
 
 class VehicleClass(OrderedModel):
     name = models.CharField("Car type", max_length=60, help_text="e.g. Compact Sedan")
@@ -280,8 +289,7 @@ class VehicleClass(OrderedModel):
 
     @property
     def price_display(self):
-        value = self.base_price.normalize()
-        return f"{self.currency_symbol}{value:f}"
+        return money(self.base_price, self.currency_symbol)  # ₹1,400
 
     @property
     def photo_card(self):
@@ -468,6 +476,8 @@ class StatItem(OrderedModel):
     show_star = models.BooleanField("Show star after number", default=False, help_text="Tick for ratings, e.g. 4.9 ★")
     label = models.CharField("Text below number", max_length=60)
     color = models.CharField("Number colour", max_length=10, choices=COLOR_CHOICES, default="green")
+    link = models.URLField("Link", blank=True,
+                           help_text="Optional. Clicking the box opens this page in a new tab, e.g. Google reviews.")
 
     class Meta(OrderedModel.Meta):
         verbose_name = "Stat box"
@@ -528,7 +538,7 @@ class RideOption(OrderedModel):
 
     @property
     def price_display(self):
-        return f"{self.currency_symbol}{self.base_price.normalize():f}"
+        return money(self.base_price, self.currency_symbol)  # ₹1,400
 
     @property
     def feature_list(self):

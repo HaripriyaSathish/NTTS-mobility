@@ -158,13 +158,13 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 
 .hero__title {
   margin-top: calc(var(--u) * 18);
-  font-size: calc(var(--u) * 58); line-height: 1.04;
+  font-size: calc(var(--u) * 68); line-height: 1.04;
   font-weight: 700; letter-spacing: -.03em; color: var(--ink);
 }
 .hero__title span { display: block; color: var(--green); }
 .hero__text {
-  margin-top: calc(var(--u) * 16); max-width: calc(var(--u) * 600);
-  font-size: max(13px, calc(var(--u) * 18)); line-height: 1.6; font-weight: 500;
+  margin-top: calc(var(--u) * 22); max-width: calc(var(--u) * 820);
+  font-size: max(16px, calc(var(--u) * 24)); line-height: 1.6; font-weight: 500;
   color: var(--ink-2); text-shadow: 0 1px 12px rgba(255, 255, 255, .9);
 }
 .hero .badge {
@@ -172,6 +172,19 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   gap: calc(var(--u) * 8);
 }
 .hero .badge .dot { width: calc(var(--u) * 7); height: calc(var(--u) * 7); }
+
+/* ---------- Hero call-to-action buttons ---------- */
+.hero__actions { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 16); margin-top: calc(var(--u) * 36); }
+.hero__actions .btn--lg {
+  padding: calc(var(--u) * 18) calc(var(--u) * 34); border-radius: calc(var(--u) * 14);
+  font-size: max(15px, calc(var(--u) * 19)); font-weight: 700;
+}
+.hero__actions .btn--lg svg { width: calc(var(--u) * 20); height: calc(var(--u) * 20); }
+.btn--outline {
+  background: rgba(255, 255, 255, .85); color: var(--green-dark);
+  box-shadow: inset 0 0 0 2px var(--green), 0 8px 20px -12px rgba(0, 0, 0, .35);
+}
+.btn--outline:hover { background: var(--green-soft); transform: translateY(-1px); }
 
 /* ---------- Quick booking card ---------- */
 .quick-book {
@@ -348,6 +361,24 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 }
 .route-box__field input:focus, .mini-field input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(19,132,91,.12); }
 .route-box__field .field__error, .mini-field .field__error { margin: 6px 0 0 14px; }
+/* Pickup / Drop place suggestions */
+.route-box__field { position: relative; }
+.suggest {
+  position: absolute; z-index: 5; left: 0; right: 0; top: calc(100% + 4px);
+  max-height: 264px; overflow-y: auto; margin: 0; padding: 6px; list-style: none;
+  background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: 0 18px 40px -16px rgba(24, 28, 36, .35);
+}
+.suggest li {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px;
+  font-size: 15px; color: var(--ink); cursor: pointer;
+}
+.suggest li::before {
+  content: ""; flex-shrink: 0; width: 16px; height: 16px; background: var(--green);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.suggest li:hover, .suggest li.is-active { background: var(--green-soft); }
 
 /* Trip tabs: Airport Transfer / Local – Hourly Rentals / Outstation */
 .trip-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; border-radius: 16px; background: var(--bg-soft); border: 1px solid var(--border); }
@@ -466,6 +497,9 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .container { padding: 0 16px; }
   .hero__grid { padding: 28px 16px 36px; }
   .hero__title { font-size: clamp(32px, 9vw, 42px); }
+  .hero__text { font-size: 17px; }
+  .hero__actions { flex-direction: column; }
+  .hero__actions .btn--lg { width: 100%; }
   .quick-book { padding: 20px 16px; border-radius: 18px; }
   .quick-book__row { grid-template-columns: 1fr; gap: 10px; padding: 0; }
   .btn--lg { padding: 16px 20px; font-size: 17px; }
@@ -599,7 +633,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
    "showroom" card; every slide gets the same frame size. */
 .fleet__car {
   position: relative; width: min(100%, 440px); aspect-ratio: 16 / 10; object-fit: cover;
-  border-radius: 20px; background: #f8fafc;
+  border-radius: 20px; background: #fff;
   border: 1px solid rgba(255, 255, 255, .5);
   box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .6), 0 0 0 8px rgba(255, 255, 255, .06);
   animation: float 5s ease-in-out infinite;
@@ -668,6 +702,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   transition: transform .25s, box-shadow .25s;
 }
 .stat:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgba(24, 28, 36, .25); }
+.stat--link { display: block; color: inherit; text-decoration: none; cursor: pointer; }
+.stat--link:hover { border-color: var(--green-line); }
 .stat__number {
   display: flex; align-items: center; gap: 6px;
   font-family: var(--font-head); font-size: 36px; line-height: 40px; font-weight: 700;
@@ -754,11 +790,11 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 /* Room for 2 lines of name, 2 of subtitle and 5 of description, so every card's parts
    start at the same height even when one car's text is shorter */
 .ride__body { flex: 1; }
-.ride__title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; min-height: 2.6em; font-size: 20px; }
+/* Car name on top, package price underneath (prices like ₹1,400 are too wide to sit beside the name) */
+.ride__title-row { display: flex; flex-direction: column; gap: 4px; min-height: 2.6em; font-size: 20px; }
 .ride__name { font-size: 20px; line-height: 1.3; font-weight: 700; color: var(--ink); }
 .ride__subtitle { margin-top: 6px; min-height: 2.8em; font-size: 14px; line-height: 1.4; font-weight: 600; color: var(--green); }
 .ride__price {
-  flex-shrink: 0; max-width: 45%; text-align: right; padding-top: 3px;
   font-family: var(--mono); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--green);
 }
 .ride__price span { font-weight: 600; }
@@ -1403,7 +1439,7 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
   .hero { --u: var(--hu); }
 }
 @media (min-width: 1025px) and (max-height: 640px) {
-  .hero__text { font-size: max(12px, calc(var(--u) * 18)); line-height: 1.5; }
+  .hero__text { font-size: max(15px, calc(var(--u) * 24)); line-height: 1.5; }
   .field input { font-size: max(12px, calc(var(--u) * 14)); }
   .quick-book__head h2 { font-size: max(14px, calc(var(--u) * 19)); }
   .quick-book .btn--lg { font-size: max(13px, calc(var(--u) * 15)); }

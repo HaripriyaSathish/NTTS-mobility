@@ -193,17 +193,9 @@ class HeroSectionAdmin(SingletonAdmin):
                 "driver_phone",
             ),
         }),
-        ("Booking box", {
-            "description": "The white booking box under the heading.",
-            "fields": (
-                ("card_title", "eta_text"),
-                "tab_labels",
-                ("pickup_label", "pickup_placeholder"),
-                ("destination_label", "destination_placeholder"),
-                ("date_label", "date_options"),
-                ("ride_window_label", "ride_window_options"),
-                "button_text",
-            ),
+        ("Buttons", {
+            "description": "The first button opens the booking popup; the second scrolls to Pricing.",
+            "fields": (("button_text", "pricing_button_text"),),
         }),
     )
 
@@ -226,6 +218,7 @@ class BookingModalAdmin(SingletonAdmin):
         ("Trip tabs", {"fields": (("airport_tab_label", "local_tab_label", "outstation_tab_label"),)}),
         ("Trip boxes", {"fields": (("pickup_label", "pickup_placeholder"),
                                   ("destination_label", "destination_placeholder"),
+                                  "location_suggestions",
                                   ("schedule_date_label", "schedule_time_label"),
                                   ("flight_label", "flight_placeholder"),
                                   ("days_label", "pax_label"),
@@ -381,7 +374,7 @@ class StatItemAdmin(admin.ModelAdmin):
     list_display_links = ("preview",)
     list_editable = ("number", "show_star", "label", "color", "order", "is_active")
     actions = [show_on_site, hide_from_site]
-    fields = ("number", "show_star", "label", "color", "order", "is_active")
+    fields = ("number", "show_star", "label", "color", "link", "order", "is_active")
 
     @admin.display(description="Looks like")
     def preview(self, obj):

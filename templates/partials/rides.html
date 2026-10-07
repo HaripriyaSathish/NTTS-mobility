@@ -26,7 +26,7 @@
           <div class="ride__media">
             {% if ride.badge_text %}<span class="ride__badge">{{ ride.badge_text }}</span>{% endif %}
             {% if ride.image %}
-              <img src="{{ ride.image|cld:600 }}" alt="{{ ride.image_alt|default:ride.name }}" loading="lazy" decoding="async">
+              <img src="{{ ride.image|cld_car:600 }}" data-fallback="{{ ride.image|cld:600 }}" alt="{{ ride.image_alt|default:ride.name }}" loading="lazy" decoding="async">
             {% else %}
               <span class="ride__placeholder">{% include "partials/_car_icon.html" with icon="sedan" %}</span>
             {% endif %}

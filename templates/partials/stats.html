@@ -2,13 +2,13 @@
 <section class="stats" aria-label="NTTS Mobility in numbers">
   <div class="stats__bar">
     {% for stat in stats %}
-      <div class="stat">
+      {% if stat.link %}<a class="stat stat--link" href="{{ stat.link }}" target="_blank" rel="noopener">{% else %}<div class="stat">{% endif %}
         <p class="stat__number stat__number--{{ stat.color }}">
           {# The real number is in the HTML for Google; the count-up animation starts from 0 on scroll #}
           <span data-count="{{ stat.number }}">{{ stat.number }}</span>{% if stat.show_star %}<svg class="stat__star" viewBox="0 0 24 24" aria-label="stars"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>{% endif %}
         </p>
         <p class="stat__label">{{ stat.label }}</p>
-      </div>
+      {% if stat.link %}</a>{% else %}</div>{% endif %}
     {% endfor %}
   </div>
 </section>

@@ -1,4 +1,23 @@
+/* Car photos use Cloudinary's background removal. The very first time a new photo is requested
+   Cloudinary may still be processing it, so retry once, then show the original photo instead. */
+const carPhotoFailed = (img) => {
+  if (!img.dataset.fallback || img.dataset.retried === "fallback") return;
+  if (!img.dataset.retried) {
+    img.dataset.retried = "1";
+    const src = img.src;
+    setTimeout(() => { img.src = `${src}${src.includes("?") ? "&" : "?"}r=1`; }, 4000);
+  } else {
+    img.dataset.retried = "fallback";
+    img.src = img.dataset.fallback;
+  }
+};
+document.addEventListener("error", (e) => { if (e.target.tagName === "IMG") carPhotoFailed(e.target); }, true);
+
 document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img[data-fallback]").forEach((img) => {
+    if (img.complete && !img.naturalWidth) carPhotoFailed(img);
+  });
+
   /* ---------------- Mobile nav ---------------- */
   const toggle = document.getElementById("navToggle");
   const menu = document.getElementById("navMenu");
@@ -592,6 +611,89 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     // Date and time pickers fire "change" rather than "input" in some browsers
     if (kind === "date" || kind === "time") input.addEventListener("change", () => input.dispatchEvent(new Event("input")));
+  });
+
+  /* ---------------- Pickup / Drop suggestions (Chennai places from admin) ----------------
+     Typing "tnag", "t nagar" or "airport" lists matching places; ↑/↓ + Enter or a click picks one.
+     Names starting with the typed text come first, then names with a word starting with it. */
+  const placesData = document.getElementById("locationSuggestions");
+  const places = placesData ? JSON.parse(placesData.textContent) : [];
+  const squash = (text) => text.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const placeIndex = places.map((name) => ({
+    name, flat: squash(name), words: name.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean),
+  }));
+  const findPlaces = (typed) => {
+    const flat = squash(typed);
+    if (flat.length < 2) return [];
+    const word = typed.toLowerCase().trim();
+    const scored = [];
+    placeIndex.forEach((p) => {
+      let score = -1;
+      if (p.flat.startsWith(flat)) score = 0;
+      else if (p.words.some((w) => w.startsWith(word) || w.startsWith(flat))) score = 1;
+      else if (p.flat.includes(flat)) score = 2;
+      if (score >= 0) scored.push([score, p.name]);
+    });
+    return scored.sort((a, b) => a[0] - b[0] || a[1].length - b[1].length).slice(0, 8).map((s) => s[1]);
+  };
+
+  form.querySelectorAll("[data-suggest]").forEach((input) => {
+    if (!places.length) return;
+    const list = document.createElement("ul");
+    list.className = "suggest";
+    list.id = `${input.name}-suggestions`;
+    list.setAttribute("role", "listbox");
+    list.hidden = true;
+    input.after(list);
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-controls", list.id);
+    input.setAttribute("aria-expanded", "false");
+    let active = -1;
+
+    const close = () => {
+      list.hidden = true;
+      active = -1;
+      input.setAttribute("aria-expanded", "false");
+    };
+    const highlight = (index) => {
+      const items = list.children;
+      if (!items.length) return;
+      active = (index + items.length) % items.length;
+      [...items].forEach((li, i) => li.classList.toggle("is-active", i === active));
+      items[active].scrollIntoView({ block: "nearest" });
+    };
+    const pick = (name) => {
+      input.value = name;
+      close();
+      input.dataset.touched = "1";
+      input.dispatchEvent(new Event("input")); // runs the address check
+    };
+    const show = () => {
+      const matches = findPlaces(input.value);
+      list.replaceChildren(...matches.map((name) => {
+        const li = document.createElement("li");
+        li.setAttribute("role", "option");
+        li.textContent = name;
+        // mousedown (not click) so the box doesn't lose focus first
+        li.addEventListener("mousedown", (e) => { e.preventDefault(); pick(name); });
+        return li;
+      }));
+      active = -1;
+      list.hidden = !matches.length;
+      input.setAttribute("aria-expanded", String(!!matches.length));
+    };
+
+    input.addEventListener("input", (e) => { if (e.isTrusted) show(); });
+    input.addEventListener("focus", show);
+    input.addEventListener("blur", close);
+    input.addEventListener("keydown", (e) => {
+      if (list.hidden) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); highlight(active + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); highlight(active - 1); }
+      else if (e.key === "Enter" && active >= 0) { e.preventDefault(); pick(list.children[active].textContent); }
+      else if (e.key === "Escape") { e.stopPropagation(); close(); }
+    });
   });
 
   /* ---------------- Trip tabs, packages and cars ---------------- */

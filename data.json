@@ -44,12 +44,12 @@
     "nav_cta_text": "Book a Ride",
     "nav_cta_opens_booking": true,
     "nav_cta_link": "#book",
-    "meta_title": "New Track | Your Destination – Our Vision",
-    "meta_description": "Fast, safe, and sustainable EV rides with NTTS Mobility. Real-time chauffeur tracking, premium EV fleets, upfront fares and zero surge pricing.",
+    "meta_title": "Book Taxi Online | Airport, Outstation & EV Cabs – New Track",
+    "meta_description": "Book a taxi online with verified drivers, transparent fares and safe rides. Choose airport, outstation, city, 7-seater and EV cab services with New Track.",
     "meta_keywords": "NTTS Mobility, EV cab, electric taxi, book a ride, airport transfer, chauffeur, urban mobility",
     "canonical_url": "",
-    "og_title": "New Track | Your Destination – Our Vision",
-    "og_description": "Fast, safe, and sustainable EV rides with zero surge surprises.",
+    "og_title": "Book Taxi Online | Airport, Outstation & EV Cabs – New Track",
+    "og_description": "Book a taxi online with verified drivers, transparent fares and safe rides. Choose airport, outstation, city, 7-seater and EV cab services with New Track.",
     "og_image": null,
     "robots": "index, follow"
   }
@@ -130,11 +130,11 @@
   "model": "core.herosection",
   "pk": 1,
   "fields": {
-    "updated_at": "2026-10-02T10:11:34.731Z",
-    "badge_text": "NEXT-GEN URBAN TRANSIT",
-    "title": "Your Destination —",
+    "updated_at": "2026-10-06T10:27:16.767Z",
+    "badge_text": "SMART CAB BOOKING",
+    "title": "Your Destination -",
     "title_highlight": "Our Vision",
-    "description": "Fast, safe, and sustainable rides at your fingertips. Experience the future of urban mobility with real-time network tracking, verified chauffeurs, premium EV fleets, and zero surge surprises.",
+    "description": "Book a taxi online for airport, outstation, one-way and local rides with verified chauffeurs, live tracking and transparent upfront fares. Enjoy safe, reliable rides with zero surge pricing.",
     "background_image": "image/upload/v1790754478/ntts/hero/vy42xxw1wj5eaquyrvmb.png",
     "background_alt": "Electric car driving on a forest road",
     "tracking_label": "Tracking Chauffeur",
@@ -148,7 +148,8 @@
     "driver_rating": "4.98",
     "driver_trips": "(1,420 trips)",
     "driver_phone": "",
-    "card_title": "Book Instantly",
+    "card_title": "Book a Cab Instantly",
+    "tab_labels": "Airport Cab\r\nOutstation\r\nOne Way\r\nHourly Rental",
     "eta_text": "Avg ETA 30 mins",
     "pickup_label": "Pickup City",
     "pickup_placeholder": "Chennai",
@@ -158,7 +159,7 @@
     "date_options": "Today (Instant)",
     "ride_window_label": "Ride Window",
     "ride_window_options": "Depart Now",
-    "button_text": "Book a Ride"
+    "button_text": "Book Taxi Now"
   }
 },
 {
@@ -844,7 +845,7 @@
     "tab_icon": "sedan",
     "badge_text": "ZERO-EMISSION LUXURY",
     "title": "NTTS Luxe Electric Sedan",
-    "description": "Whisper-quiet electric cabin with ambient lighting, ergonomic leather seating, onboard Wi-Fi, and a smooth zero-emission ride across the city.",
+    "description": "Experience premium electric cab travel with the NTTS Luxe Electric Sedan. Enjoy a quiet, comfortable ride with ambient lighting, ergonomic leather seating, onboard Wi-Fi and smooth zero-emission performance—perfect for city travel, airport transfers and premium cab bookings.",
     "ride_card": 4,
     "image": null,
     "image_alt": "NTTS Luxe Electric Sedan"
@@ -858,12 +859,12 @@
     "is_active": true,
     "tab_label": "Smart City",
     "tab_icon": "city",
-    "badge_text": "EVERYDAY CITY RIDES",
-    "title": "NTTS Smart City Sedan",
-    "description": "Affordable air-conditioned sedans for quick city hops, office commutes, and daily errands, with verified drivers and upfront fares.",
+    "badge_text": "SMART CITY TRAVEL",
+    "title": "NTTS Urban Sedan",
+    "description": "Make your everyday travel easier with a **comfortable city taxi service** designed for work, shopping, appointments, and local travel. NTTS Urban Sedan provides **AC sedan cabs with professional drivers, transparent fares, and dependable city transportation** for hassle-free daily journeys.",
     "ride_card": 1,
     "image": null,
-    "image_alt": "NTTS Smart City Sedan"
+    "image_alt": "NTTS Urban Sedan"
   }
 },
 {
@@ -874,9 +875,9 @@
     "is_active": true,
     "tab_label": "Exec SUV",
     "tab_icon": "suv",
-    "badge_text": "FIRST-CLASS CHAUFFEUR",
+    "badge_text": "EXECUTIVE LUXURY TRAVEL",
     "title": "NTTS Executive Grand SUV",
-    "description": "Expansive 6-passenger cabin with active noise cancellation, private Wi-Fi mesh, executive fold-out desks, and generous luggage hold.",
+    "description": "Travel in refined comfort with a **premium chauffeur-driven SUV** built for business trips, airport transfers, corporate travel, and special occasions. Enjoy a spacious 6-seat cabin, enhanced privacy, onboard Wi-Fi, convenient workspace features, and ample luggage capacity for a relaxed and productive journey.",
     "ride_card": 3,
     "image": null,
     "image_alt": "NTTS Executive Grand SUV"
@@ -884,47 +885,7 @@
 },
 {
   "model": "core.fleetspec",
-  "pk": 1,
-  "fields": {
-    "slide": 3,
-    "label": "Cabin Space",
-    "value": "6 Seats",
-    "order": 1
-  }
-},
-{
-  "model": "core.fleetspec",
-  "pk": 2,
-  "fields": {
-    "slide": 3,
-    "label": "Luggage",
-    "value": "5 Suitcases",
-    "order": 2
-  }
-},
-{
-  "model": "core.fleetspec",
-  "pk": 3,
-  "fields": {
-    "slide": 3,
-    "label": "Privacy Tint",
-    "value": "Grade A",
-    "order": 3
-  }
-},
-{
-  "model": "core.fleetspec",
-  "pk": 4,
-  "fields": {
-    "slide": 3,
-    "label": "Rating",
-    "value": "★ 4.99",
-    "order": 4
-  }
-},
-{
-  "model": "core.fleetspec",
-  "pk": 5,
+  "pk": 13,
   "fields": {
     "slide": 1,
     "label": "Cabin Space",
@@ -934,7 +895,7 @@
 },
 {
   "model": "core.fleetspec",
-  "pk": 6,
+  "pk": 14,
   "fields": {
     "slide": 1,
     "label": "Luggage",
@@ -944,7 +905,7 @@
 },
 {
   "model": "core.fleetspec",
-  "pk": 7,
+  "pk": 15,
   "fields": {
     "slide": 1,
     "label": "Drive",
@@ -954,7 +915,7 @@
 },
 {
   "model": "core.fleetspec",
-  "pk": 8,
+  "pk": 16,
   "fields": {
     "slide": 1,
     "label": "Rating",
@@ -964,41 +925,81 @@
 },
 {
   "model": "core.fleetspec",
-  "pk": 9,
+  "pk": 17,
   "fields": {
     "slide": 2,
-    "label": "Cabin Space",
+    "label": "Passenger Capacity",
     "value": "4 Seats",
     "order": 1
   }
 },
 {
   "model": "core.fleetspec",
-  "pk": 10,
+  "pk": 18,
   "fields": {
     "slide": 2,
-    "label": "Luggage",
+    "label": "Luggage Capacity",
     "value": "2 Bags",
     "order": 2
   }
 },
 {
   "model": "core.fleetspec",
-  "pk": 11,
+  "pk": 19,
   "fields": {
     "slide": 2,
-    "label": "Comfort",
-    "value": "Full AC",
+    "label": "Travel Comfort",
+    "value": "Air Conditioned",
     "order": 3
   }
 },
 {
   "model": "core.fleetspec",
-  "pk": 12,
+  "pk": 20,
   "fields": {
     "slide": 2,
-    "label": "Rating",
+    "label": "Customer Rating",
     "value": "★ 4.90",
+    "order": 4
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 21,
+  "fields": {
+    "slide": 3,
+    "label": "Passenger Capacity",
+    "value": "6 Seats",
+    "order": 1
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 22,
+  "fields": {
+    "slide": 3,
+    "label": "Luggage Capacity",
+    "value": "5 Suitcases",
+    "order": 2
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 23,
+  "fields": {
+    "slide": 3,
+    "label": "Privacy",
+    "value": "Grade A Tint",
+    "order": 3
+  }
+},
+{
+  "model": "core.fleetspec",
+  "pk": 24,
+  "fields": {
+    "slide": 3,
+    "label": "Customer Rating",
+    "value": "★ 4.99",
     "order": 4
   }
 },
@@ -1010,7 +1011,7 @@
     "is_active": true,
     "number": "10M+",
     "show_star": false,
-    "label": "Rides Completed Safely",
+    "label": "Safe Rides Completed",
     "color": "green"
   }
 },
@@ -1022,7 +1023,7 @@
     "is_active": true,
     "number": "4.9",
     "show_star": true,
-    "label": "Avg Customer Satisfaction",
+    "label": "Average Customer Rating",
     "color": "dark"
   }
 },
@@ -1034,7 +1035,7 @@
     "is_active": true,
     "number": "50+",
     "show_star": false,
-    "label": "Metros & Cities Worldwide",
+    "label": "Cities & Metro Areas Served",
     "color": "navy"
   }
 },
@@ -1046,7 +1047,7 @@
     "is_active": true,
     "number": "24/7",
     "show_star": false,
-    "label": "Human Concierge & Safety",
+    "label": "Customer Support & Ride Assistance",
     "color": "green"
   }
 },
@@ -1057,7 +1058,7 @@
     "updated_at": "2026-09-30T08:15:41.470Z",
     "badge_text": "FLEET & RIDES",
     "title": "Choose Your Ride",
-    "description": "Tailored transportation solutions calibrated for speed, comfort, or solo sprints.",
+    "description": "Explore reliable **cab booking and car rental options** for city travel, airport transfers, outstation trips, and group journeys. Choose from comfortable sedans, premium cars, spacious 7-seater SUVs, and electric vehicles based on your travel needs, comfort, and budget.",
     "side_badge_text": "100% Carbon-Neutral Fleet Options"
   }
 },
@@ -1071,11 +1072,12 @@
     "currency_symbol": "₹",
     "base_price": "80.00",
     "price_suffix": "base",
-    "description": "Swift Dzire Tour, Hyundai Aura or Honda Amaze – comfortable AC sedans for city rides and daily commutes.",
+    "subtitle": "Affordable City & Daily Travel",
+    "description": "Comfortable AC sedan cabs for local trips, daily commutes, airport transfers, and convenient city travel with professional drivers.",
     "image": "image/upload/v1790756196/ntts/rides/xogsbywgkqvtdx43a7st.png",
     "image_alt": "Compact Sedan",
     "badge_text": "",
-    "features": "Dzire Tour / Aura / Amaze\n4+1 Seating\nFull AC",
+    "features": "4 Seats\nAC Sedan\n2 Bags",
     "button_text": "Book Sedan",
     "booking_car": 1,
     "is_featured": false
@@ -1091,12 +1093,13 @@
     "currency_symbol": "₹",
     "base_price": "200.00",
     "price_suffix": "base",
-    "description": "Mercedes-Benz E-Class with professional chauffeurs for VIP, executive and business travel.",
+    "subtitle": "Luxury Travel with Chauffeur",
+    "description": "Experience premium comfort with a luxury car with driver for business travel, airport transfers, special occasions, and executive journeys.",
     "image": "image/upload/v1790756212/ntts/rides/vmjxeccgpukhn0dob09l.png",
     "image_alt": "Premium Executive",
     "badge_text": "TOP TIER",
-    "features": "Mercedes-Benz E-Class\nProfessional Chauffeur\nPriority Pickup",
-    "button_text": "Book Executive",
+    "features": "Premium Car\nWi-Fi\nChauffeur Service",
+    "button_text": "Book Premium",
     "booking_car": 3,
     "is_featured": false
   }
@@ -1111,11 +1114,12 @@
     "currency_symbol": "₹",
     "base_price": "260.00",
     "price_suffix": "base",
-    "description": "Toyota Innova Hycross – a roomy, modern SUV for groups and families who want extra comfort.",
+    "subtitle": "7-Seater Cab for Group Travel",
+    "description": "Travel together in a spacious SUV designed for 7-seater taxi booking, family trips, airport transfers, and outstation journeys with generous luggage space.",
     "image": "image/upload/v1790756227/ntts/rides/jswoqejed2vb9tx5y7ae.png",
     "image_alt": "Spacious SUV",
     "badge_text": "FAMILY & GROUP",
-    "features": "Innova Hycross\n6+1 / 7+1 Seating\nSpacious Cabin",
+    "features": "6–7 Seats\nLarge Luggage\nDual-Zone AC",
     "button_text": "Book SUV",
     "booking_car": 4,
     "is_featured": false
@@ -1131,11 +1135,12 @@
     "currency_symbol": "₹",
     "base_price": "110.00",
     "price_suffix": "base",
-    "description": "100% green zero-emission electric sedans and crossovers with whisper-quiet ride telemetry.",
+    "subtitle": "Smart & Sustainable Electric Travel",
+    "description": "Choose an electric car rental option for comfortable, quiet, and eco-friendly journeys. Ideal for city travel and customers looking for a modern EV ride.",
     "image": "image/upload/v1790756239/ntts/rides/uynhzikql4vh3zwmqf1w.png",
     "image_alt": "Electric EV Plus",
     "badge_text": "ECO SMART",
-    "features": "4 Passengers\r\nZero Emission\r\nSilent Cabin",
+    "features": "4 Passengers\nZero Emission\nSilent Cabin",
     "button_text": "Book EV Plus",
     "booking_car": null,
     "is_featured": false
@@ -1151,11 +1156,12 @@
     "currency_symbol": "₹",
     "base_price": "140.00",
     "price_suffix": "base",
-    "description": "Maruti Ciaz with extra legroom and boot space, ideal for business trips and airport transfers.",
+    "subtitle": "Spacious Sedan for Business Travel",
+    "description": "Ride in a roomy premium sedan with extra legroom and boot space, ideal for business trips, airport transfers, and comfortable city and outstation travel.",
     "image": "image/upload/v1790940394/ntts/rides/i3wqnwh9khsrsw6bjn88.jpg",
     "image_alt": "Premium Sedan",
     "badge_text": "",
-    "features": "Maruti Ciaz\r\n4+1 Seating\r\nSpacious Boot",
+    "features": "4 Seats\nExtra Legroom\nSpacious Boot",
     "button_text": "Book Premium Sedan",
     "booking_car": 2,
     "is_featured": false
@@ -1171,11 +1177,12 @@
     "currency_symbol": "₹",
     "base_price": "230.00",
     "price_suffix": "base",
-    "description": "Toyota Innova Crysta for family trips, group travel and outstation journeys, available with or without a roof carrier.",
+    "subtitle": "Family & Outstation SUV Travel",
+    "description": "Book a comfortable SUV cab for family trips, group travel, and outstation journeys, with 6–7 seats and an optional roof carrier for extra luggage.",
     "image": "image/upload/v1790940408/ntts/rides/ilji0gc76q1ysh1hu6az.png",
     "image_alt": "Premium SUV",
     "badge_text": "",
-    "features": "Innova Crysta\r\n6+1 / 7+1 Seating\r\nWith / Without Carrier",
+    "features": "6–7 Seats\nRoof Carrier\nOutstation Ready",
     "button_text": "Book Premium SUV",
     "booking_car": 5,
     "is_featured": false
@@ -1187,12 +1194,12 @@
   "fields": {
     "updated_at": "2026-09-30T08:24:28.963Z",
     "badge_text": "THE PROCESS",
-    "title": "Ride in 3 Simple Steps",
-    "description": "From tapping your screen to stepping out at your destination—zero friction, all precision.",
+    "title": "How to Book Your Cab in 3 Simple Steps",
+    "description": "Book your **cab or taxi online** in just three simple steps. Enter your pickup and destination, choose the right vehicle for your journey, and enjoy a comfortable ride with transparent pricing and reliable service.",
     "step_word": "STEP",
     "show_banner": true,
-    "banner_title": "Sub-Second Driver Allocation",
-    "banner_text": "Our edge routing engine matches you with the ideal nearby partner in less than 400ms.",
+    "banner_title": "Quick Driver Matching",
+    "banner_text": "Our smart booking system connects you with an available driver near your pickup location, helping you get a **cab for city travel, airport transfers, and outstation journeys** without unnecessary waiting.",
     "banner_badge": "99.98% DISPATCH UPTIME"
   }
 },
@@ -1204,9 +1211,9 @@
     "is_active": true,
     "icon": "location",
     "color": "green",
-    "title": "Enter Your Destination",
-    "description": "Type in your pickup point or allow the geo-sensor to lock onto your precise spot automatically.",
-    "highlight_text": "Instant GPS coordinate detection"
+    "title": "Enter Your Pickup & Destination",
+    "description": "Enter your pickup location and destination to find the right **cab booking option** for your journey. Whether you need a city taxi, airport transfer, or outstation cab, get your ride details quickly.",
+    "highlight_text": "**Live Location Detection –** Instantly identify your pickup point for faster and easier taxi booking."
   }
 },
 {
@@ -1217,9 +1224,9 @@
     "is_active": true,
     "icon": "sliders",
     "color": "blue",
-    "title": "Choose Your Ride",
-    "description": "Compare transparent upfront fares, precise vehicle models, and driver distance before locking in.",
-    "highlight_text": "Locked fixed price — no surprises"
+    "title": "Select Your Cab & Fare",
+    "description": "Compare available vehicles, check the **cab fare**, and choose a ride that matches your travel needs. Select from sedan, SUV, premium, or electric vehicle options before confirming your booking.",
+    "highlight_text": "**Transparent Upfront Pricing –** Know your estimated fare before confirming your **taxi booking**."
   }
 },
 {
@@ -1230,9 +1237,9 @@
     "is_active": true,
     "icon": "shield",
     "color": "green",
-    "title": "Sit Back & Relax",
-    "description": "Track your driver's real-time trajectory, share ride details with loved ones, and pay cashlessly.",
-    "highlight_text": "Encrypted telemetry & live track"
+    "title": "Confirm & Enjoy Your Ride",
+    "description": "Confirm your booking and track your driver in real time. Share your trip details with your loved ones and complete your journey with convenient digital payment options.",
+    "highlight_text": "**Live Ride Tracking –** Stay updated with your driver's location throughout the journey."
   }
 },
 {
@@ -1241,11 +1248,12 @@
   "fields": {
     "updated_at": "2026-10-02T08:59:53.338Z",
     "badge_text": "",
-    "title": "Your Safety is Our Priority",
-    "description": "From algorithmic background vetting to emergency rapid-response teams on standby, our security infrastructure protects every single kilometer.",
+    "title": "Safe & Secure Cab Rides",
+    "description": "Your safety comes first on every **online cab booking**. From verified drivers and live GPS tracking to emergency assistance and accident protection, NTTS is designed to provide a secure travel experience for **local cab services, airport cab bookings, and outstation cab bookings**.",
     "show_highlight": true,
     "highlight_title": "NTTS Shield™ Active",
-    "highlight_text": "Every trip automatically benefits from round-the-clock incident monitoring and insurance cover."
+    "highlight_text": "**Safety Support From Pickup to Drop-Off.** Every eligible NTTS journey is supported by continuous trip monitoring and safety measures, helping make your **taxi booking experience** more secure from start to finish.",
+    "highlight_tag": "24/7 Ride Monitoring"
   }
 },
 {
@@ -1257,7 +1265,9 @@
     "icon": "id_card",
     "color": "green",
     "title": "Verified Drivers",
-    "description": "Multi-point background and driving record screening before first dispatch."
+    "subtitle": "Trusted Drivers for Every Journey",
+    "description": "Every driver goes through identity, background, and driving-record verification before accepting rides, helping you travel with greater confidence.",
+    "check_text": "Verified Driver Screening"
   }
 },
 {
@@ -1269,7 +1279,9 @@
     "icon": "satellite",
     "color": "blue",
     "title": "Live GPS Tracking",
-    "description": "Share live telemetry links with contacts so they see your precise spot in real-time."
+    "subtitle": "Track Your Cab in Real Time",
+    "description": "Stay connected throughout your journey with live GPS tracking. Share your ride details with trusted contacts and know where your cab is during your trip.",
+    "check_text": "Real-Time Ride Tracking"
   }
 },
 {
@@ -1280,8 +1292,10 @@
     "is_active": true,
     "icon": "sos",
     "color": "red",
-    "title": "SOS Emergency Button",
-    "description": "Direct 1-tap pipeline to law enforcement and 24/7 internal emergency dispatch."
+    "title": "SOS Emergency Support",
+    "subtitle": "Emergency Assistance When You Need It",
+    "description": "Access quick emergency support during your ride with an SOS feature designed to help connect you with the appropriate emergency response team.",
+    "check_text": "24/7 Emergency Assistance"
   }
 },
 {
@@ -1292,8 +1306,10 @@
     "is_active": true,
     "icon": "phone_lock",
     "color": "green",
-    "title": "Masked Numbers",
-    "description": "In-app VoIP and masked virtual phone routing keep your private number private."
+    "title": "Private Communication",
+    "subtitle": "Keep Your Phone Number Private",
+    "description": "Your personal number stays protected through secure in-app communication, helping maintain privacy between passengers and drivers.",
+    "check_text": "Protected Contact Details"
   }
 },
 {
@@ -1304,8 +1320,10 @@
     "is_active": true,
     "icon": "handshake",
     "color": "green",
-    "title": "2-Way Accountability",
-    "description": "Mutual rating ensures both riders and drivers uphold highest decorum standards."
+    "title": "Two-Way Driver & Rider Ratings",
+    "subtitle": "Better Accountability on Every Ride",
+    "description": "Driver and passenger ratings help maintain service quality and encourage a professional experience across every cab booking.",
+    "check_text": "Verified Ratings & Reviews"
   }
 },
 {
@@ -1316,8 +1334,10 @@
     "is_active": false,
     "icon": "shield",
     "color": "blue",
-    "title": "Accident Cover",
-    "description": "Included comprehensive accidental and medical insurance for every booked ride."
+    "title": "Accident Protection",
+    "subtitle": "Added Protection for Your Journey",
+    "description": "Eligible rides include accident-related protection, giving passengers additional confidence when using NTTS for airport taxi booking, local travel, and outstation trips.",
+    "check_text": "Ride Protection Included"
   }
 },
 {
@@ -1326,8 +1346,9 @@
   "fields": {
     "updated_at": "2026-09-30T08:26:03.522Z",
     "badge_text": "TRANSPARENT TARIFF",
-    "title": "Simple, Transparent Pricing",
-    "description": "No hidden fuel fees. Upfront fares guaranteed before you confirm."
+    "title": "Simple & Transparent Cab Pricing",
+    "description": "Choose the right ride for your journey with **clear cab fares and upfront pricing**. Whether you need an affordable sedan for local travel, a premium executive car, an electric vehicle, or a spacious SUV, compare your options before confirming your **cab booking**.",
+    "highlights": "No Hidden Charges\nUpfront Fare\nFlexible Ride Options"
   }
 },
 {
@@ -1337,10 +1358,12 @@
     "order": 1,
     "is_active": true,
     "title": "COMPACT SEDAN",
+    "subtitle": "Affordable Sedan Cab",
+    "description": "A practical AC sedan taxi for daily commutes, local travel, airport transfers, and short city journeys.",
     "icon": "sedan",
     "car": 1,
     "price_suffix": "/ base fare",
-    "features": "₹14 per additional KM\nSwift Dzire Tour / Aura / Amaze\n4+1 Seating, Full AC\nBoot Space for 2 Bags",
+    "features": "₹14 per additional KM\nUp to 4 Passengers\nFull Air Conditioning\nSpace for 2 Bags",
     "button_text": "Select Sedan",
     "badge_text": "",
     "is_featured": false,
@@ -1354,10 +1377,12 @@
     "order": 2,
     "is_active": true,
     "title": "PREMIUM SEDAN",
+    "subtitle": "Premium Executive Cab",
+    "description": "Travel in comfort with a premium sedan featuring executive seating, Wi-Fi, bottled water, and a professional chauffeur for business and special journeys.",
     "icon": "executive",
     "car": 2,
     "price_suffix": "/ base fare",
-    "features": "₹18 per additional KM\nMaruti Ciaz\n4+1 Seating\nExtra Legroom & Boot Space",
+    "features": "₹18 per additional KM\n4 Executive Seats\nBottled Water & Wi-Fi\nProfessional Chauffeur",
     "button_text": "Select Premium Sedan",
     "badge_text": "",
     "is_featured": false,
@@ -1371,10 +1396,12 @@
     "order": 5,
     "is_active": true,
     "title": "PREMIUM EXECUTIVE",
+    "subtitle": "Luxury Executive Car",
+    "description": "Choose a premium luxury car rental option for a quiet, comfortable ride with priority pickup and enhanced travel comfort.",
     "icon": "ev",
     "car": 3,
     "price_suffix": "/ base fare",
-    "features": "₹24 per additional KM\nMercedes-Benz E-Class\nProfessional Chauffeur\nPriority Pickup & Concierge",
+    "features": "₹24 per additional KM\n4 Luxury Seats\nProfessional Chauffeur\nPriority Pickup & Concierge",
     "button_text": "Select Executive",
     "badge_text": "TOP TIER",
     "is_featured": false,
@@ -1388,10 +1415,12 @@
     "order": 4,
     "is_active": true,
     "title": "SPACIOUS SUV",
+    "subtitle": "Spacious SUV Cab",
+    "description": "Need more room for passengers and luggage? Choose an SUV cab for family travel, group journeys, airport transfers, and longer trips.",
     "icon": "suv",
     "car": 4,
     "price_suffix": "/ base fare",
-    "features": "₹28 per additional KM\nToyota Innova Hycross\n6+1 / 7+1 Seating\nSpacious Cabin",
+    "features": "₹28 per additional KM\n6–7 Passengers\nLarge Boot for 5+ Bags\nDual-Zone Climate Control",
     "button_text": "Select SUV",
     "badge_text": "",
     "is_featured": false,
@@ -1405,10 +1434,12 @@
     "order": 3,
     "is_active": true,
     "title": "PREMIUM SUV",
+    "subtitle": "Family & Outstation SUV Cab",
+    "description": "A comfortable SUV cab for family trips, group travel, and outstation journeys, with an optional roof carrier for extra luggage.",
     "icon": "suv",
     "car": 5,
     "price_suffix": "/ base fare",
-    "features": "₹22 per additional KM\nToyota Innova Crysta\n6+1 / 7+1 Seating\nWith / Without Carrier",
+    "features": "₹22 per additional KM\n6–7 Passengers\nRoof Carrier Available\nIdeal for Outstation Trips",
     "button_text": "Select Premium SUV",
     "badge_text": "",
     "is_featured": false,
@@ -1421,8 +1452,8 @@
   "fields": {
     "updated_at": "2026-10-02T11:14:55.302Z",
     "badge_text": "VERIFIED RIDERS",
-    "title": "What Our Riders Say",
-    "description": "Thousands of daily commuters rely on NTTS Mobility for punctual meetings, late-night flights, and stress-free city hops."
+    "title": "Chosen for the Journey, Trusted for the Ride",
+    "description": "A great ride is more than getting from one place to another. NTTS Mobility brings together **reliable cab booking, professional drivers, comfortable vehicles, and dependable service** for everyday travel, airport transfers, business trips, and outstation journeys."
   }
 },
 {
@@ -1504,8 +1535,8 @@
   "model": "core.faqitem",
   "pk": 1,
   "fields": {
-    "order": 1,
-    "is_active": true,
+    "order": 101,
+    "is_active": false,
     "question": "How do I book a ride?",
     "answer": "Tap “Book a Ride”, enter your pickup city and destination, choose a car and add your name, mobile number and email. Our team will call you shortly to confirm the booking."
   }
@@ -1514,8 +1545,8 @@
   "model": "core.faqitem",
   "pk": 2,
   "fields": {
-    "order": 2,
-    "is_active": true,
+    "order": 102,
+    "is_active": false,
     "question": "How soon will my car arrive?",
     "answer": "For instant bookings, your car usually arrives within 30–40 minutes. If you need it at a fixed time, use the Schedule option while booking."
   }
@@ -1524,8 +1555,8 @@
   "model": "core.faqitem",
   "pk": 3,
   "fields": {
-    "order": 3,
-    "is_active": true,
+    "order": 103,
+    "is_active": false,
     "question": "Can I book a ride in advance?",
     "answer": "Yes. Choose “Schedule” in the booking form and pick your pickup date and time."
   }
@@ -1534,8 +1565,8 @@
   "model": "core.faqitem",
   "pk": 4,
   "fields": {
-    "order": 4,
-    "is_active": true,
+    "order": 104,
+    "is_active": false,
     "question": "How is the fare calculated?",
     "answer": "Each car type has a base fare plus a per-kilometre rate, shown in the Pricing section. The fare is shared with you upfront before you confirm."
   }
@@ -1544,8 +1575,8 @@
   "model": "core.faqitem",
   "pk": 5,
   "fields": {
-    "order": 5,
-    "is_active": true,
+    "order": 105,
+    "is_active": false,
     "question": "Is there any surge pricing?",
     "answer": "No. We never apply surge pricing, so you pay the same fair rate at any time of the day."
   }
@@ -1554,8 +1585,8 @@
   "model": "core.faqitem",
   "pk": 6,
   "fields": {
-    "order": 6,
-    "is_active": true,
+    "order": 106,
+    "is_active": false,
     "question": "Can I cancel my booking?",
     "answer": "Yes. Cancellation is free within 3 minutes of booking. After that, please call our help desk and we will assist you."
   }
@@ -1564,8 +1595,8 @@
   "model": "core.faqitem",
   "pk": 7,
   "fields": {
-    "order": 7,
-    "is_active": true,
+    "order": 107,
+    "is_active": false,
     "question": "Are your drivers verified?",
     "answer": "Yes. Every driver goes through background and driving record checks before their first trip."
   }
@@ -1574,10 +1605,70 @@
   "model": "core.faqitem",
   "pk": 8,
   "fields": {
-    "order": 8,
-    "is_active": true,
+    "order": 108,
+    "is_active": false,
     "question": "Do you offer airport transfers and outstation trips?",
     "answer": "Yes. Along with daily city rides, we offer airport pickups and drops and outstation trips. Book online or call our help desk to plan your trip."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 9,
+  "fields": {
+    "order": 1,
+    "is_active": true,
+    "question": "How do I book a taxi online with New Track?",
+    "answer": "Use the New Track website. Enter your pickup and destination, choose a Compact Sedan, Premium Sedan, Premium Executive or SUV, check the upfront fare, and confirm. You can then track your driver in real time and pay digitally."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 10,
+  "fields": {
+    "order": 2,
+    "is_active": true,
+    "question": "How much does a New Track cab cost, and is there surge pricing?",
+    "answer": "New Track shows the fare upfront before you confirm, with zero surge pricing and no hidden charges. The Compact Sedan starts at ₹80 base fare plus ₹14 per extra km. The Premium Sedan is ₹140 plus ₹18 per km, the Premium Executive is ₹200 plus ₹24 per km, the Premium SUV is ₹230 plus ₹22 per km, and the Spacious SUV is ₹260 plus ₹28 per km."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 11,
+  "fields": {
+    "order": 3,
+    "is_active": true,
+    "question": "Can I book an airport cab with New Track?",
+    "answer": "Yes. Select the Airport Cab tab, enter your pickup and drop, and choose a vehicle that fits your luggage. Sedans carry 2 bags, the Executive Grand SUV carries 5 suitcases, and the Spacious SUV has a large boot for 5+ bags. Verified chauffeurs and live tracking are included."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 12,
+  "fields": {
+    "order": 4,
+    "is_active": true,
+    "question": "Can I book an outstation or one-way cab?",
+    "answer": "Yes. New Track offers Outstation, One Way and Hourly Rental bookings. You can choose a sedan, premium executive car or SUV for longer trips and see the fare before you confirm."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 13,
+  "fields": {
+    "order": 5,
+    "is_active": true,
+    "question": "What types of cabs can I book, including 7-seater?",
+    "answer": "New Track offers five options: Compact Sedan (4 seats), Premium Sedan (extra legroom and boot space), Premium SUV (6 to 7 seats, optional roof carrier), Spacious SUV (6 to 7 seats, large boot, dual-zone AC) and Premium Executive (chauffeur-driven, Wi-Fi). Choose based on your group size and luggage."
+  }
+},
+{
+  "model": "core.faqitem",
+  "pk": 14,
+  "fields": {
+    "order": 6,
+    "is_active": true,
+    "question": "Is New Track safe, and are the drivers verified?",
+    "answer": "Yes. Every driver goes through identity, background and driving-record verification before accepting rides. Each trip includes live GPS tracking, an in-app SOS button, 24/7 ride monitoring, private in-app calling that hides your phone number, and two-way driver and rider ratings."
   }
 },
 {
@@ -1643,7 +1734,9 @@
   "pk": 1,
   "fields": {
     "updated_at": "2026-10-02T07:30:30.406Z",
-    "about_text": "Redefining mobility for the modern city. Experience seamless, safe, and sustainable transportation at the tap of a button.",
+    "tagline": "Safe & Reliable Mobility for the Modern City",
+    "about_text": "New Track makes **online cab booking** simple, comfortable, and secure. Book **city taxis, airport cabs, outstation rides, and intercity travel** with verified drivers, real-time GPS tracking, emergency assistance, and transparent fares.",
+    "highlights": "Safe Rides\nVerified Drivers\nLive GPS Tracking\nTransparent Pricing",
     "company_name": "NTTS Car Rentals",
     "address": "5 East Spurtank Road ,\r\nChetpet ,\r\nChennai 600031",
     "map_link": "",

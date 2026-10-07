@@ -17,6 +17,19 @@ def cld(image, width=None):
 
 
 @register.filter
+def cld_car(image, width=None):
+    """Car photo on a plain white background, whatever background the uploaded photo has:
+    Cloudinary's AI removes the original background, then it is filled with white.
+    {{ ride.image|cld_car:600 }}"""
+    if not image:
+        return ""
+    resize = {"background": "white", "fetch_format": "auto", "quality": "auto"}
+    if width:
+        resize.update(width=int(width), crop="limit")
+    return image.build_url(transformation=[{"effect": "background_removal"}, resize], secure=True)
+
+
+@register.filter
 def bold(text):
     """Words wrapped in **double stars** in admin show in bold: {{ slide.description|bold }}"""
     parts = str(text or "").split("**")

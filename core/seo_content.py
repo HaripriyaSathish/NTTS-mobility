@@ -26,6 +26,7 @@ HERO_SEO = {
     "card_title": "Book a Cab Instantly",
     "tab_labels": "Airport Cab\nOutstation\nOne Way\nHourly Rental",
     "button_text": "Book Taxi Now",
+    "pricing_button_text": "Pricing Details",
 }
 
 # Section 02 – Featured Vehicles (fleet slider). Matched to the slides by tab name.
@@ -77,6 +78,10 @@ STATS_SEO = {
     "4.9": "Average Customer Rating",
     "50+": "Cities & Metro Areas Served",
     "24/7": "Customer Support & Ride Assistance",
+}
+# Stat boxes that open a page when clicked (matched by the number)
+STAT_LINKS = {
+    "4.9": "https://share.google/EjcDuXGOV1B8110Hr",  # Google reviews
 }
 
 # Section 03 – Fleet & Rides (Choose Your Ride)
@@ -267,33 +272,33 @@ PRICING_SEO = {
 PRICING_PLANS_SEO = {
     "Compact Sedan": {
         "subtitle": "Affordable Sedan Cab",
-        "features": "₹14 per additional KM\nUp to 4 Passengers\nFull Air Conditioning\nSpace for 2 Bags",
+        "features": "₹15 per additional KM\n₹225 per additional hour\nUp to 4 Passengers\nFull Air Conditioning\nSpace for 2 Bags",
         "description": "A practical AC sedan taxi for daily commutes, local travel, airport transfers, "
                        "and short city journeys.",
         "button_text": "Select Sedan",
     },
     "Premium Sedan": {
         "subtitle": "Premium Executive Cab",
-        "features": "₹18 per additional KM\n4 Executive Seats\nBottled Water & Wi-Fi\nProfessional Chauffeur",
+        "features": "₹16 per additional KM\n₹250 per additional hour\n4 Executive Seats\nBottled Water & Wi-Fi\nProfessional Chauffeur",
         "description": "Travel in comfort with a premium sedan featuring executive seating, Wi-Fi, bottled "
                        "water, and a professional chauffeur for business and special journeys.",
     },
     "Premium SUV": {
         "subtitle": "Family & Outstation SUV Cab",
-        "features": "₹22 per additional KM\n6–7 Passengers\nRoof Carrier Available\nIdeal for Outstation Trips",
+        "features": "₹26 per additional KM\n₹250 per additional hour\n6–7 Passengers\nRoof Carrier Available\nIdeal for Outstation Trips",
         "description": "A comfortable SUV cab for family trips, group travel, and outstation journeys, with "
                        "an optional roof carrier for extra luggage.",
     },
     "Spacious SUV": {
         "subtitle": "Spacious SUV Cab",
-        "features": "₹28 per additional KM\n6–7 Passengers\nLarge Boot for 5+ Bags\nDual-Zone Climate Control",
+        "features": "₹26 per additional KM\n₹250 per additional hour\n6–7 Passengers\nLarge Boot for 5+ Bags\nDual-Zone Climate Control",
         "description": "Need more room for passengers and luggage? Choose an SUV cab for family travel, group "
                        "journeys, airport transfers, and longer trips.",
         "button_text": "Select SUV",
     },
     "Premium Executive": {
         "subtitle": "Luxury Executive Car",
-        "features": "₹24 per additional KM\n4 Luxury Seats\nProfessional Chauffeur\nPriority Pickup & Concierge",
+        "features": "₹90 per additional KM\n₹250 per additional hour\n4 Luxury Seats\nProfessional Chauffeur\nPriority Pickup & Concierge",
         "description": "Choose a premium luxury car rental option for a quiet, comfortable ride with priority "
                        "pickup and enhanced travel comfort.",
     },
@@ -320,10 +325,10 @@ FAQ_ITEMS_SEO = [
      "Premium Executive or SUV, check the upfront fare, and confirm. You can then track your driver in real time "
      "and pay digitally."),
     ("How much does a New Track cab cost, and is there surge pricing?",
-     "New Track shows the fare upfront before you confirm, with zero surge pricing and no hidden charges. The "
-     "Compact Sedan starts at ₹80 base fare plus ₹14 per extra km. The Premium Sedan is ₹140 plus ₹18 per km, the "
-     "Premium Executive is ₹200 plus ₹24 per km, the Premium SUV is ₹230 plus ₹22 per km, and the Spacious SUV is "
-     "₹260 plus ₹28 per km."),
+     "New Track shows the fare upfront before you confirm, with zero surge pricing and no hidden charges. Local "
+     "packages start at 4 Hrs / 40 Km: Compact Sedan ₹1,400 (₹15 per extra km), Premium Sedan ₹1,500 (₹16 per km), "
+     "Premium SUV and Spacious SUV ₹3,000 (₹26 per km), and Premium Executive ₹5,000 (₹90 per km). Fuel and "
+     "driver allowance are included; taxes are extra."),
     ("Can I book an airport cab with New Track?",
      "Yes. Select the Airport Cab tab, enter your pickup and drop, and choose a vehicle that fits your luggage. "
      "Sedans carry 2 bags, the Executive Grand SUV carries 5 suitcases, and the Spacious SUV has a large boot for "

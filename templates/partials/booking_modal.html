@@ -42,18 +42,21 @@
       </div>
       <small class="field__error" data-error-for="trip_type"></small>
 
-      {# ---------- Pickup / drop ---------- #}
+      {# ---------- Pickup / drop (Chennai place suggestions from admin, shown by main.js) ---------- #}
+      {% if booking.location_list %}{{ booking.location_list|json_script:"locationSuggestions" }}{% endif %}
       <div class="route-box">
         <label class="route-box__field">
           <span class="field__label">{{ booking.pickup_label }}</span>
-          <input type="text" name="pickup" maxlength="200" autocomplete="street-address"
-                 placeholder="{{ booking.pickup_placeholder }}" required data-validate="address" data-label="pickup address">
+          <input type="text" name="pickup" maxlength="200" autocomplete="off"
+                 placeholder="{{ booking.pickup_placeholder }}" required data-validate="address" data-label="pickup address"
+                 data-suggest>
           <small class="field__error" data-error-for="pickup"></small>
         </label>
         <label class="route-box__field" data-trip-only="airport">
           <span class="field__label">{{ booking.destination_label }}</span>
           <input type="text" name="destination" maxlength="200" autocomplete="off"
-                 placeholder="{{ booking.destination_placeholder }}" required data-validate="address" data-label="drop address">
+                 placeholder="{{ booking.destination_placeholder }}" required data-validate="address" data-label="drop address"
+                 data-suggest>
           <small class="field__error" data-error-for="destination"></small>
         </label>
       </div>
@@ -127,7 +130,7 @@
                 {% if r.vehicle.badge_text %}<span class="vehicle__badge">{{ r.vehicle.badge_text }}</span>{% endif %}
                 <span class="vehicle__img">
                   {% if r.vehicle.photo %}
-                    <img src="{{ r.vehicle.photo|cld:240 }}" alt="{{ r.vehicle.name }}" loading="lazy">
+                    <img src="{{ r.vehicle.photo|cld_car:240 }}" data-fallback="{{ r.vehicle.photo|cld:240 }}" alt="{{ r.vehicle.name }}" loading="lazy">
                   {% else %}
                     <svg viewBox="0 0 24 24"><path d="M5 17h14M6 17v2M18 17v2M4 13l2-6h12l2 6v4H4v-4z"/></svg>
                   {% endif %}
